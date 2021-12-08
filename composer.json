@@ -1,0 +1,28 @@
+{
+    "name": "paygreen/impact-magento-2",
+    "description": "Paygreen payment",
+    "keywords": [
+        "magento2"
+    ],
+    "license": "CC-BY-ND-4.0",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Paygreen",
+            "email": "support@paygreen.fr"
+        }
+    ],
+    "require": {
+        "magento/framework": "*",
+        "smarty/smarty": "^3.1"
+    },
+    "autoload": {
+        "files": [
+            "registration-composer.php"
+        ],
+        "psr-4": {
+            "Paygreen\\Impact\\": ""
+        },
+        "classmap": ["bundles/"]
+    }
+}

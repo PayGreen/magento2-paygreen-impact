@@ -1,0 +1,33 @@
+{
+  "forms": {
+    "tree_bot": {
+      "fields": {
+        "tree_bot_color": {
+          "label": "Couleur principale"
+        },
+        "tree_bot_side": {
+          "label": "Position dans l'écran",
+          "choices": {
+            "LEFT": "En bas à gauche",
+            "RIGHT": "En bas à droite"
+          }
+        },
+        "tree_bot_corner": {
+          "label": "Forme des angles",
+          "choices": {
+            "ROUND": "Angles arrondis",
+            "SQUARE": "Angles arrés"
+          }
+        },
+        "tree_bot_mobile_activated" : {
+          "label": "Afficher le CarbonBot sur les sites mobiles",
+          "help": "Permet de définir si vous souhaitez ou non afficher le CarbonBot sur les sites mobiles."
+        },
+        "tree_details_url": {
+          "label": "Page sur vos engagements",
+          "help": "Facultatif : si renseignée, un lien 'En savoir plus' sera affiché dans le CarbonBot et permettra à vos clients d'accéder à une page de votre choix (par exemple pour développer vos engagements)."
+        }
+      }
+    }
+  }   
+}

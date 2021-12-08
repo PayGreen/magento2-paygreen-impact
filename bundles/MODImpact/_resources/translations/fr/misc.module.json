@@ -1,0 +1,10 @@
+{
+  "misc": {
+    "module": {
+      "description": "Le module français à impact positif sur la société et l'environnement.",
+      "uninstall": {
+        "confirmation": "Êtes-vous sûr de vouloir désinstaller le module PayGreen Impact ?"
+      }
+    }
+  }
+}

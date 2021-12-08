@@ -1,0 +1,12 @@
+{
+  "blocks": {
+    "system": {
+      "title": "Informations système sur le module PayGreen Impact",
+      "platform": {
+        "fields": {
+          "module": "Module PayGreen Impact"
+        }
+      }
+    }
+  }
+}
