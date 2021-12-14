@@ -20,313 +20,6 @@
  */
 
 return array (
-'cache' =>
-array (
-'entries' =>
-array (
-'translations-fr' =>
-array (
-'ttl' => 604800,
-'format' => 'array',
-),
-'translations-en' =>
-array (
-'ttl' => 604800,
-'format' => 'array',
-),
-'carbon_footprint_catalog' =>
-array (
-'ttl' => 259200,
-),
-'tree_account_data' =>
-array (
-'ttl' => 21600,
-'format' => 'object',
-),
-'tree_user_data' =>
-array (
-'ttl' => 21600,
-'format' => 'object',
-),
-'charity_associations' =>
-array (
-'ttl' => 259200,
-'format' => 'array',
-),
-'charity_partnerships' =>
-array (
-'ttl' => 21600,
-'format' => 'object',
-),
-'charity_account_data' =>
-array (
-'ttl' => 21600,
-'format' => 'object',
-),
-'charity_user_data' =>
-array (
-'ttl' => 21600,
-'format' => 'object',
-),
-),
-),
-'media' =>
-array (
-'baseurl' => '/pub/media/paygreen',
-),
-'settings' =>
-array (
-'entries' =>
-array (
-'behavior_detailed_logs' =>
-array (
-'type' => 'bool',
-'system' => true,
-'default' => false,
-'alias' => 'pgimpact_behavior_detailed_logs',
-),
-'use_cache' =>
-array (
-'type' => 'bool',
-'system' => true,
-'default' => true,
-'alias' => 'pgimpact_use_cache',
-),
-'last_update' =>
-array (
-'type' => 'string',
-'system' => true,
-'alias' => 'pgimpact_last_update',
-),
-'crontab_global' =>
-array (
-'type' => 'array',
-'global' => true,
-),
-'crontab_shop' =>
-array (
-'type' => 'array',
-),
-'ssl_security_skip' =>
-array (
-'type' => 'bool',
-'global' => true,
-'default' => false,
-),
-'shop_identifier' =>
-array (
-'type' => 'string',
-),
-'cron_activation' =>
-array (
-'type' => 'bool',
-'default' => true,
-'global' => true,
-),
-'cron_activation_mode' =>
-array (
-'type' => 'string',
-'default' => 'AJAX',
-'global' => true,
-),
-'tree_activation' =>
-array (
-'type' => 'bool',
-'default' => false,
-),
-'tree_kit_activation' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'tree_client_id' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'tree_client_username' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'carbon_offsetting_payer' =>
-array (
-'type' => 'string',
-'default' => 'MERCHANT',
-),
-'shipping_address_line_1' =>
-array (
-'type' => 'string',
-'default' => '',
-),
-'shipping_address_line_2' =>
-array (
-'type' => 'string',
-'default' => '',
-),
-'shipping_address_zipcode' =>
-array (
-'type' => 'string',
-'default' => '',
-),
-'shipping_address_city' =>
-array (
-'type' => 'string',
-'default' => '',
-),
-'shipping_address_country' =>
-array (
-'type' => 'string',
-'default' => 'fr',
-),
-'tree_details_url' =>
-array (
-'type' => 'string',
-'default' => '',
-),
-'tree_bot_activated' =>
-array (
-'type' => 'bool',
-'default' => false,
-),
-'tree_bot_color' =>
-array (
-'type' => 'string',
-'default' => '#33AD73',
-),
-'tree_bot_side' =>
-array (
-'type' => 'string',
-'default' => 'RIGHT',
-),
-'tree_bot_corner' =>
-array (
-'type' => 'string',
-'default' => 'ROUND',
-),
-'tree_bot_mobile_activated' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'tree_test_mode' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'tree_access_token' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'tree_access_token_validity' =>
-array (
-'type' => 'string',
-),
-'tree_refresh_token' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'tree_refresh_token_validity' =>
-array (
-'type' => 'string',
-),
-'tree_api_server' =>
-array (
-'type' => 'string',
-'default' => 'PROD',
-),
-'tree_use_https' =>
-array (
-'type' => 'bool',
-'global' => true,
-'default' => true,
-),
-'charity_activation' =>
-array (
-'type' => 'bool',
-'default' => false,
-),
-'charity_kit_activation' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'charity_client_id' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'charity_client_username' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'charity_partnerships_positions' =>
-array (
-'type' => 'array',
-'default' =>
-array (
-),
-),
-'charity_test_mode' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'charity_access_token' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'charity_access_token_validity' =>
-array (
-'type' => 'string',
-),
-'charity_refresh_token' =>
-array (
-'type' => 'string',
-'private' => true,
-),
-'charity_refresh_token_validity' =>
-array (
-'type' => 'string',
-),
-'charity_api_server' =>
-array (
-'type' => 'string',
-'default' => 'PROD',
-),
-'charity_use_https' =>
-array (
-'type' => 'bool',
-'global' => true,
-'default' => true,
-),
-'regenerate_cart_on_cancelled_payment' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'regenerate_cart_on_refused_payment' =>
-array (
-'type' => 'bool',
-'default' => true,
-),
-'charity_gift_id' =>
-array (
-'type' => 'int',
-'global' => true,
-),
-),
-'officers' =>
-array (
-'basic' => 'officer.settings.database.basic',
-'global' => 'officer.settings.database.global',
-'system' => 'officer.settings.configuration.global',
-),
-),
 'behaviors' =>
 array (
 'detailed_logs' =>
@@ -685,6 +378,391 @@ array (
 ),
 ),
 ),
+'media' =>
+array (
+'baseurl' => '/pub/media/paygreen',
+),
+'cache' =>
+array (
+'entries' =>
+array (
+'translations-fr' =>
+array (
+'ttl' => 604800,
+'format' => 'array',
+),
+'translations-en' =>
+array (
+'ttl' => 604800,
+'format' => 'array',
+),
+'carbon_footprint_catalog' =>
+array (
+'ttl' => 259200,
+),
+'tree_account_data' =>
+array (
+'ttl' => 21600,
+'format' => 'object',
+),
+'tree_user_data' =>
+array (
+'ttl' => 21600,
+'format' => 'object',
+),
+'charity_associations' =>
+array (
+'ttl' => 259200,
+'format' => 'array',
+),
+'charity_partnerships' =>
+array (
+'ttl' => 21600,
+'format' => 'object',
+),
+'charity_account_data' =>
+array (
+'ttl' => 21600,
+'format' => 'object',
+),
+'charity_user_data' =>
+array (
+'ttl' => 21600,
+'format' => 'object',
+),
+),
+),
+'settings' =>
+array (
+'entries' =>
+array (
+'behavior_detailed_logs' =>
+array (
+'type' => 'bool',
+'system' => true,
+'default' => false,
+'alias' => 'pgimpact_behavior_detailed_logs',
+),
+'use_cache' =>
+array (
+'type' => 'bool',
+'system' => true,
+'default' => true,
+'alias' => 'pgimpact_use_cache',
+),
+'last_update' =>
+array (
+'type' => 'string',
+'system' => true,
+'alias' => 'pgimpact_last_update',
+),
+'crontab_global' =>
+array (
+'type' => 'array',
+'global' => true,
+),
+'crontab_shop' =>
+array (
+'type' => 'array',
+),
+'ssl_security_skip' =>
+array (
+'type' => 'bool',
+'global' => true,
+'default' => false,
+),
+'shop_identifier' =>
+array (
+'type' => 'string',
+),
+'cron_activation' =>
+array (
+'type' => 'bool',
+'default' => true,
+'global' => true,
+),
+'cron_activation_mode' =>
+array (
+'type' => 'string',
+'default' => 'AJAX',
+'global' => true,
+),
+'tree_activation' =>
+array (
+'type' => 'bool',
+'default' => false,
+),
+'tree_kit_activation' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'tree_client_id' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'tree_client_username' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'carbon_offsetting_payer' =>
+array (
+'type' => 'string',
+'default' => 'MERCHANT',
+),
+'shipping_address_line_1' =>
+array (
+'type' => 'string',
+'default' => '',
+),
+'shipping_address_line_2' =>
+array (
+'type' => 'string',
+'default' => '',
+),
+'shipping_address_zipcode' =>
+array (
+'type' => 'string',
+'default' => '',
+),
+'shipping_address_city' =>
+array (
+'type' => 'string',
+'default' => '',
+),
+'shipping_address_country' =>
+array (
+'type' => 'string',
+'default' => 'fr',
+),
+'tree_details_url' =>
+array (
+'type' => 'string',
+'default' => '',
+),
+'tree_bot_activated' =>
+array (
+'type' => 'bool',
+'default' => false,
+),
+'tree_bot_color' =>
+array (
+'type' => 'string',
+'default' => '#33AD73',
+),
+'tree_bot_side' =>
+array (
+'type' => 'string',
+'default' => 'RIGHT',
+),
+'tree_bot_corner' =>
+array (
+'type' => 'string',
+'default' => 'ROUND',
+),
+'tree_bot_mobile_activated' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'tree_test_mode' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'tree_access_token' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'tree_access_token_validity' =>
+array (
+'type' => 'string',
+),
+'tree_refresh_token' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'tree_refresh_token_validity' =>
+array (
+'type' => 'string',
+),
+'tree_api_server' =>
+array (
+'type' => 'string',
+'default' => 'PROD',
+),
+'tree_use_https' =>
+array (
+'type' => 'bool',
+'global' => true,
+'default' => true,
+),
+'charity_activation' =>
+array (
+'type' => 'bool',
+'default' => false,
+),
+'charity_kit_activation' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'charity_client_id' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'charity_client_username' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'charity_partnerships_positions' =>
+array (
+'type' => 'array',
+'default' =>
+array (
+),
+),
+'charity_test_mode' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'charity_access_token' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'charity_access_token_validity' =>
+array (
+'type' => 'string',
+),
+'charity_refresh_token' =>
+array (
+'type' => 'string',
+'private' => true,
+),
+'charity_refresh_token_validity' =>
+array (
+'type' => 'string',
+),
+'charity_api_server' =>
+array (
+'type' => 'string',
+'default' => 'PROD',
+),
+'charity_use_https' =>
+array (
+'type' => 'bool',
+'global' => true,
+'default' => true,
+),
+'regenerate_cart_on_cancelled_payment' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'regenerate_cart_on_refused_payment' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'charity_gift_id' =>
+array (
+'type' => 'int',
+'global' => true,
+),
+),
+'officers' =>
+array (
+'basic' => 'officer.settings.database.basic',
+'global' => 'officer.settings.database.global',
+'system' => 'officer.settings.configuration.global',
+),
+),
+'outputs' =>
+array (
+'back_office_paygreen' =>
+array (
+'target' => 'BACK.PAYGREEN',
+'builder' => 'back_office_paygreen',
+'clean' => false,
+),
+'front_office_paygreen' =>
+array (
+'target' => 'FRONT.PAYGREEN',
+'builder' => 'front_office_paygreen',
+'clean' => false,
+),
+'global_front_office_paygreen' =>
+array (
+'target' => 'FRONT.HEAD',
+'builder' => 'global_front_office_paygreen',
+'clean' => false,
+),
+'global_cron_launcher' =>
+array (
+'target' => 'FRONT.HEAD',
+'builder' => 'cron_launcher',
+'clean' => true,
+'requirements' =>
+array (
+'cron_activation' => true,
+),
+),
+'carbon_footprint' =>
+array (
+'target' => 'FRONT.FUNNEL.CONFIRMATION',
+'builder' => 'carbon_footprint',
+'clean' => true,
+'requirements' =>
+array (
+'tree_access_available' => true,
+),
+),
+'carbon_bot' =>
+array (
+'target' => 'FRONT.HEAD',
+'builder' => 'carbon_bot',
+'clean' => true,
+'requirements' =>
+array (
+'tree_access_available' => true,
+'tree_bot_activation' => true,
+),
+),
+'charity_block' =>
+array (
+'target' => 'FRONT.FUNNEL.CHECKOUT',
+'builder' => 'charity_block',
+'clean' => true,
+'requirements' =>
+array (
+'charity_access_available' => true,
+),
+),
+'frontoffice_override_css' =>
+array (
+'target' => 'FRONT.HEAD',
+'builder' => 'frontoffice_override_css',
+),
+'carbon_bot_css' =>
+array (
+'target' => 'FRONT.HEAD',
+'builder' => 'carbon_bot_css',
+'clean' => true,
+'requirements' =>
+array (
+'tree_activation' => true,
+'tree_bot_activation' => true,
+),
+),
+),
 'static' =>
 array (
 'public' => null,
@@ -702,10 +780,12 @@ array (
 'module' => 'Paygreen_Impact',
 'folder' => 'static',
 ),
-'logo' =>
+'upgrades' =>
 array (
-'path' => 'PGModule:paygreen-logo.svg',
-'template' => 'block-menu-logo.tpl',
+),
+'setup' =>
+array (
+'older' => null,
 ),
 'translations' =>
 array (
@@ -819,91 +899,6 @@ array (
 array (
 'fr' => 'Arrondir le montant de mon panier au profit d\'une association avec un don de',
 'en' => 'Round up the amount of my basket to benefit an association with a donation of',
-),
-),
-),
-'setup' =>
-array (
-'older' => null,
-),
-'upgrades' =>
-array (
-),
-'outputs' =>
-array (
-'back_office_paygreen' =>
-array (
-'target' => 'BACK.PAYGREEN',
-'builder' => 'back_office_paygreen',
-'clean' => false,
-),
-'front_office_paygreen' =>
-array (
-'target' => 'FRONT.PAYGREEN',
-'builder' => 'front_office_paygreen',
-'clean' => false,
-),
-'global_front_office_paygreen' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'global_front_office_paygreen',
-'clean' => false,
-),
-'global_cron_launcher' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'cron_launcher',
-'clean' => true,
-'requirements' =>
-array (
-'cron_activation' => true,
-),
-),
-'carbon_footprint' =>
-array (
-'target' => 'FRONT.FUNNEL.CONFIRMATION',
-'builder' => 'carbon_footprint',
-'clean' => true,
-'requirements' =>
-array (
-'tree_access_available' => true,
-),
-),
-'carbon_bot' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'carbon_bot',
-'clean' => true,
-'requirements' =>
-array (
-'tree_access_available' => true,
-'tree_bot_activation' => true,
-),
-),
-'charity_block' =>
-array (
-'target' => 'FRONT.FUNNEL.CHECKOUT',
-'builder' => 'charity_block',
-'clean' => true,
-'requirements' =>
-array (
-'charity_access_available' => true,
-),
-),
-'frontoffice_override_css' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'frontoffice_override_css',
-),
-'carbon_bot_css' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'carbon_bot_css',
-'clean' => true,
-'requirements' =>
-array (
-'tree_activation' => true,
-'tree_bot_activation' => true,
 ),
 ),
 ),
@@ -1043,6 +1038,11 @@ array (
 ),
 ),
 ),
+'logo' =>
+array (
+'path' => 'PGModule:paygreen-logo.svg',
+'template' => 'block-menu-logo.tpl',
+),
 'db' =>
 array (
 'var' =>
@@ -1051,6 +1051,76 @@ array (
 'engine' => 'innodb',
 ),
 'split' => true,
+),
+'mime_types' =>
+array (
+'aac' => 'audio/aac',
+'abw' => 'application/x-abiword',
+'arc' => 'application/octet-stream',
+'avi' => 'video/x-msvideo',
+'azw' => 'application/vnd.amazon.ebook',
+'bin' => 'application/octet-stream',
+'bz' => 'application/x-bzip',
+'bz2' => 'application/x-bzip2',
+'csh' => 'application/x-csh',
+'css' => 'text/css',
+'csv' => 'text/csv',
+'doc' => 'application/msword',
+'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+'eot' => 'application/vnd.ms-fontobject',
+'epub' => 'application/epub+zip',
+'gif' => 'image/gif',
+'htm' => 'text/html',
+'html' => 'text/html',
+'ico' => 'image/x-icon',
+'ics' => 'text/calendar',
+'jar' => 'application/java-archive',
+'jpeg' => 'image/jpeg',
+'jpg' => 'image/jpeg',
+'js' => 'application/javascript',
+'json' => 'application/json',
+'log' => 'text/plain',
+'mid' => 'audio/midi',
+'midi' => 'audio/midi',
+'mpeg' => 'video/mpeg',
+'mpkg' => 'application/vnd.apple.installer+xml',
+'odp' => 'application/vnd.oasis.opendocument.presentation',
+'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+'odt' => 'application/vnd.oasis.opendocument.text',
+'oga' => 'audio/ogg',
+'ogv' => 'video/ogg',
+'ogx' => 'application/ogg',
+'otf' => 'font/otf',
+'png' => 'image/png',
+'pdf' => 'application/pdf',
+'ppt' => 'application/vnd.ms-powerpoint',
+'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+'rar' => 'application/x-rar-compressed',
+'rtf' => 'application/rtf',
+'sh' => 'application/x-sh',
+'svg' => 'image/svg+xml',
+'swf' => 'application/x-shockwave-flash',
+'tar' => 'application/x-tar',
+'tif' => 'image/tiff',
+'tiff' => 'image/tiff',
+'ts' => 'application/typescript',
+'ttf' => 'font/ttf',
+'vsd' => 'application/vnd.visio',
+'wav' => 'audio/x-wav',
+'weba' => 'audio/webm',
+'webm' => 'video/webm',
+'webp' => 'image/webp',
+'woff' => 'font/woff',
+'woff2' => 'font/woff2',
+'xhtml' => 'application/xhtml+xml',
+'xls' => 'application/vnd.ms-excel',
+'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+'xml' => 'application/xml',
+'xul' => 'application/vnd.mozilla.xul+xml',
+'zip' => 'application/zip',
+'3gp' => 'video/3gpp',
+'3g2' => 'video/3gpp2',
+'7z' => 'application/x-7z-compressed',
 ),
 'http_codes' =>
 array (
@@ -1128,76 +1198,6 @@ array (
 511 => 'Network Authentication Required',
 598 => 'Network read timeout error',
 599 => 'Network connect timeout error',
-),
-'mime_types' =>
-array (
-'aac' => 'audio/aac',
-'abw' => 'application/x-abiword',
-'arc' => 'application/octet-stream',
-'avi' => 'video/x-msvideo',
-'azw' => 'application/vnd.amazon.ebook',
-'bin' => 'application/octet-stream',
-'bz' => 'application/x-bzip',
-'bz2' => 'application/x-bzip2',
-'csh' => 'application/x-csh',
-'css' => 'text/css',
-'csv' => 'text/csv',
-'doc' => 'application/msword',
-'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-'eot' => 'application/vnd.ms-fontobject',
-'epub' => 'application/epub+zip',
-'gif' => 'image/gif',
-'htm' => 'text/html',
-'html' => 'text/html',
-'ico' => 'image/x-icon',
-'ics' => 'text/calendar',
-'jar' => 'application/java-archive',
-'jpeg' => 'image/jpeg',
-'jpg' => 'image/jpeg',
-'js' => 'application/javascript',
-'json' => 'application/json',
-'log' => 'text/plain',
-'mid' => 'audio/midi',
-'midi' => 'audio/midi',
-'mpeg' => 'video/mpeg',
-'mpkg' => 'application/vnd.apple.installer+xml',
-'odp' => 'application/vnd.oasis.opendocument.presentation',
-'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-'odt' => 'application/vnd.oasis.opendocument.text',
-'oga' => 'audio/ogg',
-'ogv' => 'video/ogg',
-'ogx' => 'application/ogg',
-'otf' => 'font/otf',
-'png' => 'image/png',
-'pdf' => 'application/pdf',
-'ppt' => 'application/vnd.ms-powerpoint',
-'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-'rar' => 'application/x-rar-compressed',
-'rtf' => 'application/rtf',
-'sh' => 'application/x-sh',
-'svg' => 'image/svg+xml',
-'swf' => 'application/x-shockwave-flash',
-'tar' => 'application/x-tar',
-'tif' => 'image/tiff',
-'tiff' => 'image/tiff',
-'ts' => 'application/typescript',
-'ttf' => 'font/ttf',
-'vsd' => 'application/vnd.visio',
-'wav' => 'audio/x-wav',
-'weba' => 'audio/webm',
-'webm' => 'video/webm',
-'webp' => 'image/webp',
-'woff' => 'font/woff',
-'woff2' => 'font/woff2',
-'xhtml' => 'application/xhtml+xml',
-'xls' => 'application/vnd.ms-excel',
-'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-'xml' => 'application/xml',
-'xul' => 'application/vnd.mozilla.xul+xml',
-'zip' => 'application/zip',
-'3gp' => 'video/3gpp',
-'3g2' => 'video/3gpp2',
-'7z' => 'application/x-7z-compressed',
 ),
 'request_builder' =>
 array (
@@ -1938,573 +1938,190 @@ array (
 'collection' => 'PGI\\Impact\\PGForm\\Components\\Fields\\Collection',
 ),
 ),
-'intl' =>
-array (
-'native_languages' =>
-array (
-0 => 'en',
-1 => 'fr',
-),
-),
-'form' =>
-array (
-'definitions' =>
-array (
-'translations' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'cron' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'cron_activation' =>
-array (
-'model' => 'bool.switch',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.cron.fields.cron_activation.label',
-'help' => 'forms.cron.fields.cron_activation.help',
-),
-),
-),
-'cron_activation_mode' =>
-array (
-'model' => 'choice.contracted.single',
-'default' => 'URL',
-'requirements' =>
-array (
-'cron_activation' => true,
-),
-'validators' =>
-array (
-'array.in' => 'cron_activation_mode',
-),
-'view' =>
-array (
-'data' =>
-array (
-'choices' => 'cron_activation_mode',
-'label' => 'forms.cron.fields.cron_activation_mode.label',
-'help' => 'forms.cron.fields.cron_activation_mode.help',
-'translate' => true,
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'settings_support' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'behavior_detailed_logs' =>
-array (
-'model' => 'bool.switch',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.settings_support.fields.detailed_logs.label',
-'help' => 'forms.settings_support.fields.detailed_logs.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'tree_shipping_address' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'shipping_address_line_1' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_shipping_address.fields.line_1.label',
-),
-),
-),
-'shipping_address_line_2' =>
-array (
-'model' => 'string',
-'required' => false,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_shipping_address.fields.line_2.label',
-),
-),
-),
-'shipping_address_zipcode' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_shipping_address.fields.zipcode.label',
-),
-),
-),
-'shipping_address_city' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_shipping_address.fields.city.label',
-),
-),
-),
-'shipping_address_country' =>
-array (
-'model' => 'choice.contracted.single',
-'validators' =>
-array (
-'array.in' => 'countries',
-),
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'choices' => 'countries',
-'translate' => true,
-'label' => 'forms.tree_shipping_address.fields.country.label',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'products' =>
-array (
-'fields' =>
-array (
-'tree_kit_activation' =>
-array (
-'enabled' => true,
-'model' => 'bool.switch',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.products.fields.tree_kit_activation.label',
-'help' => 'forms.products.fields.tree_kit_activation.help',
-),
-),
-),
-),
-),
-'tree_bot' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'tree_bot_color' =>
-array (
-'model' => 'colorpicker',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_bot.fields.tree_bot_color.label',
-),
-),
-),
-'tree_bot_side' =>
-array (
-'model' => 'choice.contracted.single',
-'validators' =>
-array (
-'array.in' =>
-array (
-0 => 'LEFT',
-1 => 'RIGHT',
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'translate' => true,
-'choices' =>
-array (
-'LEFT' => 'forms.tree_bot.fields.tree_bot_side.choices.LEFT',
-'RIGHT' => 'forms.tree_bot.fields.tree_bot_side.choices.RIGHT',
-),
-'label' => 'forms.tree_bot.fields.tree_bot_side.label',
-),
-),
-),
-'tree_bot_corner' =>
-array (
-'model' => 'choice.contracted.single',
-'validators' =>
-array (
-'array.in' =>
-array (
-0 => 'ROUND',
-1 => 'SQUARE',
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'translate' => true,
-'choices' =>
-array (
-'ROUND' => 'forms.tree_bot.fields.tree_bot_corner.choices.ROUND',
-'SQUARE' => 'forms.tree_bot.fields.tree_bot_corner.choices.SQUARE',
-),
-'label' => 'forms.tree_bot.fields.tree_bot_corner.label',
-),
-),
-),
-'tree_details_url' =>
-array (
-'model' => 'string',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_bot.fields.tree_details_url.label',
-'help' => 'forms.tree_bot.fields.tree_details_url.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'tree_config' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'carbon_offsetting_payer' =>
-array (
-'model' => 'choice.expanded.single',
-'format' => 'string',
-'default' => 'MERCHANT',
-'enabled' => false,
-'view' =>
-array (
-'data' =>
-array (
-'choices' =>
-array (
-'MERCHANT' => 'forms.tree_config.fields.carbon_offsetting_payer.values.MERCHANT',
-'CUSTOMER' => 'forms.tree_config.fields.carbon_offsetting_payer.values.CUSTOMER',
-),
-'attr' =>
-array (
-'disabled' => '',
-),
-'translate' => true,
-'label' => 'forms.tree_config.fields.carbon_offsetting_payer.label',
-'help' => 'forms.tree_config.fields.carbon_offsetting_payer.help',
-'warning' => 'forms.tree_config.fields.carbon_offsetting_payer.warning',
-),
-),
-),
-'tree_test_mode' =>
-array (
-'model' => 'bool.switch',
-'requirements' =>
-array (
-'tree_prod_available' => true,
-),
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_config.fields.tree_test_mode.label',
-'help' => 'forms.tree_config.fields.tree_test_mode.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'carbon_bot_config_global' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'tree_bot_activated' =>
-array (
-'model' => 'bool.switch',
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.carbon_bot_config_global.fields.tree_bot_activated.label',
-'help' => 'forms.carbon_bot_config_global.fields.tree_bot_activated.help',
-),
-),
-),
-'tree_bot_mobile_activated' =>
-array (
-'model' => 'bool.switch',
-'requirements' =>
-array (
-'tree_bot_activation' => true,
-),
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_bot.fields.tree_bot_mobile_activated.label',
-'help' => 'forms.tree_bot.fields.tree_bot_mobile_activated.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'tree_authentication' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'client_id' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.client_id.label',
-),
-),
-),
-'login' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.login.label',
-),
-),
-),
-'password' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.password.label',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'charity_authentication' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'client_id' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.client_id.label',
-),
-),
-),
-'login' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.login.label',
-),
-),
-),
-'password' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.password.label',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'charity_config' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'charity_test_mode' =>
-array (
-'model' => 'bool.switch',
-'requirements' =>
-array (
-'charity_prod_available' => true,
-),
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_config.fields.charity_test_mode.label',
-'help' => 'forms.charity_config.fields.charity_test_mode.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'settings_customization' =>
-array (
-'fields' =>
-array (
-'footer_display' =>
-array (
-'enabled' => false,
-),
-'footer_color' =>
-array (
-'enabled' => false,
-),
-),
-),
-),
-'default' =>
-array (
-),
-'models' =>
-array (
-'basic' =>
-array (
-'view' =>
-array (
-'name' => 'form',
-'data' =>
-array (
-'attr' =>
-array (
-'method' => 'post',
-),
-),
-'template' => 'form',
-),
-),
-'multipart' =>
-array (
-'view' =>
-array (
-'name' => 'form',
-'data' =>
-array (
-'attr' =>
-array (
-'method' => 'post',
-'enctype' => 'multipart/form-data',
-),
-),
-'template' => 'form',
-),
-),
-),
+'languages' =>
+array (
+0 => 'ab',
+1 => 'aa',
+2 => 'af',
+3 => 'ak',
+4 => 'sq',
+5 => 'de',
+6 => 'am',
+7 => 'en',
+8 => 'ar',
+9 => 'an',
+10 => 'hy',
+11 => 'as',
+12 => 'av',
+13 => 'ae',
+14 => 'ay',
+15 => 'az',
+16 => 'ba',
+17 => 'bm',
+18 => 'eu',
+19 => 'bn',
+20 => 'bi',
+21 => 'be',
+22 => 'my',
+23 => 'bs',
+24 => 'br',
+25 => 'bg',
+26 => 'ca',
+27 => 'ch',
+28 => 'ny',
+29 => 'zh',
+30 => 'ko',
+31 => 'kw',
+32 => 'co',
+33 => 'cr',
+34 => 'hr',
+35 => 'da',
+36 => 'dz',
+37 => 'es',
+38 => 'eo',
+39 => 'et',
+40 => 'ee',
+41 => 'fo',
+42 => 'fj',
+43 => 'fi',
+44 => 'nl',
+45 => 'fr',
+46 => 'fy',
+47 => 'gd',
+48 => 'gl',
+49 => 'om',
+50 => 'cy',
+51 => 'lg',
+52 => 'ka',
+53 => 'gu',
+54 => 'el',
+55 => 'kl',
+56 => 'gn',
+57 => 'ht',
+58 => 'ha',
+59 => 'he',
+60 => 'hz',
+61 => 'hi',
+62 => 'ho',
+63 => 'hu',
+64 => 'io',
+65 => 'ig',
+66 => 'id',
+67 => 'iu',
+68 => 'ik',
+69 => 'ga',
+70 => 'is',
+71 => 'it',
+72 => 'ja',
+73 => 'jv',
+74 => 'kn',
+75 => 'kr',
+76 => 'ks',
+77 => 'kk',
+78 => 'km',
+79 => 'ki',
+80 => 'ky',
+81 => 'kv',
+82 => 'kg',
+83 => 'ku',
+84 => 'kj',
+85 => 'bh',
+86 => 'lo',
+87 => 'la',
+88 => 'lv',
+89 => 'li',
+90 => 'ln',
+91 => 'lt',
+92 => 'lu',
+93 => 'lb',
+94 => 'mk',
+95 => 'ms',
+96 => 'ml',
+97 => 'dv',
+98 => 'mg',
+99 => 'mt',
+100 => 'gv',
+101 => 'mi',
+102 => 'mr',
+103 => 'mh',
+104 => 'ro',
+105 => 'mn',
+106 => 'na',
+107 => 'nv',
+108 => 'nd',
+109 => 'nr',
+110 => 'ng',
+111 => 'ne',
+112 => 'no',
+113 => 'nb',
+114 => 'nn',
+115 => 'oc',
+116 => 'oj',
+117 => 'or',
+118 => 'os',
+119 => 'ug',
+120 => 'ur',
+121 => 'uz',
+122 => 'ps',
+123 => 'pi',
+124 => 'pa',
+125 => 'fa',
+126 => 'ff',
+127 => 'pl',
+128 => 'pt',
+129 => 'qu',
+130 => 'rm',
+131 => 'rn',
+132 => 'ru',
+133 => 'rw',
+134 => 'se',
+135 => 'sm',
+136 => 'sg',
+137 => 'sa',
+138 => 'sc',
+139 => 'sr',
+140 => 'sn',
+141 => 'sd',
+142 => 'si',
+143 => 'sk',
+144 => 'sl',
+145 => 'so',
+146 => 'st',
+147 => 'su',
+148 => 'sv',
+149 => 'sw',
+150 => 'ss',
+151 => 'tg',
+152 => 'tl',
+153 => 'ty',
+154 => 'ta',
+155 => 'tt',
+156 => 'cs',
+157 => 'ce',
+158 => 'cv',
+159 => 'te',
+160 => 'th',
+161 => 'bo',
+162 => 'ti',
+163 => 'to',
+164 => 'ts',
+165 => 'tn',
+166 => 'tr',
+167 => 'tk',
+168 => 'tw',
+169 => 'uk',
+170 => 've',
+171 => 'vi',
+172 => 'cu',
+173 => 'vo',
+174 => 'wa',
+175 => 'wo',
+176 => 'xh',
+177 => 'ii',
+178 => 'yi',
+179 => 'yo',
+180 => 'za',
+181 => 'zu',
 ),
 'countries' =>
 array (
@@ -2755,227 +2372,571 @@ array (
 244 => 'za',
 245 => 'zi',
 ),
-'languages' =>
+'intl' =>
 array (
-0 => 'ab',
-1 => 'aa',
-2 => 'af',
-3 => 'ak',
-4 => 'sq',
-5 => 'de',
-6 => 'am',
-7 => 'en',
-8 => 'ar',
-9 => 'an',
-10 => 'hy',
-11 => 'as',
-12 => 'av',
-13 => 'ae',
-14 => 'ay',
-15 => 'az',
-16 => 'ba',
-17 => 'bm',
-18 => 'eu',
-19 => 'bn',
-20 => 'bi',
-21 => 'be',
-22 => 'my',
-23 => 'bs',
-24 => 'br',
-25 => 'bg',
-26 => 'ca',
-27 => 'ch',
-28 => 'ny',
-29 => 'zh',
-30 => 'ko',
-31 => 'kw',
-32 => 'co',
-33 => 'cr',
-34 => 'hr',
-35 => 'da',
-36 => 'dz',
-37 => 'es',
-38 => 'eo',
-39 => 'et',
-40 => 'ee',
-41 => 'fo',
-42 => 'fj',
-43 => 'fi',
-44 => 'nl',
-45 => 'fr',
-46 => 'fy',
-47 => 'gd',
-48 => 'gl',
-49 => 'om',
-50 => 'cy',
-51 => 'lg',
-52 => 'ka',
-53 => 'gu',
-54 => 'el',
-55 => 'kl',
-56 => 'gn',
-57 => 'ht',
-58 => 'ha',
-59 => 'he',
-60 => 'hz',
-61 => 'hi',
-62 => 'ho',
-63 => 'hu',
-64 => 'io',
-65 => 'ig',
-66 => 'id',
-67 => 'iu',
-68 => 'ik',
-69 => 'ga',
-70 => 'is',
-71 => 'it',
-72 => 'ja',
-73 => 'jv',
-74 => 'kn',
-75 => 'kr',
-76 => 'ks',
-77 => 'kk',
-78 => 'km',
-79 => 'ki',
-80 => 'ky',
-81 => 'kv',
-82 => 'kg',
-83 => 'ku',
-84 => 'kj',
-85 => 'bh',
-86 => 'lo',
-87 => 'la',
-88 => 'lv',
-89 => 'li',
-90 => 'ln',
-91 => 'lt',
-92 => 'lu',
-93 => 'lb',
-94 => 'mk',
-95 => 'ms',
-96 => 'ml',
-97 => 'dv',
-98 => 'mg',
-99 => 'mt',
-100 => 'gv',
-101 => 'mi',
-102 => 'mr',
-103 => 'mh',
-104 => 'ro',
-105 => 'mn',
-106 => 'na',
-107 => 'nv',
-108 => 'nd',
-109 => 'nr',
-110 => 'ng',
-111 => 'ne',
-112 => 'no',
-113 => 'nb',
-114 => 'nn',
-115 => 'oc',
-116 => 'oj',
-117 => 'or',
-118 => 'os',
-119 => 'ug',
-120 => 'ur',
-121 => 'uz',
-122 => 'ps',
-123 => 'pi',
-124 => 'pa',
-125 => 'fa',
-126 => 'ff',
-127 => 'pl',
-128 => 'pt',
-129 => 'qu',
-130 => 'rm',
-131 => 'rn',
-132 => 'ru',
-133 => 'rw',
-134 => 'se',
-135 => 'sm',
-136 => 'sg',
-137 => 'sa',
-138 => 'sc',
-139 => 'sr',
-140 => 'sn',
-141 => 'sd',
-142 => 'si',
-143 => 'sk',
-144 => 'sl',
-145 => 'so',
-146 => 'st',
-147 => 'su',
-148 => 'sv',
-149 => 'sw',
-150 => 'ss',
-151 => 'tg',
-152 => 'tl',
-153 => 'ty',
-154 => 'ta',
-155 => 'tt',
-156 => 'cs',
-157 => 'ce',
-158 => 'cv',
-159 => 'te',
-160 => 'th',
-161 => 'bo',
-162 => 'ti',
-163 => 'to',
-164 => 'ts',
-165 => 'tn',
-166 => 'tr',
-167 => 'tk',
-168 => 'tw',
-169 => 'uk',
-170 => 've',
-171 => 'vi',
-172 => 'cu',
-173 => 'vo',
-174 => 'wa',
-175 => 'wo',
-176 => 'xh',
-177 => 'ii',
-178 => 'yi',
-179 => 'yo',
-180 => 'za',
-181 => 'zu',
+'native_languages' =>
+array (
+0 => 'en',
+1 => 'fr',
 ),
-'log' =>
+),
+'form' =>
 array (
-'outputs' =>
+'definitions' =>
 array (
+'translations' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+),
 'view' =>
 array (
-'config' =>
+'data' =>
 array (
-'file' => 'log:/view.log',
-'format' => '<datetime> | *<type>* | <text>',
+'validate' => 'misc.forms.default.buttons.save',
 ),
 ),
-'api' =>
+),
+'cron' =>
 array (
-'config' =>
+'model' => 'basic',
+'fields' =>
 array (
-'file' => 'log:/api.log',
-'format' => '<datetime> | *<type>* | <text>',
+'cron_activation' =>
+array (
+'model' => 'bool.switch',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.cron.fields.cron_activation.label',
+'help' => 'forms.cron.fields.cron_activation.help',
+),
+),
+),
+'cron_activation_mode' =>
+array (
+'model' => 'choice.contracted.single',
+'default' => 'URL',
+'requirements' =>
+array (
+'cron_activation' => true,
+),
+'validators' =>
+array (
+'array.in' => 'cron_activation_mode',
+),
+'view' =>
+array (
+'data' =>
+array (
+'choices' => 'cron_activation_mode',
+'label' => 'forms.cron.fields.cron_activation_mode.label',
+'help' => 'forms.cron.fields.cron_activation_mode.help',
+'translate' => true,
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'settings_support' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'behavior_detailed_logs' =>
+array (
+'model' => 'bool.switch',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.settings_support.fields.detailed_logs.label',
+'help' => 'forms.settings_support.fields.detailed_logs.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'tree_bot' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'tree_bot_color' =>
+array (
+'model' => 'colorpicker',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_bot.fields.tree_bot_color.label',
+),
+),
+),
+'tree_bot_side' =>
+array (
+'model' => 'choice.contracted.single',
+'validators' =>
+array (
+'array.in' =>
+array (
+0 => 'LEFT',
+1 => 'RIGHT',
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'translate' => true,
+'choices' =>
+array (
+'LEFT' => 'forms.tree_bot.fields.tree_bot_side.choices.LEFT',
+'RIGHT' => 'forms.tree_bot.fields.tree_bot_side.choices.RIGHT',
+),
+'label' => 'forms.tree_bot.fields.tree_bot_side.label',
+),
+),
+),
+'tree_bot_corner' =>
+array (
+'model' => 'choice.contracted.single',
+'validators' =>
+array (
+'array.in' =>
+array (
+0 => 'ROUND',
+1 => 'SQUARE',
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'translate' => true,
+'choices' =>
+array (
+'ROUND' => 'forms.tree_bot.fields.tree_bot_corner.choices.ROUND',
+'SQUARE' => 'forms.tree_bot.fields.tree_bot_corner.choices.SQUARE',
+),
+'label' => 'forms.tree_bot.fields.tree_bot_corner.label',
+),
+),
+),
+'tree_details_url' =>
+array (
+'model' => 'string',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_bot.fields.tree_details_url.label',
+'help' => 'forms.tree_bot.fields.tree_details_url.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'tree_authentication' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'client_id' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_authentication.fields.client_id.label',
+),
+),
+),
+'login' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_authentication.fields.login.label',
+),
+),
+),
+'password' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_authentication.fields.password.label',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'carbon_bot_config_global' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'tree_bot_activated' =>
+array (
+'model' => 'bool.switch',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.carbon_bot_config_global.fields.tree_bot_activated.label',
+'help' => 'forms.carbon_bot_config_global.fields.tree_bot_activated.help',
+),
+),
+),
+'tree_bot_mobile_activated' =>
+array (
+'model' => 'bool.switch',
+'requirements' =>
+array (
+'tree_bot_activation' => true,
+),
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_bot.fields.tree_bot_mobile_activated.label',
+'help' => 'forms.tree_bot.fields.tree_bot_mobile_activated.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'tree_config' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'carbon_offsetting_payer' =>
+array (
+'model' => 'choice.expanded.single',
+'format' => 'string',
+'default' => 'MERCHANT',
+'enabled' => false,
+'view' =>
+array (
+'data' =>
+array (
+'choices' =>
+array (
+'MERCHANT' => 'forms.tree_config.fields.carbon_offsetting_payer.values.MERCHANT',
+'CUSTOMER' => 'forms.tree_config.fields.carbon_offsetting_payer.values.CUSTOMER',
+),
+'attr' =>
+array (
+'disabled' => '',
+),
+'translate' => true,
+'label' => 'forms.tree_config.fields.carbon_offsetting_payer.label',
+'help' => 'forms.tree_config.fields.carbon_offsetting_payer.help',
+'warning' => 'forms.tree_config.fields.carbon_offsetting_payer.warning',
+),
+),
+),
+'tree_test_mode' =>
+array (
+'model' => 'bool.switch',
+'requirements' =>
+array (
+'tree_prod_available' => true,
+),
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_config.fields.tree_test_mode.label',
+'help' => 'forms.tree_config.fields.tree_test_mode.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'tree_shipping_address' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'shipping_address_line_1' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_shipping_address.fields.line_1.label',
+),
+),
+),
+'shipping_address_line_2' =>
+array (
+'model' => 'string',
+'required' => false,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_shipping_address.fields.line_2.label',
+),
+),
+),
+'shipping_address_zipcode' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_shipping_address.fields.zipcode.label',
+),
+),
+),
+'shipping_address_city' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_shipping_address.fields.city.label',
+),
+),
+),
+'shipping_address_country' =>
+array (
+'model' => 'choice.contracted.single',
+'validators' =>
+array (
+'array.in' => 'countries',
+),
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'choices' => 'countries',
+'translate' => true,
+'label' => 'forms.tree_shipping_address.fields.country.label',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'products' =>
+array (
+'fields' =>
+array (
+'tree_kit_activation' =>
+array (
+'enabled' => true,
+'model' => 'bool.switch',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.products.fields.tree_kit_activation.label',
+'help' => 'forms.products.fields.tree_kit_activation.help',
+),
+),
+),
+),
+),
+'charity_config' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'charity_test_mode' =>
+array (
+'model' => 'bool.switch',
+'requirements' =>
+array (
+'charity_prod_available' => true,
+),
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.charity_config.fields.charity_test_mode.label',
+'help' => 'forms.charity_config.fields.charity_test_mode.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'charity_authentication' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'client_id' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.charity_authentication.fields.client_id.label',
+),
+),
+),
+'login' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.charity_authentication.fields.login.label',
+),
+),
+),
+'password' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.charity_authentication.fields.password.label',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
+'settings_customization' =>
+array (
+'fields' =>
+array (
+'footer_display' =>
+array (
+'enabled' => false,
+),
+'footer_color' =>
+array (
+'enabled' => false,
+),
+),
 ),
 ),
 'default' =>
 array (
-'config' =>
+),
+'models' =>
 array (
-'file' => 'log:/module.log',
-'format' => '<datetime> | *<type>* | <text>',
+'basic' =>
+array (
+'view' =>
+array (
+'name' => 'form',
+'data' =>
+array (
+'attr' =>
+array (
+'method' => 'post',
 ),
 ),
+'template' => 'form',
 ),
-'archive' =>
+),
+'multipart' =>
 array (
-'file' =>
+'view' =>
 array (
-'folder' => 'var:/chronicles',
-'file' => '<name>_<date>_<time>.zip',
-'max_size' => 10485760,
+'name' => 'form',
+'data' =>
+array (
+'attr' =>
+array (
+'method' => 'post',
+'enctype' => 'multipart/form-data',
+),
+),
+'template' => 'form',
+),
 ),
 ),
 ),
@@ -3371,6 +3332,79 @@ array (
 ),
 'null_stream' => 'PGI\\Impact\\PGView\\Components\\NullStream',
 ),
+'log' =>
+array (
+'outputs' =>
+array (
+'view' =>
+array (
+'config' =>
+array (
+'file' => 'log:/view.log',
+'format' => '<datetime> | *<type>* | <text>',
+),
+),
+'api' =>
+array (
+'config' =>
+array (
+'file' => 'log:/api.log',
+'format' => '<datetime> | *<type>* | <text>',
+),
+),
+'default' =>
+array (
+'config' =>
+array (
+'file' => 'log:/module.log',
+'format' => '<datetime> | *<type>* | <text>',
+),
+),
+),
+'archive' =>
+array (
+'file' =>
+array (
+'folder' => 'var:/chronicles',
+'file' => '<name>_<date>_<time>.zip',
+'max_size' => 10485760,
+),
+),
+),
+'data' =>
+array (
+'cron_activation_mode' =>
+array (
+'URL' => 'data.cron_activation_mode.url',
+'AJAX' => 'data.cron_activation_mode.ajax',
+),
+'charity_gift' =>
+array (
+'name' => 'Impact Gift',
+'reference' => 'pgimpact-charity-gift',
+'image_path' => 'static:/pictures/FOCharity/logo-charity-kit.png',
+),
+'display_type' =>
+array (
+'IMAGE' => 'forms.button.fields.display_type.values.picture',
+'TEXT' => 'forms.button.fields.display_type.values.text',
+),
+),
+'tasks' =>
+array (
+'log_zipping_module' =>
+array (
+'task' => 'log.zipping',
+'frequency' => 'P1D',
+'tab' => 'global',
+),
+'log_cleaning' =>
+array (
+'task' => 'log.cleaning',
+'frequency' => 'P7D',
+'tab' => 'global',
+),
+),
 'requirements' =>
 array (
 'cron_activation' =>
@@ -3446,39 +3480,6 @@ array (
 array (
 0 => 'charity_activation',
 ),
-),
-),
-'data' =>
-array (
-'cron_activation_mode' =>
-array (
-'URL' => 'data.cron_activation_mode.url',
-'AJAX' => 'data.cron_activation_mode.ajax',
-),
-'charity_gift' =>
-array (
-'reference' => 'pgimpact-charity-gift',
-'image_path' => 'static:/pictures/FOCharity/logo-charity-kit.png',
-),
-'display_type' =>
-array (
-'IMAGE' => 'forms.button.fields.display_type.values.picture',
-'TEXT' => 'forms.button.fields.display_type.values.text',
-),
-),
-'tasks' =>
-array (
-'log_zipping_module' =>
-array (
-'task' => 'log.zipping',
-'frequency' => 'P1D',
-'tab' => 'global',
-),
-'log_cleaning' =>
-array (
-'task' => 'log.cleaning',
-'frequency' => 'P7D',
-'tab' => 'global',
 ),
 ),
 'servers' =>
@@ -3796,11 +3797,6 @@ array (
 array (
 'tree' =>
 array (
-'responses' =>
-array (
-'class' => 'PGI\\Impact\\PGClient\\Components\\ResponseJSON',
-'validity' => '200-299',
-),
 'requests' =>
 array (
 'oauth_access' =>
@@ -3954,6 +3950,11 @@ array (
 'validity' => '204',
 ),
 ),
+'responses' =>
+array (
+'class' => 'PGI\\Impact\\PGClient\\Components\\ResponseJSON',
+'validity' => '200-299',
+),
 'clients' =>
 array (
 'curl' =>
@@ -3968,17 +3969,6 @@ array (
 ),
 'charity' =>
 array (
-'clients' =>
-array (
-'curl' =>
-array (
-'allow_redirection' => true,
-'verify_peer' => true,
-'verify_host' => 2,
-'timeout' => 30,
-'http_version' => '1.1',
-),
-),
 'responses' =>
 array (
 'class' => 'PGI\\Impact\\PGClient\\Components\\ResponseJSON',
@@ -4179,6 +4169,17 @@ array (
 'method' => 'POST',
 'url' => '{host}/calc/round-up',
 'private' => true,
+),
+),
+'clients' =>
+array (
+'curl' =>
+array (
+'allow_redirection' => true,
+'verify_peer' => true,
+'verify_host' => 2,
+'timeout' => 30,
+'http_version' => '1.1',
 ),
 ),
 ),

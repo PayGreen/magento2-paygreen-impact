@@ -3,7 +3,7 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="paygreen_impact_checkout_output_provider" xsi:type="object">Paygreen\Impact\Model\CheckoutOutputProvider</item>
+                <item name="pgimpact_impact_checkout_output_provider" xsi:type="object">Paygreen\Impact\Model\CheckoutOutputProvider</item>
             </argument>
         </arguments>
     </type>

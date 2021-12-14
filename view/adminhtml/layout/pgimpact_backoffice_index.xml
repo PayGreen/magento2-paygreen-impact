@@ -1,14 +1,14 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <title>Administration du module PayGreen</title>
+        <title>Administration du module PayGreen Impact</title>
     </head>
     <body>
         <referenceBlock name="header">
-            <block class="Paygreen\Impact\Block\DisplayBackofficeHeader" name="paygreen_impact_block_displaybackofficeheader" cacheable="false" />
+            <block class="Paygreen\Impact\Block\DisplayBackofficeHeader" name="pgimpact_impact_block_displaybackofficeheader" cacheable="false" />
         </referenceBlock>
         <referenceContainer name="content">
-            <block class="Paygreen\Impact\Block\DisplayBackofficeOutput" name="paygreen_impact_block_displaybackoffice" cacheable="false" />
+            <block class="Paygreen\Impact\Block\DisplayBackofficeOutput" name="pgimpact_impact_block_displaybackoffice" cacheable="false" />
         </referenceContainer>
     </body>
 </page>

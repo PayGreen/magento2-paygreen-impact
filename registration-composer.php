@@ -31,7 +31,7 @@ if (defined('BP')) {
     $root = dirname(realpath(\Composer\Factory::getComposerFile()));
 }
 
-define('PGIMPACT_MODULE_DIR', $root . DS . 'vendor' . DS . 'paygreen' . DS . 'impact-magento-2');
+define('PGIMPACT_MODULE_DIR', $root . DS . 'vendor' . DS . 'paygreen' . DS . 'magento2-paygreen-impact');
 define('PGIMPACT_BOOTSTRAP_SRC', PGIMPACT_MODULE_DIR . DS . 'bootstrap.php');
 define('PGIMPACT_AUTOLOADING', false);
 

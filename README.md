@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-composer require paygreen/impact-magento-2
+composer require paygreen/magento2-paygreen-impact
 ```
 
 ## Configuration

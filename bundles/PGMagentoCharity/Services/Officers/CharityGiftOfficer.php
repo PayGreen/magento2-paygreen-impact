@@ -170,7 +170,7 @@ class CharityGiftOfficer extends AbstractService implements CharityGiftOfficerIn
             /** @var LocalProduct $localProduct */
             $localProduct = $this->localProductFactory->create();
 
-            $localProduct->setName('Charity Gift');
+            $localProduct->setName($this->getConfig('gift_name'));
             $localProduct->setTypeId('virtual');
             $localProduct->setAttributeSetId(4);
             $localProduct->setSku($this->getConfig('gift_reference'));
