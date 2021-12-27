@@ -45,109 +45,22 @@ class AccountController extends AbstractBackofficeController
     }
 
     /**
-     * @return BoxComponent
      * @throws Exception
      */
-    protected function buildAuthenticationFormView()
+    public function connectAction()
     {
         /** @var Settings $settings */
         $settings = $this->getSettings();
 
-        $action = $this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_account.save');
-
-        $values = array(
-            'client_id' => $settings->get('tree_client_id')
-        );
-
-        $view = $this->buildForm('tree_authentication', $values)
-            ->buildView()
-            ->setAction($action)
-        ;
-
-        return new BoxComponent($view);
-    }
-
-    /**
-     * @return RedirectionResponseComponent
-     * @throws Exception
-     */
-    public function disconnectAction()
-    {
-        $this->treeAuthenticationHandler->disconnect();
-
-        $this->success('actions.tree_authentication.reset.result.success');
-
-        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_account.display'));
-    }
-
-    /**
-     * @inheritDoc
-     * @throws Exception
-     */
-    public function saveTreeAccountConfigurationAction()
-    {
-        /** @var FormInterface $form */
-        $form = $this->buildForm('tree_authentication', $this->getRequest()->getAll());
-        $result = null;
-
-        if ($form->isValid()) {
-            $isConnected = $this->treeAuthenticationHandler->connect(
-                $form->getValue('client_id'),
-                $form->getValue('login'),
-                $form->getValue('password')
-            );
-
-            if ($isConnected) {
-                $this->success('actions.tree_authentication.save.result.success');
-                $result = $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_account.display'));
-            } else {
-                $this->failure('actions.tree_authentication.save.result.failure');
-            }
-        } else {
-            $this->failure('actions.tree_authentication.save.result.invalid');
+        $client_id = $settings->get('tree_client_id');
+        if($this->treeAuthenticationHandler->activateClimate($client_id)) {
+            $this->success('actions.tree_authentication.save.result.success');
         }
-
-        if ($result === null) {
-            $result = $this->forward('tree_account.display', array(
-                'form' => $form
-            ));
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return TemplateResponseComponent
-     * @throws Exception
-     */
-    public function displayAccountInfosAction()
-    {
-        /** @var Settings $settings */
-        $settings = $this->getSettings();
-
-        $client_id = '';
-
-        $infos = null;
-
-        if ($this->treeAuthenticationHandler->isConnected()) {
-            $client_id = $settings->get('tree_client_id');
-            $username = $settings->get('tree_client_username');
-            $infos = array(
-                'blocks.tree_account_infos.form.client_id' => $client_id,
-                'blocks.tree_account_infos.form.username' => $username
-            );
+        else {
+            $this->failure('actions.tree_authentication.save.result.failure');
         }
 
 
-        return $this->buildTemplateResponse('tree_account/block-infos')
-            ->addData('infos', $infos)
-        ;
-    }
-
-    public function displayAccountLoginAction()
-    {
-        return $this->buildTemplateResponse('tree_account/block-login')
-            ->addData('form', $this->buildAuthenticationFormView('tree_authentication', 'backoffice.tree_account.save'))
-        ;
+        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.home.display'));
     }
 }

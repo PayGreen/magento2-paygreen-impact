@@ -21,11 +21,11 @@
 
 namespace PGI\Impact\PGTree\Services\Requirements;
 
+use PGI\Impact\PGFramework\Foundations\AbstractRequirement;
 use PGI\Impact\PGTree\Services\Handlers\TreeAccountHandler;
 use PGI\Impact\PGClient\Exceptions\Response as ResponseException;
-use PGI\Impact\PGFramework\Interfaces\RequirementInterface;
 
-class TreeAccessAvailableRequirement implements RequirementInterface
+class TreeAccessAvailableRequirement extends AbstractRequirement
 {
     /** @var TreeAccountHandler */
     private $treeAccountHandler;
@@ -40,15 +40,6 @@ class TreeAccessAvailableRequirement implements RequirementInterface
      * @throws ResponseException
      */
     public function isValid()
-    {
-        return $this->isTreeAccessAvailable();
-    }
-
-    /**
-     * @return bool
-     * @throws ResponseException
-     */
-    private function isTreeAccessAvailable()
     {
         $isMandateSigned = $this->treeAccountHandler->isMandateSigned();
         $isTestModeNotExpired = (!$this->treeAccountHandler->isTestModeExpired());

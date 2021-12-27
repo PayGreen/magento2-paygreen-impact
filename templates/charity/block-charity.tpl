@@ -17,79 +17,91 @@
  * @version   1.0.0
  *
  *}
-<div class="pgdiv_flex_row pg_justify_content_between pg_align_items-flex_start">
-    <h2 class="pg__mtop-0">
+
+<div class="pgdiv_flex_row pg_justify_content_between pg_align_items-flex_start pgcharity_home_block">
+    <h2 class="pgblock__shadow__title pg__mtop-md">
         {'blocks.charity.title'|pgtrans}
     </h2>
-
-    {if $charityKitInfos != null}
-        {if $charityKitInfos['is_test_mode_activated'] && !$charityKitInfos['is_test_mode_expired'] && $charityActivated}
-            {include file="charity/test_mode/badge-test-mode.tpl"}
-        {/if}
-    {/if}
 </div>
+<article>
+    {if $charityActivated == true }
 
-<div class="pgdiv_flex_row">
-    {if $connected}
-        {if $charityKitInfos != null}
-            {include file="charity/block-charity-kit-infos.tpl" infos=[
-                'blocks.charity_kit_infos.form.client_id' => $credentials['client_id'],
-                'blocks.charity_kit_infos.form.username' => $credentials['username']
-            ] giftsOverview=$charityKitInfos['gifts_overview']}
+        {if
+        $charityKitInfos['is_mandate_signed'] == false &&
+        $charityKitInfos['is_test_mode_expired']
+        }
+            {'misc.charity_account.notifications.mandate.unsigned'|pgtrans}
+        {else}
+            {include
+            file="toggle.tpl"
+            title="blocks.charity_mode.title"
+            description=$description
+            action="backoffice.charity_test_mode.activation"
+            active=!$charityKitInfos["is_test_mode_activated"]}
         {/if}
+        <div class="pgblock pg__success_container">
+            <p>
+            <div class="pgbutton__container">
+                <a
+                        target="_blank"
+                        href="https://charitykit.paygreen.fr/login"
+                        class="pgbutton pg__default"
+                >
+                    {'blocks.charity.space'|pgtrans}
+                </a>
+            </div>
+            <p>
+                {'blocks.charity.space_description'|pgtrans}
+            </p>
+        </div>
+        <div class="pgblock pg__danger_container">
+            {include file="charity_account/block-logout.tpl"}
+        </div>
     {else}
-        <div class="pgdiv_flex_column">
-            <div class="pgblock pgblock__min__md">
-                <p>{'blocks.charity_account_login.title'|pgtrans}</p>
-                <div class="pgbutton__container pg__mtop-md pg__mbottom-md">
-                    <a href="{'backoffice.charity_account.display'|toback}" class="pgbutton">
-                        {'blocks.charity_account_login.action'|pgtrans}
+        <ul>
+            <li>
+                {'blocks.charity.text1'|pgtrans}
+            </li>
+            <li class="pg__mtop">
+                {'blocks.charity.text2'|pgtrans}
+            </li>
+            <li class="pg__mtop">
+                {'blocks.charity.text3'|pgtrans}
+            </li>
+        </ul>
+        {if $connected == true }
+            <div class="pgdiv_flex_row">
+                <div class="pgbutton__container">
+                    <a
+                            target="_blank"
+                            href="https://climatekit.paygreen.fr/user/spaces"
+                            class="pgbutton pg__default"
+                    >
+                        {'blocks.charity.activate'|pgtrans}
+                    </a>
+                </div>
+                <div class="pgbutton__container">
+                    <a
+                            href="{'backoffice.charity_account.connect'|toback}"
+                            class="pgbutton pg__success"
+                    >
+                        {'blocks.charity.connect'|pgtrans}
                     </a>
                 </div>
             </div>
-        </div>
-    {/if}
-
-    <div class="pgdiv_flex_column">
-        {if $charityKitInfos != null}
-            <div class="pgblock pgblock__max__md">
-                {if $charityKitInfos['is_mandate_signed'] == false && $charityKitInfos['is_test_mode_expired']}
-                    {'misc.charity_account.notifications.mandate.unsigned'|pgtrans}
-                {else}
-                    {include
-                    file="toggle.tpl"
-                    title="blocks.charity.charity_activation.title"
-                    description="blocks.charity.charity_activation.help"
-                    action="backoffice.charity.activation"
-                    active=$charityActivated}
-                {/if}
+            <p>
+                {'blocks.charity.description'|pgtrans}
+            </p>
+        {else}
+            <div class="pgbutton__container pg__mtop-lg">
+                <a
+                        target="_blank"
+                        href="https://www.paygreen.io/arrondi-en-ligne/"
+                        class="pgbutton pg__default"
+                >
+                    {'blocks.charity.learnmore'|pgtrans}
+                </a>
             </div>
         {/if}
-        <div class="pgblock pgblock__max__md">
-            <p>{'blocks.charity.shortcuts'|pgtrans} :</p>
-            <ul class="p-0 no-list-style">
-                <li>
-                    <a href="{'backoffice.charity_account.display'|toback}" class="pglink pg__default">
-                        {'pages.charity_account.name'|pgtrans}
-                    </a>
-                </li>
-                {if $connected}
-                    {if $charityKitInfos['is_mandate_signed']}
-                        <li>
-                            <a href="{'backoffice.charity_config.display'|toback}" class="pglink pg__default">
-                                {'pages.charity_config.name'|pgtrans}
-                            </a>
-                        </li>
-                    {/if}
-                {/if}
-                {if $connected}
-                    <li>
-                        <a target="_blank" href="{$charityKitInfos['link_backoffice']}" class="pglink pg__default">
-                            {'pages.charitykit.link'|pgtrans}
-                        </a>
-                    </li>
-                {/if}
-            </ul>
-        </div>
-    </div>
-</div>
+    {/if}
+</article>

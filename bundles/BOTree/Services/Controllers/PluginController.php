@@ -25,10 +25,9 @@ use PGI\Impact\BOModule\Foundations\Controllers\AbstractBackofficeController;
 use PGI\Impact\PGModule\Services\Settings;
 use PGI\Impact\PGServer\Components\Responses\Redirection as RedirectionResponseComponent;
 use PGI\Impact\PGServer\Components\Responses\Template as TemplateResponseComponent;
-use PGI\Impact\PGSystem\Components\Parameters as ParametersComponent;
+use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGTree\Services\Handlers\TreeAccountHandler;
 use PGI\Impact\PGTree\Services\Handlers\TreeAuthenticationHandler;
-use PGI\Impact\PGTree\Services\Managers\CarbonDataManager;
 use Exception;
 
 /**
@@ -40,20 +39,12 @@ class PluginController extends AbstractBackofficeController
     /** @var TreeAuthenticationHandler */
     private $treeAuthenticationHandler;
 
-    /** @var CarbonDataManager */
-    private $carbonDataManager;
-
     /** @var TreeAccountHandler */
     private $treeAccountHandler;
 
     public function setTreeAuthenticationHandler(TreeAuthenticationHandler $treeAuthenticationHandler)
     {
         $this->treeAuthenticationHandler = $treeAuthenticationHandler;
-    }
-
-    public function setCarbonDataManager(CarbonDataManager $carbonDataManager)
-    {
-        $this->carbonDataManager = $carbonDataManager;
     }
 
     public function setTreeAccountHandler(TreeAccountHandler $treeAccountHandler)
@@ -70,12 +61,10 @@ class PluginController extends AbstractBackofficeController
         /** @var Settings $settings */
         $settings = $this->getSettings();
 
-        /** @var ParametersComponent */
-        $parameters = $this->getParameters();
-
         $infos = array();
-        $credentials = array();
         $isConnected = false;
+        $addressNeeded = false;
+        $description = 'blocks.tree_mode.test';
 
         $isTreeActivated = $settings->get('tree_activation');
         $isTreeKitActivated = $settings->get('tree_kit_activation');
@@ -83,25 +72,24 @@ class PluginController extends AbstractBackofficeController
         if ($isTreeKitActivated) {
             if ($this->treeAuthenticationHandler->isConnected()) {
                 $isConnected = true;
-                $server = $settings->get('tree_api_server');
-                $url = $parameters["urls.bo_climatekit.$server"];
 
-                $credentials['client_id'] = $settings->get('tree_client_id');
-                $credentials['username'] = $settings->get('tree_client_username');
-
-                $infos['carbon_data_overview'] = $this->getCarbonDataOverview();
-                $infos['link_backoffice'] = "https://".$url;
                 $infos['is_test_mode_activated'] = $settings->get('tree_test_mode');
                 $infos['is_test_mode_expired'] = $this->treeAccountHandler->isTestModeExpired();
                 $infos['is_mandate_signed'] = $this->treeAccountHandler->isMandateSigned();
+                $addressNeeded = $this->treeAccountHandler->isAddressNeeded();
+                if ($settings->get('tree_test_mode') === false) {
+                    $description = 'blocks.tree_mode.prod';
+                }
             }
         }
 
         return $this->buildTemplateResponse('tree/block-tree')
+            ->addData('description', $description)
             ->addData('connected', $isConnected)
             ->addData('treeActivated', $isTreeActivated)
             ->addData('treeKitInfos', $infos)
-            ->addData('credentials', $credentials)
+            ->addData('addressNeeded', $addressNeeded)
+            ->addResource(new StyleFileResourceComponent('/css/tree-home-block.css'))
         ;
     }
 
@@ -125,18 +113,18 @@ class PluginController extends AbstractBackofficeController
      * @return RedirectionResponseComponent
      * @throws Exception
      */
-    public function treeActivationAction()
+    public function treeTestModeActivationAction()
     {
         $settings = $this->getSettings();
 
-        $treeActivation = $settings->get('tree_activation');
+        $treeTestMode = !$settings->get('tree_test_mode');
 
-        $settings->set('tree_activation', !$treeActivation);
+        $settings->set('tree_test_mode', $treeTestMode);
 
-        if ($treeActivation) {
-            $this->success('actions.tree_activation.toggle.result.success.disabled');
+        if ($treeTestMode) {
+            $this->success('actions.tree_mode.toggle.result.test');
         } else {
-            $this->success('actions.tree_activation.toggle.result.success.enabled');
+            $this->success('actions.tree_mode.toggle.result.prod');
         }
 
         return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.home.display'));
@@ -161,48 +149,5 @@ class PluginController extends AbstractBackofficeController
         }
 
         return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.products.display'));
-    }
-
-    /**
-     * @return array
-     * @throws Exception
-     */
-    private function getCarbonDataOverview()
-    {
-        $data = array();
-
-        $data[] = array(
-            'period' => 'day',
-            'footprint' => ($this->carbonDataManager->getSumOfTheLastHours('footprint') * 1000),
-            'carbon_offset' => $this->carbonDataManager->getSumOfTheLastHours('carbon_offset')
-        );
-
-        $data[] = array(
-            'period' => 'week',
-            'footprint' => ($this->carbonDataManager->getSumOfTheLastSevenDays('footprint') * 1000),
-            'carbon_offset' => $this->carbonDataManager->getSumOfTheLastSevenDays('carbon_offset')
-        );
-
-        $data[] = array(
-            'period' => 'month',
-            'footprint' => ($this->carbonDataManager->getSumOfTheLastThirtyDays('footprint') * 1000),
-            'carbon_offset' => $this->carbonDataManager->getSumOfTheLastThirtyDays('carbon_offset')
-        );
-
-        foreach ($data as $index => $value) {
-            $data[$index]['footprint'] = $this->formatAmount($value['footprint']);
-            $data[$index]['carbon_offset'] = $this->formatAmount($value['carbon_offset']);
-        }
-
-        return $data;
-    }
-
-    /**
-     * @param $amount
-     * @return string
-     */
-    private function formatAmount($amount)
-    {
-        return number_format($amount, 2, '.', ' ');
     }
 }

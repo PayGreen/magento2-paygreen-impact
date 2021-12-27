@@ -73,19 +73,4 @@ interface CarbonDataRepositoryInterface extends RepositoryInterface
      * @return bool
      */
     public function delete(CarbonDataEntityInterface $carbonData);
-
-    /**
-     * @param int $dayIntervalBegin
-     * @param int $dayIntervalEnd
-     * @return array
-     */
-    public function findAllByDayInterval($dayIntervalBegin = 0, $dayIntervalEnd = 1);
-
-    /**
-     * @param string $columnName
-     * @param int $dayIntervalBegin
-     * @param int $dayIntervalEnd
-     * @return float
-     */
-    public function getColumnSumByDayInterval($columnName, $dayIntervalBegin = 0, $dayIntervalEnd = 1);
 }

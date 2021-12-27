@@ -213,7 +213,7 @@ array (
 'service' => 'listener.carbon_offsetting_computing.adding_web_data',
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'setting_transport_carbon_offsetting' =>
@@ -222,7 +222,7 @@ array (
 'service' => 'listener.carbon_offsetting_computing.setting_transport_data',
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'setting_product_carbon_offsetting' =>
@@ -231,7 +231,7 @@ array (
 'service' => 'listener.carbon_offsetting_computing.setting_product_data',
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'tree.page_counting' =>
@@ -240,7 +240,7 @@ array (
 'service' => 'listener.tree.page_counting',
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'tree_check_client_compatibility' =>
@@ -250,39 +250,33 @@ array (
 'method' => 'checkCompatibility',
 'priority' => 100,
 ),
-'display_tree_connexion_requirement' =>
-array (
-'event' =>
-array (
-0 => 'action.backoffice.tree_account.display',
-1 => 'action.backoffice.tree_config.display',
-),
-'service' => 'listener.tree_action.display_backoffice',
-),
 'display_tree_shipping_address_requirement' =>
 array (
 'event' =>
 array (
-0 => 'action.backoffice.tree_account.display',
-1 => 'action.backoffice.tree_config.display',
+0 => 'action.backoffice.tree_config.display',
+1 => 'action.backoffice.tree_translations.display',
+2 => 'action.backoffice.carbon_bot_config.display',
 ),
 'service' => 'listener.tree_action.shipping_address',
+'requirements' =>
+array (
+0 => 'tree_activation',
+),
 ),
 'display_tree_test_mode_expiration_notification' =>
 array (
 'event' =>
 array (
 0 => 'action.backoffice.home.display',
-1 => 'action.backoffice.tree_account.display',
-2 => 'action.backoffice.tree_config.display',
-3 => 'action.backoffice.tree_translations.display',
-4 => 'action.backoffice.tree_products_synchronization.display',
-5 => 'action.backoffice.carbon_bot_config.display',
+1 => 'action.backoffice.tree_config.display',
+2 => 'action.backoffice.tree_translations.display',
+3 => 'action.backoffice.carbon_bot_config.display',
 ),
 'service' => 'listener.tree_action.display_tree_test_mode_expiration_notification',
 'requirements' =>
 array (
-'tree_connexion' => true,
+0 => 'tree_activation',
 ),
 ),
 'carbon_footprint_finalization' =>
@@ -291,7 +285,7 @@ array (
 'service' => 'listener.carbon_footprint.finalization',
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'install_charity_database' =>
@@ -343,29 +337,18 @@ array (
 'method' => 'checkCompatibility',
 'priority' => 100,
 ),
-'display_charity_connexion_requirement' =>
-array (
-'event' =>
-array (
-0 => 'action.backoffice.charity_account.display',
-1 => 'action.backoffice.charity_config.display',
-),
-'service' => 'listener.charity_action.display_backoffice',
-),
 'display_charity_test_mode_expiration_notification' =>
 array (
 'event' =>
 array (
 0 => 'action.backoffice.home.display',
-1 => 'action.backoffice.charity_account.display',
-2 => 'action.backoffice.charity_config.display',
-3 => 'action.backoffice.charity_partnerships.display',
-4 => 'action.backoffice.charity_translations.display',
+1 => 'action.backoffice.charity_partnerships.display',
+2 => 'action.backoffice.charity_translations.display',
 ),
 'service' => 'listener.charity_action.display_charity_test_mode_expiration_notification',
 'requirements' =>
 array (
-'charity_connexion' => true,
+0 => 'charity_activation',
 ),
 ),
 'charity_gift.finalization' =>
@@ -374,7 +357,7 @@ array (
 'service' => 'listener.charity_gift.finalization',
 'requirements' =>
 array (
-'charity_activation' => true,
+0 => 'charity_activation',
 ),
 ),
 ),
@@ -506,11 +489,6 @@ array (
 array (
 'type' => 'string',
 'private' => true,
-),
-'carbon_offsetting_payer' =>
-array (
-'type' => 'string',
-'default' => 'MERCHANT',
 ),
 'shipping_address_line_1' =>
 array (
@@ -712,7 +690,7 @@ array (
 'clean' => true,
 'requirements' =>
 array (
-'cron_activation' => true,
+0 => 'cron_activation',
 ),
 ),
 'carbon_footprint' =>
@@ -722,7 +700,7 @@ array (
 'clean' => true,
 'requirements' =>
 array (
-'tree_access_available' => true,
+0 => 'tree_access_available',
 ),
 ),
 'carbon_bot' =>
@@ -732,8 +710,8 @@ array (
 'clean' => true,
 'requirements' =>
 array (
-'tree_access_available' => true,
-'tree_bot_activation' => true,
+0 => 'tree_access_available',
+1 => 'tree_bot_activation',
 ),
 ),
 'charity_block' =>
@@ -743,24 +721,13 @@ array (
 'clean' => true,
 'requirements' =>
 array (
-'charity_access_available' => true,
+0 => 'charity_access_available',
 ),
 ),
 'frontoffice_override_css' =>
 array (
 'target' => 'FRONT.HEAD',
 'builder' => 'frontoffice_override_css',
-),
-'carbon_bot_css' =>
-array (
-'target' => 'FRONT.HEAD',
-'builder' => 'carbon_bot_css',
-'clean' => true,
-'requirements' =>
-array (
-'tree_activation' => true,
-'tree_bot_activation' => true,
-),
 ),
 ),
 'static' =>
@@ -1239,7 +1206,7 @@ array (
 'target' => 'cron.display',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.cron.run' =>
@@ -1247,7 +1214,7 @@ array (
 'target' => 'runScheduler@backoffice.cron',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.cron.save_config' =>
@@ -1259,7 +1226,7 @@ array (
 'target' => 'products.display',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.products.save' =>
@@ -1267,7 +1234,7 @@ array (
 'target' => 'products.save',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.system.display' =>
@@ -1307,7 +1274,7 @@ array (
 'target' => 'home.display',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.cache.reset' =>
@@ -1319,15 +1286,15 @@ array (
 'target' => 'runScheduler@front.cron',
 'requirements' =>
 array (
-'cron_activation' => true,
+0 => 'cron_activation',
 ),
 ),
-'backoffice.tree.activation' =>
+'backoffice.tree_test_mode.activation' =>
 array (
-'target' => 'treeActivation@backoffice.tree',
+'target' => 'treeTestModeActivation@backoffice.tree',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.tree_products.activation' =>
@@ -1335,7 +1302,7 @@ array (
 'target' => 'treeProductsActivation@backoffice.tree',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
 'backoffice.tree_kit_activation.save' =>
@@ -1343,34 +1310,16 @@ array (
 'target' => 'tree_kit_activation.save',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
-'backoffice.tree_account.display' =>
+'backoffice.tree_account.connect' =>
 array (
-'target' => 'tree_account.display',
+'target' => 'connect@backoffice.tree_account',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
-),
-),
-'backoffice.tree_account.save' =>
-array (
-'target' => 'saveTreeAccountConfiguration@backoffice.tree_account',
-'requirements' =>
-array (
-'shop_context' => true,
-'tree_kit_activation' => true,
-),
-),
-'backoffice.tree_account.disconnect' =>
-array (
-'target' => 'disconnect@backoffice.tree_account',
-'requirements' =>
-array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_config.display' =>
@@ -1378,8 +1327,8 @@ array (
 'target' => 'tree_config.display',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.carbon_bot_config.display' =>
@@ -1387,8 +1336,8 @@ array (
 'target' => 'carbon_bot_config.display',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_config.save' =>
@@ -1396,8 +1345,8 @@ array (
 'target' => 'tree_configuration.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.carbon_bot_config_global_form.save' =>
@@ -1405,8 +1354,8 @@ array (
 'target' => 'carbon_bot_config_global_form.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_bot_form.save' =>
@@ -1414,8 +1363,8 @@ array (
 'target' => 'tree_bot_form.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_shipping_address.save' =>
@@ -1423,8 +1372,8 @@ array (
 'target' => 'tree_shipping_address.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_translations.display' =>
@@ -1432,8 +1381,8 @@ array (
 'target' => 'tree_translations.display',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_translations.save' =>
@@ -1441,8 +1390,8 @@ array (
 'target' => 'tree_translations_form.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_bot_translations.save' =>
@@ -1450,8 +1399,8 @@ array (
 'target' => 'tree_bot_translations_form.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_config.download_product_catalog' =>
@@ -1459,8 +1408,8 @@ array (
 'target' => 'downloadProductCatalog@backoffice.tree_export_product_catalog',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_config.generate_product_catalog' =>
@@ -1468,8 +1417,8 @@ array (
 'target' => 'generateProductCatalog@backoffice.tree_export_product_catalog',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_kit_activation',
 ),
 ),
 'backoffice.tree_config.export_product_catalog' =>
@@ -1477,17 +1426,8 @@ array (
 'target' => 'exportProductCatalog@backoffice.tree_export_product_catalog',
 'requirements' =>
 array (
-'shop_context' => true,
-'tree_connexion' => true,
-),
-),
-'backoffice.tree_products_synchronization.display' =>
-array (
-'target' => 'tree_products_synchronization.display',
-'requirements' =>
-array (
-'shop_context' => true,
-'tree_kit_activation' => true,
+0 => 'shop_context',
+1 => 'tree_connexion',
 ),
 ),
 'front.climatebot.display' =>
@@ -1495,15 +1435,7 @@ array (
 'target' => 'display@front.tree.climatebot',
 'requirements' =>
 array (
-'tree_access_available' => true,
-),
-),
-'backoffice.charity.activation' =>
-array (
-'target' => 'charityActivation@backoffice.charity',
-'requirements' =>
-array (
-'shop_context' => true,
+0 => 'tree_access_available',
 ),
 ),
 'backoffice.charity_products.activation' =>
@@ -1511,52 +1443,25 @@ array (
 'target' => 'charityProductsActivation@backoffice.charity',
 'requirements' =>
 array (
-'shop_context' => true,
+0 => 'shop_context',
 ),
 ),
-'backoffice.charity_account.display' =>
+'backoffice.charity_account.connect' =>
 array (
-'target' => 'charity_account.display',
+'target' => 'connect@backoffice.charity_account',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_kit_activation' => true,
+0 => 'shop_context',
+1 => 'charity_kit_activation',
 ),
 ),
-'backoffice.charity_account.save' =>
+'backoffice.charity_test_mode.activation' =>
 array (
-'target' => 'saveCharityAccountConfiguration@backoffice.charity_account',
+'target' => 'charityTestModeActivation@backoffice.charity',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_kit_activation' => true,
-),
-),
-'backoffice.charity_account.disconnect' =>
-array (
-'target' => 'disconnect@backoffice.charity_account',
-'requirements' =>
-array (
-'shop_context' => true,
-'charity_kit_activation' => true,
-),
-),
-'backoffice.charity_config.display' =>
-array (
-'target' => 'charity_config.display',
-'requirements' =>
-array (
-'shop_context' => true,
-'charity_prod_available' => true,
-),
-),
-'backoffice.charity_config.save' =>
-array (
-'target' => 'charity_config.save',
-'requirements' =>
-array (
-'shop_context' => true,
-'charity_kit_activation' => true,
+0 => 'shop_context',
+1 => 'charity_kit_activation',
 ),
 ),
 'backoffice.charity_partnerships.display' =>
@@ -1564,8 +1469,8 @@ array (
 'target' => 'charity_partnerships.display',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_activation' => true,
+0 => 'shop_context',
+1 => 'charity_activation',
 ),
 ),
 'backoffice.charity_partnerships.update_positions' =>
@@ -1573,8 +1478,8 @@ array (
 'target' => 'updatePartnershipsPositions@backoffice.charity_partnerships',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_kit_activation' => true,
+0 => 'shop_context',
+1 => 'charity_kit_activation',
 ),
 ),
 'backoffice.charity_translations.display' =>
@@ -1582,8 +1487,8 @@ array (
 'target' => 'charity_translations.display',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_kit_activation' => true,
+0 => 'shop_context',
+1 => 'charity_kit_activation',
 ),
 ),
 'backoffice.charity_translations.save' =>
@@ -1591,8 +1496,17 @@ array (
 'target' => 'charity_translations_form.save',
 'requirements' =>
 array (
-'shop_context' => true,
-'charity_kit_activation' => true,
+0 => 'shop_context',
+1 => 'charity_kit_activation',
+),
+),
+'backoffice.charity_config.save' =>
+array (
+'target' => 'charity_config.save',
+'requirements' =>
+array (
+0 => 'shop_context',
+1 => 'charity_kit_activation',
 ),
 ),
 'front.charity.display_popin' =>
@@ -1600,7 +1514,7 @@ array (
 'target' => 'display@front.charity.popin',
 'requirements' =>
 array (
-'charity_access_available' => true,
+0 => 'charity_access_available',
 ),
 ),
 'front.charity.save_gift' =>
@@ -1608,7 +1522,7 @@ array (
 'target' => 'saveGift@front.charity.gift',
 'requirements' =>
 array (
-'charity_access_available' => true,
+0 => 'charity_access_available',
 ),
 ),
 'front.charity.cancel_gift' =>
@@ -1616,7 +1530,7 @@ array (
 'target' => 'cancelGift@front.charity.gift',
 'requirements' =>
 array (
-'charity_access_available' => true,
+0 => 'charity_access_available',
 ),
 ),
 'front.charity.gift_explanation' =>
@@ -2421,7 +2335,7 @@ array (
 'default' => 'URL',
 'requirements' =>
 array (
-'cron_activation' => true,
+0 => 'cron_activation',
 ),
 'validators' =>
 array (
@@ -2560,56 +2474,6 @@ array (
 ),
 ),
 ),
-'tree_authentication' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'client_id' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.client_id.label',
-),
-),
-),
-'login' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.login.label',
-),
-),
-),
-'password' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_authentication.fields.password.label',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
 'carbon_bot_config_global' =>
 array (
 'model' => 'basic',
@@ -2632,7 +2496,7 @@ array (
 'model' => 'bool.switch',
 'requirements' =>
 array (
-'tree_bot_activation' => true,
+0 => 'tree_bot_activation',
 ),
 'view' =>
 array (
@@ -2640,62 +2504,6 @@ array (
 array (
 'label' => 'forms.tree_bot.fields.tree_bot_mobile_activated.label',
 'help' => 'forms.tree_bot.fields.tree_bot_mobile_activated.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'tree_config' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'carbon_offsetting_payer' =>
-array (
-'model' => 'choice.expanded.single',
-'format' => 'string',
-'default' => 'MERCHANT',
-'enabled' => false,
-'view' =>
-array (
-'data' =>
-array (
-'choices' =>
-array (
-'MERCHANT' => 'forms.tree_config.fields.carbon_offsetting_payer.values.MERCHANT',
-'CUSTOMER' => 'forms.tree_config.fields.carbon_offsetting_payer.values.CUSTOMER',
-),
-'attr' =>
-array (
-'disabled' => '',
-),
-'translate' => true,
-'label' => 'forms.tree_config.fields.carbon_offsetting_payer.label',
-'help' => 'forms.tree_config.fields.carbon_offsetting_payer.help',
-'warning' => 'forms.tree_config.fields.carbon_offsetting_payer.warning',
-),
-),
-),
-'tree_test_mode' =>
-array (
-'model' => 'bool.switch',
-'requirements' =>
-array (
-'tree_prod_available' => true,
-),
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.tree_config.fields.tree_test_mode.label',
-'help' => 'forms.tree_config.fields.tree_test_mode.help',
 ),
 ),
 ),
@@ -2804,86 +2612,6 @@ array (
 'help' => 'forms.products.fields.tree_kit_activation.help',
 ),
 ),
-),
-),
-),
-'charity_config' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'charity_test_mode' =>
-array (
-'model' => 'bool.switch',
-'requirements' =>
-array (
-'charity_prod_available' => true,
-),
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_config.fields.charity_test_mode.label',
-'help' => 'forms.charity_config.fields.charity_test_mode.help',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
-),
-),
-),
-'charity_authentication' =>
-array (
-'model' => 'basic',
-'fields' =>
-array (
-'client_id' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.client_id.label',
-),
-),
-),
-'login' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.login.label',
-),
-),
-),
-'password' =>
-array (
-'model' => 'string',
-'required' => true,
-'view' =>
-array (
-'data' =>
-array (
-'label' => 'forms.charity_authentication.fields.password.label',
-),
-),
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'validate' => 'misc.forms.default.buttons.save',
 ),
 ),
 ),
@@ -3056,16 +2784,16 @@ array (
 ),
 'tree_kit_header' =>
 array (
-'position' => 2,
+'position' => 4,
 'target' => 'home',
 'action' => 'display@backoffice.tree',
 'data' =>
 array (
-'class' => 'pgblock__min__xxl',
+'class' => 'pgblock__max__md pgblock__shadow',
 ),
 'requirements' =>
 array (
-'tree_kit_activation' => true,
+0 => 'tree_kit_activation',
 ),
 ),
 'tree_kit_products' =>
@@ -3075,19 +2803,6 @@ array (
 'data' =>
 array (
 'class' => 'pgblock__max__md',
-),
-),
-'tree_account_infos' =>
-array (
-'target' => 'tree_account',
-'action' => 'displayAccountInfos@backoffice.tree_account',
-'data' =>
-array (
-'class' => 'pgblock__min__md',
-),
-'requirements' =>
-array (
-'tree_connexion' => true,
 ),
 ),
 'tree_account_logout' =>
@@ -3100,20 +2815,7 @@ array (
 ),
 'requirements' =>
 array (
-'tree_connexion' => true,
-),
-),
-'tree_account_login' =>
-array (
-'target' => 'tree_account',
-'action' => 'displayAccountLogin@backoffice.tree_account',
-'data' =>
-array (
-'class' => 'pgblock__max__md',
-),
-'requirements' =>
-array (
-'tree_connexion' => false,
+0 => 'tree_connexion',
 ),
 ),
 'carbon_bot_config_global_form' =>
@@ -3136,7 +2838,7 @@ array (
 ),
 'requirements' =>
 array (
-'tree_bot_activation' => true,
+0 => 'tree_bot_activation',
 ),
 ),
 'tree_shipping_address_form' =>
@@ -3173,12 +2875,12 @@ array (
 ),
 'requirements' =>
 array (
-'tree_bot_activation' => true,
+0 => 'tree_bot_activation',
 ),
 ),
 'tree_generate_product_catalog' =>
 array (
-'target' => 'tree_products_synchronization',
+'target' => 'tree_config',
 'action' => 'displayTreeGenerateProductCatalogButton@backoffice.tree_export_product_catalog',
 'data' =>
 array (
@@ -3188,7 +2890,7 @@ array (
 ),
 'tree_export_product_catalog' =>
 array (
-'target' => 'tree_products_synchronization',
+'target' => 'tree_config',
 'action' => 'displayTreeExportProductCatalogButton@backoffice.tree_export_product_catalog',
 'data' =>
 array (
@@ -3196,32 +2898,18 @@ array (
 'title' => 'blocks.tree_export_product_catalog.title',
 ),
 ),
-'tree_config_form_common' =>
-array (
-'target' => 'tree_config',
-'action' => 'tree_module_config.display',
-'data' =>
-array (
-'title' => 'blocks.tree_config_form_common.title',
-'class' => 'pgblock__md',
-),
-'requirements' =>
-array (
-'tree_prod_available' => true,
-),
-),
 'charity_kit_header' =>
 array (
-'position' => 3,
+'position' => 5,
 'target' => 'home',
 'action' => 'display@backoffice.charity',
 'data' =>
 array (
-'class' => 'pgblock__min__xxl',
+'class' => 'pgblock__max__md pgblock__shadow',
 ),
 'requirements' =>
 array (
-'charity_kit_activation' => true,
+0 => 'charity_kit_activation',
 ),
 ),
 'charity_kit_products' =>
@@ -3231,19 +2919,6 @@ array (
 'data' =>
 array (
 'class' => 'pgblock__max__md',
-),
-),
-'charity_account_infos' =>
-array (
-'target' => 'charity_account',
-'action' => 'displayAccountInfos@backoffice.charity_account',
-'data' =>
-array (
-'class' => 'pgblock__min__md',
-),
-'requirements' =>
-array (
-'charity_connexion' => true,
 ),
 ),
 'charity_account_logout' =>
@@ -3256,30 +2931,7 @@ array (
 ),
 'requirements' =>
 array (
-'charity_connexion' => true,
-),
-),
-'charity_account_login' =>
-array (
-'target' => 'charity_account',
-'action' => 'displayAccountLogin@backoffice.charity_account',
-'data' =>
-array (
-'class' => 'pgblock__max__md',
-),
-'requirements' =>
-array (
-'charity_connexion' => false,
-),
-),
-'charity_config_form_common' =>
-array (
-'target' => 'charity_config',
-'action' => 'charity_module_config.display',
-'data' =>
-array (
-'title' => 'blocks.charity_config_form_common.title',
-'class' => 'pgblock__md',
+0 => 'charity_connexion',
 ),
 ),
 'charity_partnerships_list' =>
@@ -3409,18 +3061,45 @@ array (
 array (
 'cron_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'cron_activation',
+),
 ),
 'shop_context' =>
 array (
+'name' => 'generic.bridge',
+'config' =>
+array (
+'service' => 'handler.shop',
+'method' => 'isShopContext',
+),
 ),
 'tree_kit_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'tree_kit_activation',
+),
 ),
 'tree_bot_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'tree_bot_activated',
+),
 ),
 'tree_connexion' =>
 array (
+'name' => 'generic.bridge',
+'config' =>
+array (
+'service' => 'handler.tree_authentication',
+'method' => 'isConnected',
+),
 'requirements' =>
 array (
 0 => 'tree_kit_activation',
@@ -3428,6 +3107,11 @@ array (
 ),
 'tree_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'tree_activation',
+),
 'requirements' =>
 array (
 0 => 'tree_connexion',
@@ -3435,6 +3119,12 @@ array (
 ),
 'tree_prod_available' =>
 array (
+'name' => 'generic.bridge',
+'config' =>
+array (
+'service' => 'handler.tree_account',
+'method' => 'isMandateSigned',
+),
 'requirements' =>
 array (
 0 => 'tree_activation',
@@ -3447,14 +3137,22 @@ array (
 0 => 'tree_activation',
 ),
 ),
-'tree_access_available_without_activation' =>
-array (
-),
 'charity_kit_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'charity_kit_activation',
+),
 ),
 'charity_connexion' =>
 array (
+'name' => 'generic.bridge',
+'config' =>
+array (
+'service' => 'handler.charity_authentication',
+'method' => 'isConnected',
+),
 'requirements' =>
 array (
 0 => 'charity_kit_activation',
@@ -3462,6 +3160,11 @@ array (
 ),
 'charity_activation' =>
 array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'charity_activation',
+),
 'requirements' =>
 array (
 0 => 'charity_connexion',
@@ -3469,6 +3172,12 @@ array (
 ),
 'charity_prod_available' =>
 array (
+'name' => 'generic.bridge',
+'config' =>
+array (
+'service' => 'handler.charity_account',
+'method' => 'isMandateSigned',
+),
 'requirements' =>
 array (
 0 => 'charity_activation',
@@ -3660,11 +3369,11 @@ array (
 'title' => 'menu.tree.title',
 'children' =>
 array (
-'tree_account' =>
+'carbon_bot_config' =>
 array (
-'action' => 'backoffice.tree_account.display',
-'name' => 'pages.tree_account.name',
-'title' => 'pages.tree_account.title',
+'action' => 'backoffice.carbon_bot_config.display',
+'name' => 'pages.carbon_bot_config.name',
+'title' => 'pages.carbon_bot_config.title',
 ),
 'tree_config' =>
 array (
@@ -3678,36 +3387,12 @@ array (
 'name' => 'pages.translations.name',
 'title' => 'pages.translations.title',
 ),
-'tree_products_synchronization' =>
-array (
-'action' => 'backoffice.tree_products_synchronization.display',
-'name' => 'pages.tree_products_synchronization.name',
-'title' => 'pages.tree_products_synchronization.title',
-),
-'carbon_bot_config' =>
-array (
-'action' => 'backoffice.carbon_bot_config.display',
-'name' => 'pages.carbon_bot_config.name',
-'title' => 'pages.carbon_bot_config.title',
-),
 ),
 ),
 'charity' =>
 array (
 'children' =>
 array (
-'charity_account' =>
-array (
-'action' => 'backoffice.charity_account.display',
-'name' => 'pages.charity_account.name',
-'title' => 'pages.charity_account.title',
-),
-'charity_config' =>
-array (
-'action' => 'backoffice.charity_config.display',
-'name' => 'pages.charity_config.name',
-'title' => 'pages.charity_config.title',
-),
 'charity_partnerships' =>
 array (
 'action' => 'backoffice.charity_partnerships.display',

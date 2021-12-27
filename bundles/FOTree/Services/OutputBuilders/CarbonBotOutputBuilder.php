@@ -26,6 +26,7 @@ use PGI\Impact\PGModule\Foundations\AbstractOutputBuilder;
 use PGI\Impact\PGModule\Services\Settings;
 use PGI\Impact\PGServer\Components\Resources\Data as DataResourceComponent;
 use PGI\Impact\PGServer\Components\Resources\ScriptFile as ScriptFileResourceComponent;
+use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGServer\Services\Handlers\LinkHandler;
 
 /**
@@ -67,6 +68,7 @@ class CarbonBotOutputBuilder extends AbstractOutputBuilder
         )));
 
         $output->addResource(new ScriptFileResourceComponent('/js/climatebot.js'));
+        $output->addResource(new StyleFileResourceComponent('/css/tree-frontoffice.css'));
 
         return $output;
     }

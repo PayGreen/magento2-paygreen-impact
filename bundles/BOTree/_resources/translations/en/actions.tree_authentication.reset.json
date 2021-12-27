@@ -3,8 +3,8 @@
     "tree_authentication": {
       "reset": {
         "result": {
-          "success": "Credentials reseted successfully.",
-          "failure": "An error occured during reseting credentials."
+          "success": "You have successfully logged out of ClimateKit. ",
+          "failure": "An error occurred while disconnecting from ClimateKit."
         }
       }
     }

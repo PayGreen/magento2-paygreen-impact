@@ -24,14 +24,11 @@ namespace PGI\Impact\BOCharity\Services\Controllers;
 use PGI\Impact\BOModule\Foundations\Controllers\AbstractBackofficeController;
 use PGI\Impact\PGCharity\Services\Handlers\CharityAccountHandler;
 use PGI\Impact\PGCharity\Services\Handlers\CharityAuthenticationHandler;
-use PGI\Impact\PGCharity\Services\Managers\GiftManager;
-use PGI\Impact\PGModule\Components\Events\ProductActivation as ProductActivationEventComponent;
-use PGI\Impact\PGModule\Services\Broadcaster;
+use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGModule\Services\Settings;
 use PGI\Impact\PGServer\Components\Responses\Redirection as RedirectionResponseComponent;
 use PGI\Impact\PGServer\Components\Responses\Template as TemplateResponseComponent;
 use Exception;
-use PGI\Impact\PGSystem\Components\Parameters as ParametersComponent;
 
 /**
  * Class PluginController
@@ -45,12 +42,6 @@ class PluginController extends AbstractBackofficeController
     /** @var CharityAccountHandler */
     private $charityAccountHandler;
 
-    /** @var GiftManager */
-    private $giftManager;
-
-    /** @var Broadcaster */
-    private $broadcaster;
-
     public function setCharityAccountHandler(CharityAccountHandler $charityAccountHandler)
     {
         $this->charityAccountHandler = $charityAccountHandler;
@@ -59,16 +50,6 @@ class PluginController extends AbstractBackofficeController
     public function setCharityAuthenticationHandler(CharityAuthenticationHandler $charityAuthenticationHandler)
     {
         $this->charityAuthenticationHandler = $charityAuthenticationHandler;
-    }
-
-    public function setGiftManager(GiftManager $giftManager)
-    {
-        $this->giftManager = $giftManager;
-    }
-
-    public function setBroadcaster(Broadcaster $broadcaster)
-    {
-        $this->broadcaster = $broadcaster;
     }
 
     /**
@@ -80,12 +61,9 @@ class PluginController extends AbstractBackofficeController
         /** @var Settings $settings */
         $settings = $this->getSettings();
 
-        /** @var ParametersComponent */
-        $parameters = $this->getParameters();
-
         $infos = array();
-        $credentials = array();
         $isConnected = false;
+        $description = 'blocks.charity_mode.test';
 
         $isCharityActivated = $settings->get('charity_activation');
         $isCharityKitActivated = $settings->get('charity_kit_activation');
@@ -93,49 +71,23 @@ class PluginController extends AbstractBackofficeController
         if ($isCharityKitActivated) {
             if ($this->charityAuthenticationHandler->isConnected()) {
                 $isConnected = true;
-                $server = $settings->get('charity_api_server');
-                $url = $parameters["urls.bo_charitykit.$server"];
-
-                $credentials['client_id'] = $settings->get('charity_client_id');
-                $credentials['username'] = $settings->get('charity_client_username');
-
-                $infos['gifts_overview'] = $this->getGiftsOverviewData();
-                $infos['link_backoffice'] = "https://".$url;
 
                 $infos['is_test_mode_activated'] = $settings->get('charity_test_mode');
                 $infos['is_test_mode_expired'] = $this->charityAccountHandler->isTestModeExpired();
                 $infos['is_mandate_signed'] = $this->charityAccountHandler->isMandateSigned();
+                if ($settings->get('charity_test_mode') === false) {
+                    $description = 'blocks.charity_mode.prod';
+                }
             }
         }
 
         return $this->buildTemplateResponse('charity/block-charity')
+            ->addData('description', $description)
             ->addData('connected', $isConnected)
             ->addData('charityActivated', $isCharityActivated)
             ->addData('charityKitInfos', $infos)
-            ->addData('credentials', $credentials)
+            ->addResource(new StyleFileResourceComponent('/css/charity-home-block.css'))
             ;
-    }
-
-    /**
-     * @return RedirectionResponseComponent
-     * @throws Exception
-     */
-    public function charityActivationAction()
-    {
-        $settings = $this->getSettings();
-
-        $charityActivation = $settings->get('charity_activation');
-
-        $settings->set('charity_activation', !$charityActivation);
-
-        if ($charityActivation) {
-            $this->success('actions.charity_activation.toggle.result.success.disabled');
-        } else {
-            $this->broadcaster->fire(new ProductActivationEventComponent('soft', 'charity'));
-            $this->success('actions.charity_activation.toggle.result.success.enabled');
-        }
-
-        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.home.display'));
     }
 
     /**
@@ -176,44 +128,23 @@ class PluginController extends AbstractBackofficeController
     }
 
     /**
-     * @return array
+     * @return RedirectionResponseComponent
      * @throws Exception
      */
-    private function getGiftsOverviewData()
+    public function charityTestModeActivationAction()
     {
-        $data = array();
+        $settings = $this->getSettings();
 
-        $data[] = array(
-            'period' => 'day',
-            'count' => $this->giftManager->getCountOfTheLastHours(),
-            'amount' => $this->giftManager->getAmountOfTheLastHours()
-        );
+        $charityTestMode = !$settings->get('charity_test_mode');
 
-        $data[] = array(
-            'period' => 'week',
-            'count' => $this->giftManager->getCountOfTheLastSevenDays(),
-            'amount' => $this->giftManager->getAmountOfTheLastSevenDays()
-        );
+        $settings->set('charity_test_mode', $charityTestMode);
 
-        $data[] = array(
-            'period' => 'month',
-            'count' => $this->giftManager->getCountOfTheLastThirtyDays(),
-            'amount' => $this->giftManager->getAmountOfTheLastThirtyDays()
-        );
-
-        foreach ($data as $index => $value) {
-            $data[$index]['amount'] = $this->formatAmount($value['amount']);
+        if ($charityTestMode) {
+            $this->success('actions.charity_mode.toggle.result.test');
+        } else {
+            $this->success('actions.charity_mode.toggle.result.prod');
         }
 
-        return $data;
-    }
-
-    /**
-     * @param $amount
-     * @return string
-     */
-    private function formatAmount($amount)
-    {
-        return number_format($amount, 2, '.', ' ');
+        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.home.display'));
     }
 }

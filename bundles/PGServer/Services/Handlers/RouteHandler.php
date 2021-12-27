@@ -73,12 +73,10 @@ class RouteHandler
     {
         $config = $this->getRouteConfiguration($routeName);
 
-        $requirementConfiguration = $config["requirements.$requirementName"];
-
-        if ($requirementConfiguration === null) {
+        if (!in_array($requirementName, $config["requirements"])) {
             return true;
         } else {
-            return $this->requirementHandler->isFulfilled($requirementName, $requirementConfiguration);
+            return $this->requirementHandler->isFulfilled($requirementName);
         }
     }
 

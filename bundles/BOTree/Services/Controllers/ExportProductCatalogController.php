@@ -120,7 +120,7 @@ class ExportProductCatalogController extends AbstractBackofficeController
             ));
         } catch (InvalidProductCatalogException $exception) {
             $this->failure('actions.tree_export_product_catalog.invalid_product_catalog');
-            return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_products_synchronization.display'));
+            return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_config.display'));
         }
     }
 
@@ -148,7 +148,7 @@ class ExportProductCatalogController extends AbstractBackofficeController
         } catch (InvalidProductCatalogException $exception) {
             $this->failure('actions.tree_export_product_catalog.invalid_product_catalog');
         }
-        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_products_synchronization.display'));
+        return $this->redirect($this->getLinkHandler()->buildBackOfficeUrl('backoffice.tree_config.display'));
     }
 
     /**

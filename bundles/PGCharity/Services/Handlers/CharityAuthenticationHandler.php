@@ -28,6 +28,8 @@ use PGI\Impact\PGClient\Exceptions\Response as ResponseException;
 use PGI\Impact\PGClient\Services\Factories\RequestFactory;
 use PGI\Impact\PGGreen\Interfaces\AuthenticationHandlerInterface;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
+use PGI\Impact\PGModule\Services\Broadcaster;
+use PGI\Impact\PGModule\Components\Events\ProductActivation as ProductActivationEventComponent;
 use PGI\Impact\PGModule\Services\Settings;
 use DateTime;
 use Exception;
@@ -53,16 +55,21 @@ class CharityAuthenticationHandler implements AuthenticationHandlerInterface
     /** @var LoggerInterface */
     private $logger;
 
+    /** @var Broadcaster */
+    private $broadcaster;
+
     public function __construct(
         ApiFacade $apiFacade,
         ApiFacadeFactory $apiFacadeFactory,
         Settings $settings,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Broadcaster $broadcaster
     ) {
         $this->apiFacade = $apiFacade;
         $this->apiFacadeFactory = $apiFacadeFactory;
         $this->settings = $settings;
         $this->logger = $logger;
+        $this->broadcaster = $broadcaster;
     }
 
     /**
@@ -206,5 +213,25 @@ class CharityAuthenticationHandler implements AuthenticationHandlerInterface
         } else {
             throw new Exception("Undefined 'charity_client_id' setting.");
         }
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function activateCharity($clientId)
+    {
+        $result = false;
+
+        /** @var ResponseComponent $response */
+        $response = $this->apiFacade->getAccountInfos($clientId);
+
+        if ($response->data->usesArrondi === "1") {
+            $result = true;
+            $this->settings->set('charity_activation',true);
+            $this->broadcaster->fire(new ProductActivationEventComponent('soft', 'charity'));
+        }
+
+        return $result;
     }
 }

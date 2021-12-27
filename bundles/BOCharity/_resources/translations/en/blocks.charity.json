@@ -1,11 +1,16 @@
 {
   "blocks": {
     "charity": {
-      "title": "PayGreen CharityKit",
-      "shortcuts": "Shortcuts",
-      "charity_activation": {
-        "title": "Activation of online rounding",
-        "help": "If the online rounding is activated, you will be able to offer your customers to round up their orders for the benefit of an association."
+      "title": "CharityKit",
+      "text1" : "Associate your image with causes that are dear to you ",
+      "text2" : "Incluez vos lients dans les engagements RSE de votre entreprise",
+      "text3" : "Transformez votre site de vente en lieu de collecte pour des associations",
+      "activate" : "Activer mon espace",
+      "connect" : "Me connecter",
+      "learnmore" : "En savoir plus",
+      "description" : "Si vous avez déjà créé votre espace CharityKit, connectez vous dès maintenant pour proposer l'Arrondi solidaire à vos clients.",
+      "space": "Mon espace",
+      "space_description": "Rendez-vous sur votre espace CharityKit pour nouer des partenariats avec des assocations."
       }
     }
   }

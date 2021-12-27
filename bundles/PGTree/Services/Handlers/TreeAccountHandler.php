@@ -164,4 +164,19 @@ class TreeAccountHandler
 
         return (($accountData->climateExpirationDate <= $currentTimestamp) && !$this->isMandateSigned());
     }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function isAddressNeeded()
+    {
+        $tree_shipping_address_line_1 = $this->settings->get('shipping_address_line_1');
+        $result = false;
+
+        if (empty($tree_shipping_address_line_1)) {
+            $result = true;
+        }
+        return $result;
+    }
 }

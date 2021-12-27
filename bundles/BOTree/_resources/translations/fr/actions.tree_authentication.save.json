@@ -3,8 +3,8 @@
     "tree_authentication": {
       "save": {
         "result": {
-          "success": "Vos identifiants de connexion ont été enregistrés avec succès.",
-          "failure": "Une erreur s'est produite lors de l'enregistrement de vos identifiants de connexion.",
+          "success": "Vous avez été connecté au ClimateKit avec succès.",
+          "failure": "Veuillez activer votre espace ClimateKit avant d'essayer de vous connecter.",
           "invalid": "Le format de vos identifiants de connexion est invalide."
         }
       }

@@ -1,7 +1,7 @@
 {
   "pages": {
     "tree_config": {
-      "name": "Configuration",
+      "name": "Paramètres de calcul",
       "title": "Configuration de votre module ClimateKit"
     }
   }

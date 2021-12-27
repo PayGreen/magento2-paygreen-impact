@@ -17,78 +17,87 @@
  * @version   1.0.0
  *
  *}
-<div class="pgdiv_flex_row pg_justify_content_between pg_align_items-flex_start">
-    <h2 class="pg__mtop-0">
-        {'blocks.tree.title'|pgtrans}
-    </h2>
-    {if $treeKitInfos != null}
-        {if $treeKitInfos['is_test_mode_activated'] && !$treeKitInfos['is_test_mode_expired'] && $treeActivated}
-            {include file="tree/badge-test-mode.tpl"}
-        {/if}
-    {/if}
-</div>
 
-
-<div class="pgdiv_flex_row">
-    {if $connected}
-        {if $treeKitInfos != null}
-            {include file="tree/block-tree-kit-infos.tpl" infos=[
-                'blocks.tree_kit_infos.form.client_id' => $credentials['client_id'],
-                'blocks.tree_kit_infos.form.username' => $credentials['username']
-            ] carbonDataOverview=$treeKitInfos['carbon_data_overview']}
-        {/if}
-    {else}
-        <div class="pgdiv_flex_column">
-            <div class="pgblock pgblock__min__md">
-                <p>{'blocks.tree_account_login.title'|pgtrans}</p>
-                <div class="pgbutton__container pg__mtop-md pg__mbottom-md">
-                    <a href="{'backoffice.tree_account.display'|toback}" class="pgbutton">
-                        {'blocks.tree_account_login.action'|pgtrans}
-                    </a>
-                </div>
-            </div>
-        </div>
-    {/if}
-
-    <div class="pgdiv_flex_column">
-        {if $treeKitInfos != null}
-            <div class="pgblock pgblock__max__md">
-                {if
-                    $treeKitInfos['is_mandate_signed'] == false &&
-                    $treeKitInfos['is_test_mode_expired']
-                }
-                    {'misc.tree_account.notifications.mandate.unsigned'|pgtrans}
-                {else}
-                    {include
-                    file="toggle.tpl"
-                    title="blocks.tree.tree_activation.title"
-                    description="blocks.tree.tree_activation.help"
-                    action="backoffice.tree.activation"
-                    active=$treeActivated}
-                {/if}
-            </div>
-        {/if}
-        <div class="pgblock pgblock__max__md">
-            <p>{'blocks.tree.shortcuts'|pgtrans} :</p>
-            <ul class="p-0 no-list-style">
-                <li>
-                    <a href="{'backoffice.tree_account.display'|toback}" class="pglink pg__default">
-                        {'pages.tree_account.name'|pgtrans}
-                    </a>
-                </li>
-                <li>
-                    <a href="{'backoffice.tree_config.display'|toback}" class="pglink pg__default">
-                        {'pages.tree_config.name'|pgtrans}
-                    </a>
-                </li>
-                {if $connected}
-                    <li>
-                        <a target="_blank" href="{$treeKitInfos['link_backoffice']|escape:'html':'UTF-8'}" class="pglink pg__default">
-                            {'pages.climatekit.link'|pgtrans}
-                        </a>
-                    </li>
-                {/if}
-            </ul>
-        </div>
+    <div class="pgdiv_flex_row pg_justify_content_between pg_align_items-flex_start pgclimate_home_block">
+        <h2 class="pgblock__shadow__title pg__mtop-md">
+            {'blocks.tree.title'|pgtrans}
+        </h2>
     </div>
-</div>
+    <article>
+    {if $treeActivated == true }
+
+        {if
+            $treeKitInfos['is_mandate_signed'] == false &&
+            $treeKitInfos['is_test_mode_expired']
+        }
+            {'misc.tree_account.notifications.mandate.unsigned'|pgtrans}
+        {else}
+            {include
+            file="toggle.tpl"
+            title="blocks.tree_mode.title"
+            description=$description
+            action="backoffice.tree_test_mode.activation"
+            active=!$treeKitInfos["is_test_mode_activated"]}
+        {/if}
+        {if $addressNeeded == true }
+            <div class="pgblock pg__success_container">
+                <p>
+                    {'blocks.tree.shipping_address.text1'|pgtrans}
+                    <a href="{'backoffice.tree_config.display'|toback}">
+                        {'blocks.tree.shipping_address.link'|pgtrans}
+                    </a>
+                    {'blocks.tree.shipping_address.text2'|pgtrans}
+                </p>
+            </div>
+        {/if}
+        <div class="pgblock pg__danger_container">
+            {include file="tree_account/block-logout.tpl"}
+        </div>
+    {else}
+        <ul>
+            <li>
+                {'blocks.tree.text1'|pgtrans}
+            </li>
+            <li class="pg__mtop">
+                {'blocks.tree.text2'|pgtrans}
+            </li>
+            <li class="pg__mtop">
+                {'blocks.tree.text3'|pgtrans}
+            </li>
+        </ul>
+        {if $connected == true }
+        <div class="pgdiv_flex_row">
+            <div class="pgbutton__container">
+                <a
+                        target="_blank"
+                        href="https://charitykit.paygreen.fr/user/spaces"
+                        class="pgbutton pg__default"
+                >
+                    {'blocks.tree.activate'|pgtrans}
+                </a>
+            </div>
+            <div class="pgbutton__container">
+                <a
+                        href="{'backoffice.tree_account.connect'|toback}"
+                        class="pgbutton pg__success"
+                >
+                    {'blocks.tree.connect'|pgtrans}
+                </a>
+            </div>
+        </div>
+        <p>
+            {'blocks.tree.description'|pgtrans}
+        </p>
+        {else}
+            <div class="pgbutton__container pg__mtop-lg">
+                <a
+                        target="_blank"
+                        href="https://www.paygreen.io/climatekit/"
+                        class="pgbutton pg__default"
+                >
+                    {'blocks.tree.learnmore'|pgtrans}
+                </a>
+            </div>
+        {/if}
+    {/if}
+    </article>

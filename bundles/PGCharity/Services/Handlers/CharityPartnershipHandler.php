@@ -24,6 +24,7 @@ namespace PGI\Impact\PGCharity\Services\Handlers;
 use Exception;
 use PGI\Impact\APICharity\Services\Facades\ApiFacade;
 use PGI\Impact\PGClient\Exceptions\Response;
+use PGI\Impact\PGClient\Exceptions\ResponseHTTPError;
 use PGI\Impact\PGFramework\Services\Handlers\CacheHandler;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
 use PGI\Impact\PGModule\Services\Settings;
@@ -71,8 +72,29 @@ class CharityPartnershipHandler
         $partnerships = $this->cacheHandler->loadEntry(self::CHARITY_PARTNERSHIP_CACHE_KEY);
 
         if ($partnerships === null) {
-            $partnerships = $this->charityAPIFacade->getPartnerships();
-            $partnerships = $partnerships->data->_embedded->partnership;
+            try {
+                $rawData = $this->charityAPIFacade->getPartnershipGroup('default');
+
+                $associations = array();
+                foreach ($rawData->data->associations as $association) {
+                    $id = $association->idAssociation;
+                    $associations[$id] = $association;
+                }
+
+                $partnerships = array();
+                foreach ($rawData->data->partnerships as $partnership) {
+                    $id = $partnership->idAssociation;
+                    $partnership->association = $associations[$id];
+                    $partnerships[] = $partnership;
+                }
+            } catch (ResponseHTTPError $exception) {
+                if ($exception->getCode() === 404) {
+                    $partnerships = $this->charityAPIFacade->getPartnerships()->data->_embedded->partnership;
+                } else {
+                    throw $exception;
+                }
+            }
+
             $this->storePartnerships($partnerships);
         } else {
             $this->logger->debug('Partnerships loaded from cache.');
@@ -104,6 +126,8 @@ class CharityPartnershipHandler
             foreach ($partnerships as $partnership) {
                 if (in_array($partnership->idPartnership, $partnershipsPositions)) {
                     $partnership->position = array_search($partnership->idPartnership, $partnershipsPositions);
+                } else {
+                    $partnership->position = null;
                 }
             }
 

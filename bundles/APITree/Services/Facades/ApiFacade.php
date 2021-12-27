@@ -563,7 +563,7 @@ class ApiFacade
      */
     private function isAccessAvailable()
     {
-        return $this->requirementHandler->isFulfilled('tree_access_available_without_activation');
+        return $this->requirementHandler->isFulfilled('tree_access_available');
     }
 
     /**

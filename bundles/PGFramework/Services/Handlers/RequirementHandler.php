@@ -22,9 +22,13 @@
 namespace PGI\Impact\PGFramework\Services\Handlers;
 
 use PGI\Impact\PGFramework\Components\Aggregator as AggregatorComponent;
+use PGI\Impact\PGFramework\Interfaces\RequirementInterface;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
 use Exception;
 use PGI\Impact\PGSystem\Components\Bag;
+use PGI\Impact\PGSystem\Components\Parser;
+use PGI\Impact\PGSystem\Exceptions\Configuration;
+use PGI\Impact\PGSystem\Interfaces\Services\ConfigurableServiceInterface;
 
 /**
  * Class RequirementHandler
@@ -35,14 +39,22 @@ class RequirementHandler
     /** @var AggregatorComponent */
     private $requirementAggregator;
 
+    /** @var Parser */
+    private $parser;
+
     private $requirements = array();
 
     /** @var LoggerInterface */
     private $logger;
 
-    public function __construct(AggregatorComponent $requirementAggregator, array $requirements, LoggerInterface $logger)
-    {
+    public function __construct(
+        AggregatorComponent $requirementAggregator,
+        Parser $parser,
+        array $requirements,
+        LoggerInterface $logger
+    ) {
         $this->requirementAggregator = $requirementAggregator;
+        $this->parser = $parser;
         $this->requirements = new Bag($requirements);
         $this->logger = $logger;
     }
@@ -53,9 +65,14 @@ class RequirementHandler
      * @return bool
      * @throws Exception
      */
-    public function isFulfilled($name, $arguments = null)
+    public function isFulfilled($name)
     {
-        $isRequired = ($arguments === null) || (bool) $arguments;
+        $isRequired = true;
+
+        if (substr($name, 0, 1) === '!') {
+            $isRequired = false;
+            $name = substr($name, 1);
+        }
 
         return ($this->isRequirementValid($name) === $isRequired);
     }
@@ -65,7 +82,7 @@ class RequirementHandler
      * @return bool
      * @throws Exception
      */
-    public function isRequirementValid($name)
+    protected function isRequirementValid($name)
     {
         if (!isset($this->requirements[$name])) {
             throw new Exception("Undefined requirements '$name'.");
@@ -81,21 +98,47 @@ class RequirementHandler
             }
         }
 
+        $requirement = $this->buildRequirement($name);
+
+        try {
+            $result = $requirement->isValid();
+        } catch (Exception $exception) {
+            $result = false;
+            $this->logger->error("Requirement error during process: " . $exception->getMessage(), $exception);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $name
+     * @return RequirementInterface
+     * @throws Exception
+     */
+    protected function buildRequirement($name)
+    {
         $requirementServiceName = $this->requirements["$name.name"];
 
         if ($requirementServiceName === null) {
             $requirementServiceName = $name;
         }
 
+        /** @var RequirementInterface $requirement */
         $requirement = $this->requirementAggregator->getService($requirementServiceName);
 
-        try {
-            return $requirement->isValid();
-        } catch (Exception $exception) {
-            $this->logger->error("Requirement error during process: " . $exception->getMessage(), $exception);
+        /** @var array|null $config */
+        $config = $this->requirements["$name.config"];
 
-            return false;
+        if (is_array($config)) {
+            if ($requirement instanceof ConfigurableServiceInterface) {
+                $config = $this->parser->parseConfig($config);
+                $requirement->addConfig($config);
+            } else {
+                throw new Configuration("Requirement with 'config' parameter but without ConfigurableServiceInterface.");
+            }
         }
+
+        return $requirement;
     }
 
     /**
@@ -107,8 +150,8 @@ class RequirementHandler
     {
         $result = true;
 
-        foreach ($requirements as $name => $arguments) {
-            if (!$this->isFulfilled($name, $arguments)) {
+        foreach ($requirements as $name) {
+            if (!$this->isFulfilled($name)) {
                 $result = false;
                 break;
             }

@@ -206,4 +206,22 @@ class TreeAuthenticationHandler implements AuthenticationHandlerInterface
             throw new Exception("Undefined 'tree_client_id' setting.");
         }
     }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function activateClimate($clientId)
+    {
+        $result = false;
+        /** @var ResponseComponent $response */
+        $response = $this->apiFacade->getAccountInfos($clientId);
+
+        if ($response->data->usesTree === "1") {
+            $result = true;
+            $this->settings->set("tree_activation",true);
+        }
+
+        return $result;
+    }
 }

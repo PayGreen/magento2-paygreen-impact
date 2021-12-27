@@ -3,8 +3,8 @@
     "charity_authentication": {
       "save": {
         "result": {
-          "success": "Your login credentials have been saved successfully.",
-          "failure": "An error occurred while saving your login credentials.",
+          "success": "You have been successfully logged in to CharityKit.",
+          "failure": "Please activate your CharityKit space before trying to log in.",
           "invalid": "The format of your login credentials is invalid."
         }
       }

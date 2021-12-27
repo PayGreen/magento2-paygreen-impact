@@ -17,19 +17,15 @@
  * @version   1.0.0
  *
  *}
-<h2 class="pg__danger">
-    {'blocks.charity_account_logout.title'|pgtrans}
-</h2>
-
-<p>
-    {'blocks.charity_account_logout.description'|pgtrans}
-</p>
-
-<div class="pgbutton__container pg__mtop-md">
+<div class="pgbutton__container">
     <a
-        href="{'backoffice.charity_account.disconnect'|toback}"
-        class="pgbutton pg__danger"
+            href="{'backoffice.green_account.disconnectCharity'|toback}"
+            class="pgbutton pg__danger"
     >
         {'blocks.charity_account_logout.action'|pgtrans}
     </a>
 </div>
+
+<p>
+    {'blocks.charity_account_logout.description'|pgtrans}
+</p>

@@ -68,18 +68,4 @@ interface GiftRepositoryInterface extends RepositoryInterface
      * @return bool
      */
     public function delete(GiftEntityInterface $gift);
-
-    /**
-     * @param int $dayIntervalBegin
-     * @param int $dayIntervalEnd
-     * @return int
-     */
-    public function getCountByDayInterval($dayIntervalBegin = 0, $dayIntervalEnd = 1);
-
-    /**
-     * @param int $dayIntervalBegin
-     * @param int $dayIntervalEnd
-     * @return float
-     */
-    public function getAmountByDayInterval($dayIntervalBegin = 0, $dayIntervalEnd = 1);
 }

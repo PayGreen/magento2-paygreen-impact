@@ -3933,52 +3933,76 @@ array (
 ),
 1 =>
 array (
+'type' => 'ADD',
+'code' => 'PGI-3711',
+'text' => 'Possibilité d\'exporter directement le catalogue produit vers l\'api ClimateKit.',
+),
+2 =>
+array (
 'type' => 'FIX',
 'code' => 'PGI-3659',
 'text' => 'Suppression de l\'installation/désinstallation de la table \'fingerprint\'.',
 ),
-2 =>
+3 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3679',
 'text' => 'Suppression de la double gestion du setup de la table \'setting\'.',
 ),
-3 =>
+4 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3702',
 'text' => 'Corrections des anciens upgrades.',
 ),
-4 =>
+5 =>
+array (
+'type' => 'FIX',
+'code' => 'PGI-3768',
+'text' => 'Configurer un upgrade pour modifier le serveur utilisé par les API.',
+),
+6 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3719',
 'text' => 'Corriger les upgrade de réinitialisation des settings d\'accès aux api green.',
 ),
-5 =>
+7 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3720',
 'text' => 'Ajouter les unités dans la preview du CarbonBot et changer le 0 en O du C02.',
 ),
-6 =>
+8 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3722',
 'text' => 'Ajout des traductions pour les associations de type Autre et Social.',
 ),
-7 =>
+9 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3734',
 'text' => 'Problème de stats qui commencent à minuit le jour même à la place de l\'heure exacte.',
+),
+10 =>
+array (
+'type' => 'FIX',
+'code' => 'PGI-3747',
+'text' => 'Retirer le filtre d\'échapemment sur les variables de templates qui retourne du HTML.',
+),
+11 =>
+array (
+'type' => 'FIX',
+'code' => 'PGI-3755',
+'text' => 'L\'export direct du catalogue produit ne fonctionne pas si ClimateKit n\'est pas SOFT activé.',
 ),
 ),
 'dependencies' =>
 array (
 'framework' =>
 array (
-'version' => '3.10.0',
+'version' => '3.10.2',
 'from' => '3.9.6',
 ),
 ),
@@ -3993,34 +4017,16 @@ array (
 0 =>
 array (
 'type' => 'ADD',
-'code' => 'PGI-3711',
-'text' => 'Possibilité d\'exporter directement le catalogue produit vers l\'api ClimateKit.',
-),
-1 =>
-array (
-'type' => 'ADD',
 'code' => 'PGI-3703',
 'text' => 'Archivage régulier des logs trop volumineux.',
 ),
-2 =>
+1 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3726',
 'text' => 'Ajout d\'une page de gestion du planificateur interne.',
 ),
-3 =>
-array (
-'type' => 'FIX',
-'code' => 'PGI-3747',
-'text' => 'Retirer le filtre d\'échapemment sur les variables de templates qui retourne du HTML.',
-),
-4 =>
-array (
-'type' => 'FIX',
-'code' => 'PGI-3755',
-'text' => 'L\'export direct du catalogue produit ne fonctionne pas si ClimateKit n\'est pas SOFT activé.',
-),
-5 =>
+2 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3732',
@@ -4032,7 +4038,7 @@ array (
 'framework' =>
 array (
 'version' => '3.11.0',
-'from' => '3.10.0',
+'from' => '3.10.2',
 ),
 ),
 ),

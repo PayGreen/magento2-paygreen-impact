@@ -23,9 +23,9 @@ namespace PGI\Impact\PGCharity\Services\Requirements;
 
 use PGI\Impact\PGCharity\Services\Handlers\CharityAccountHandler;
 use PGI\Impact\PGClient\Exceptions\Response as ResponseException;
-use PGI\Impact\PGFramework\Interfaces\RequirementInterface;
+use PGI\Impact\PGFramework\Foundations\AbstractRequirement;
 
-class CharityAccessAvailableRequirement implements RequirementInterface
+class CharityAccessAvailableRequirement extends AbstractRequirement
 {
     /** @var CharityAccountHandler */
     private $charityAccountHandler;
@@ -40,15 +40,6 @@ class CharityAccessAvailableRequirement implements RequirementInterface
      * @throws ResponseException
      */
     public function isValid()
-    {
-        return $this->isCharityAccessAvailable();
-    }
-
-    /**
-     * @return bool
-     * @throws ResponseException
-     */
-    private function isCharityAccessAvailable()
     {
         $isMandateSigned = $this->charityAccountHandler->isMandateSigned();
         $isTestModeNotExpired = (!$this->charityAccountHandler->isTestModeExpired());
