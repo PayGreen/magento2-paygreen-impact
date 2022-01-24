@@ -21,8 +21,6 @@
 
 namespace PGI\Impact\PGMagento\Services\Linkers;
 
-use PGI\Impact\Services\Linkers\Foundations\MagentoLinker;
-
 class HomeLinker extends MagentoLinker
 {
     public function buildUrl(array $data = array())
