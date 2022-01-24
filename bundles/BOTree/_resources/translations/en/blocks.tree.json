@@ -8,7 +8,7 @@
       "activate" : "Activate my account",
       "connect" : "Log in",
       "learnmore" : "Learn more",
-      "description" : "",
+      "description" : "If you have already created your ClimateKit space, log in now to calculate the carbon footprint of your activity.",
       "shipping_address": {
         "text1": "Fill in your",
         "link": "shipping address",

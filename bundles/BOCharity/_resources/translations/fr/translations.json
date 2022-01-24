@@ -2,32 +2,29 @@
   "translations": {
     "charity_block_title": {
       "field": {
-        "label": "Titre du bloc Charity",
-        "help": "Ce titre est affiché à vos clients sur la page de paiement."
+        "label": "Titre du bloc"
       }
     },
     "charity_block_message": {
       "field": {
-        "label": "Message du bloc Charity",
-        "help": "Ce message est affiché à vos clients sur la page de paiement et dans le popin."
+        "label": "Intitulé de la case à cocher"
       }
     },
     "charity_popin_title": {
       "field": {
-        "label": "Titre du popin Charity",
-        "help": "Ce titre est affiché à vos clients à l'intérieur de le popin Charity."
+        "label": "Titre de la popin"
       }
     },
     "charity_popin_subtitle": {
       "field": {
-        "label": "Sous-titre du popin Charity",
-        "help": "Ce sous-titre est affiché à vos clients à l'intérieur de le popin Charity."
+        "label": "Instruction pour le choix de l'association",
+        "help": "Ce texte est affiché au-dessus du choix de l'association bénéficiaire du don."
       }
     },
     "charity_popin_message": {
       "field": {
-        "label": "Message du popin Charity",
-        "help": "Ce message est affiché à vos clients sur la page de paiement et dans le popin."
+        "label": "Instruction pour le choix du montant",
+        "help": "Ce texte est affiché devant le champ permettant de modifier le montant du don."
       }
     }
   }

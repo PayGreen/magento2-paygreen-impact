@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -3498,6 +3498,9 @@ array (
 0 => '@server.backoffice',
 1 => '@handler.output',
 2 => '@handler.menu',
+3 => '@logger',
+4 => '@handler.static_file',
+5 => '@parameters',
 ),
 ),
 'action.support_configuration.save' =>
@@ -4334,6 +4337,43 @@ array (
 2 => '@logger',
 ),
 ),
+'upgrade.match_green_access_settings' =>
+array (
+'abstract' => false,
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'upgrade',
+),
+),
+'class' => 'PGI\\Impact\\PGGreen\\Services\\Upgrades\\MatchGreenAccessSettingsUpgrade',
+'extends' => 'upgrade.abstract',
+'arguments' =>
+array (
+0 => '@manager.setting',
+1 => '@handler.shop',
+2 => '@logger',
+),
+),
+'diagnostic.tree_contribution' =>
+array (
+'abstract' => false,
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'diagnostic',
+),
+),
+'class' => 'PGI\\Impact\\PGTree\\Services\\Diagnostics\\TreeContributionDiagnostic',
+'extends' => 'diagnostic.abstract',
+'arguments' =>
+array (
+0 => '@handler.tree_contribution',
+1 => '@logger',
+),
+),
 'handler.tree_authentication' =>
 array (
 'class' => 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeAuthenticationHandler',
@@ -4343,6 +4383,7 @@ array (
 1 => '@factory.api.tree',
 2 => '@settings',
 3 => '@logger',
+4 => '@broadcaster',
 ),
 ),
 'handler.tree_carbon_offsetting' =>
@@ -4403,6 +4444,37 @@ array (
 4 => '@logger',
 ),
 ),
+'handler.tree' =>
+array (
+'class' => 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeHandler',
+'arguments' =>
+array (
+0 => '@handler.tree_cart',
+1 => '@settings',
+2 => '@logger',
+),
+),
+'handler.tree_cart' =>
+array (
+'class' => 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeCartHandler',
+'arguments' =>
+array (
+0 => '@manager.cart',
+1 => '@handler.tree_contribution',
+2 => '@manager.product',
+3 => '@logger',
+),
+),
+'handler.tree_contribution' =>
+array (
+'class' => 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeContributionHandler',
+'arguments' =>
+array (
+0 => '@manager.product',
+1 => '@officer.tree_contribution',
+2 => '@handler.shop',
+),
+),
 'manager.carbon_data' =>
 array (
 'class' => 'PGI\\Impact\\PGTree\\Services\\Managers\\CarbonDataManager',
@@ -4449,6 +4521,15 @@ array (
 'arguments' =>
 array (
 0 => '@handler.page_counter',
+1 => '@logger',
+),
+),
+'listener.setup.tree_contribution_product' =>
+array (
+'class' => 'PGI\\Impact\\PGTree\\Services\\Listeners\\SetupTreeContributionProductListener',
+'arguments' =>
+array (
+0 => '@handler.tree_contribution',
 1 => '@logger',
 ),
 ),
@@ -4788,6 +4869,7 @@ array (
 0 => '@generator.csv',
 1 => '@handler.tree.catalog',
 2 => '@facade.api.tree',
+3 => '@handler.requirement',
 ),
 ),
 'action.tree_shipping_address.save' =>
@@ -5161,6 +5243,14 @@ array (
 'arguments' =>
 array (
 0 => '@builder.form',
+),
+),
+6 =>
+array (
+'method' => 'setTranslationHandler',
+'arguments' =>
+array (
+0 => '@handler.translation',
 ),
 ),
 ),
@@ -5668,7 +5758,7 @@ array (
 'config' =>
 array (
 'translation_tag' => 'tree_bot',
-'redirect_to' => 'carbon_bot_config',
+'redirect_to' => 'tree_translations',
 ),
 ),
 'action.tree_configuration.save' =>
@@ -5719,6 +5809,127 @@ array (
 'config' =>
 array (
 'form_name' => 'tree_config',
+'redirection' => 'backoffice.support.display',
+),
+),
+'action.tree_user_contribution_config_form.display' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+3 =>
+array (
+'method' => 'setSettings',
+'arguments' =>
+array (
+0 => '@settings',
+),
+),
+4 =>
+array (
+'method' => 'setParameters',
+'arguments' =>
+array (
+0 => '@parameters',
+),
+),
+5 =>
+array (
+'method' => 'setFormBuilder',
+'arguments' =>
+array (
+0 => '@builder.form',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'action',
+),
+),
+'extends' => 'action.standardized_form_settings_block.abstract',
+'class' => 'PGI\\Impact\\BOModule\\Services\\Actions\\StandardizedFormSettingsBlockAction',
+'config' =>
+array (
+'form_name' => 'tree_user_contribution_config',
+'form_action' => 'backoffice.tree_user_contribution_config_form.save',
+),
+),
+'action.tree_user_contribution_config_form.save' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'action',
+),
+),
+'extends' => 'action.standardized_save_settings.abstract',
+'class' => 'PGI\\Impact\\BOModule\\Services\\Actions\\StandardizedSaveSettingsAction',
+'arguments' =>
+array (
+0 => '@builder.form',
+1 => '@settings',
+),
+'config' =>
+array (
+'form_name' => 'tree_user_contribution_config',
 'redirection' => 'backoffice.tree_config.display',
 ),
 ),
@@ -5823,6 +6034,75 @@ array (
 4 => '@handler.carbon_rounder',
 ),
 ),
+'controller.front.tree.usercontribution' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+3 =>
+array (
+'method' => 'setSettings',
+'arguments' =>
+array (
+0 => '@settings',
+),
+),
+4 =>
+array (
+'method' => 'setParameters',
+'arguments' =>
+array (
+0 => '@parameters',
+),
+),
+5 =>
+array (
+'method' => 'setFormBuilder',
+'arguments' =>
+array (
+0 => '@builder.form',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'controller',
+),
+),
+'extends' => 'controller.abstract',
+'class' => 'PGI\\Impact\\FOTree\\Services\\Controllers\\UserContributionController',
+'arguments' =>
+array (
+0 => '@handler.tree',
+),
+),
 'builder.output.carbon_footprint' =>
 array (
 'abstract' => false,
@@ -5879,8 +6159,48 @@ array (
 'class' => 'PGI\\Impact\\FOTree\\Services\\OutputBuilders\\CarbonBotOutputBuilder',
 'arguments' =>
 array (
-0 => '@handler.link',
-1 => '@settings',
+0 => '@settings',
+1 => '@handler.tree_carbon_offsetting',
+2 => '@handler.tree_account',
+3 => '@manager.cart',
+4 => '@manager.customer',
+5 => '@handler.translation',
+6 => '@handler.tree_footprint_id',
+7 => '@handler.link',
+8 => '@logger',
+9 => '@parameters',
+),
+),
+'builder.output.user_contribution_block' =>
+array (
+'abstract' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setViewHandler',
+'arguments' =>
+array (
+0 => '@handler.view',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'builder.output',
+),
+),
+'extends' => 'builder.output.abstract',
+'class' => 'PGI\\Impact\\FOTree\\Services\\OutputBuilders\\UserContributionOutputBuilder',
+'arguments' =>
+array (
+0 => '@handler.tree',
+1 => '@handler.tree_carbon_offsetting',
+2 => '@handler.carbon_rounder',
+3 => '@handler.link',
+4 => '@settings',
 ),
 ),
 'handler.carbon_rounder' =>
@@ -5898,7 +6218,8 @@ array (
 array (
 0 => '@handler.tree_carbon_offsetting',
 1 => '@repository.carbon_data',
-2 => '@logger',
+2 => '@handler.tree_contribution',
+3 => '@logger',
 ),
 ),
 'diagnostic.charity_gift' =>
@@ -6577,7 +6898,7 @@ array (
 'page_name' => 'charity_translations',
 ),
 ),
-'action.charity_translations_form.display' =>
+'action.charity_translations_block_form.display' =>
 array (
 'abstract' => false,
 'shared' => false,
@@ -6624,11 +6945,11 @@ array (
 ),
 'config' =>
 array (
-'translation_tag' => 'charity',
-'form_action' => 'backoffice.charity_translations.save',
+'translation_tag' => 'charity_block',
+'form_action' => 'backoffice.charity_translations_block.save',
 ),
 ),
-'action.charity_translations_form.save' =>
+'action.charity_translations_block_form.save' =>
 array (
 'abstract' => false,
 'shared' => false,
@@ -6676,7 +6997,110 @@ array (
 ),
 'config' =>
 array (
-'translation_tag' => 'charity',
+'translation_tag' => 'charity_block',
+'redirect_to' => 'charity_translations',
+),
+),
+'action.charity_translations_popin_form.display' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'action',
+),
+),
+'extends' => 'action.standardized_translations_form_block.abstract',
+'class' => 'PGI\\Impact\\BOModule\\Services\\Actions\\StandardizedFormTranslationsBlockAction',
+'arguments' =>
+array (
+0 => '@builder.translation_form',
+1 => '@handler.translation',
+),
+'config' =>
+array (
+'translation_tag' => 'charity_popin',
+'form_action' => 'backoffice.charity_translations_popin.save',
+),
+),
+'action.charity_translations_popin_form.save' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'action',
+),
+),
+'extends' => 'action.standardized_save_translations_form.abstract',
+'class' => 'PGI\\Impact\\BOModule\\Services\\Actions\\StandardizedSaveTranslationsFormAction',
+'arguments' =>
+array (
+0 => '@builder.translation_form',
+1 => '@handler.translation',
+2 => '@manager.translation',
+),
+'config' =>
+array (
+'translation_tag' => 'charity_popin',
 'redirect_to' => 'charity_translations',
 ),
 ),
@@ -7000,6 +7424,87 @@ array (
 1 => '@repository.gift',
 2 => '@logger',
 ),
+),
+'controller.backoffice.green_account' =>
+array (
+'abstract' => false,
+'shared' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+1 =>
+array (
+'method' => 'setNotifier',
+'arguments' =>
+array (
+0 => '@notifier',
+),
+),
+2 =>
+array (
+'method' => 'setLinkHandler',
+'arguments' =>
+array (
+0 => '@handler.link',
+),
+),
+3 =>
+array (
+'method' => 'setSettings',
+'arguments' =>
+array (
+0 => '@settings',
+),
+),
+4 =>
+array (
+'method' => 'setParameters',
+'arguments' =>
+array (
+0 => '@parameters',
+),
+),
+5 =>
+array (
+'method' => 'setFormBuilder',
+'arguments' =>
+array (
+0 => '@builder.form',
+),
+),
+6 =>
+array (
+'method' => 'setCharityAuthenticationHandler',
+'arguments' =>
+array (
+0 => '@handler.charity_authentication',
+),
+),
+7 =>
+array (
+'method' => 'setTreeAuthenticationHandler',
+'arguments' =>
+array (
+0 => '@handler.tree_authentication',
+),
+),
+),
+'tags' =>
+array (
+0 =>
+array (
+'name' => 'controller',
+),
+),
+'extends' => 'controller.abstract',
+'class' => 'PGI\\Impact\\BOGreen\\Services\\Controllers\\AccountController',
 ),
 'builder.output.frontoffice_override_css' =>
 array (
@@ -7341,6 +7846,220 @@ array (
 'route' => 'checkout/onepage/success',
 ),
 ),
+'officer.tree_contribution' =>
+array (
+'abstract' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+),
+'extends' => 'service.abstract',
+'class' => 'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionOfficer',
+'arguments' =>
+array (
+0 => '@local.factory.product',
+1 => '@local.repository.product',
+2 => '@local.app.state',
+3 => '@manager.product',
+4 => '@settings',
+5 => '@officer.tree_contribution.picture',
+6 => '@officer.tree_contribution.translation',
+7 => '@officer.tree_contribution.stock',
+),
+'config' =>
+array (
+'contribution_name' => '%data.tree_contribution.name',
+'contribution_reference' => '%data.tree_contribution.reference',
+'contribution_primary_setting' => 'tree_contribution_id',
+),
+),
+'officer.tree_contribution.picture' =>
+array (
+'abstract' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+),
+'extends' => 'service.abstract',
+'class' => 'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionPictureOfficer',
+'arguments' =>
+array (
+0 => '@pathfinder',
+1 => '@local.product.media.config',
+2 => '@local.filesystem',
+),
+'config' =>
+array (
+'contribution_picture' => 'static:/pictures/FOTree/logo-tree-contribution.png',
+),
+),
+'officer.tree_contribution.translation' =>
+array (
+'abstract' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+),
+'extends' => 'service.abstract',
+'class' => 'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionTranslationOfficer',
+'arguments' =>
+array (
+0 => '@local.factory.product',
+1 => '@local.resource_model.product',
+2 => '@local.scope',
+3 => '@translator',
+),
+'config' =>
+array (
+'contribution_name_translation_key' => 'data.tree_contribution.name',
+),
+),
+'officer.tree_contribution.stock' =>
+array (
+'abstract' => false,
+'calls' =>
+array (
+0 =>
+array (
+'method' => 'setLogger',
+'arguments' =>
+array (
+0 => '@logger',
+),
+),
+),
+'extends' => 'service.abstract',
+'class' => 'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionStockOfficer',
+'arguments' =>
+array (
+0 => '@local.registry.stock',
+),
+),
+'local.repository.product' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Catalog\\Api\\ProductRepositoryInterface',
+1 => 'Magento\\Catalog\\Api\\ProductRepositoryInterface',
+),
+),
+'local.factory.product' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Catalog\\Api\\Data\\ProductInterfaceFactory',
+1 => 'Magento\\Catalog\\Api\\Data\\ProductInterfaceFactory',
+),
+),
+'local.resource_model.product' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Catalog\\Model\\ResourceModel\\Product',
+1 => 'Magento\\Catalog\\Model\\ResourceModel\\Product',
+),
+),
+'local.app.state' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Framework\\App\\State',
+1 => 'Magento\\Framework\\App\\State',
+),
+),
+'local.registry.stock' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\CatalogInventory\\Api\\StockRegistryInterface',
+1 => 'Magento\\CatalogInventory\\Api\\StockRegistryInterface',
+),
+),
+'local.product.media.config' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Catalog\\Model\\Product\\Media\\Config',
+1 => 'Magento\\Catalog\\Model\\Product\\Media\\Config',
+),
+),
+'local.filesystem' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Framework\\Filesystem',
+1 => 'Magento\\Framework\\Filesystem',
+),
+),
+'local.scope' =>
+array (
+'factory' =>
+array (
+'service' => 'magento',
+'method' => 'get',
+),
+'arguments' =>
+array (
+0 => 'Magento\\Framework\\App\\Config\\ScopeConfigInterface',
+1 => 'Magento\\Framework\\App\\Config\\ScopeConfigInterface',
+),
+),
 'officer.charity_gift.picture' =>
 array (
 'abstract' => false,
@@ -7415,102 +8134,6 @@ array (
 'arguments' =>
 array (
 0 => '@local.registry.stock',
-),
-),
-'local.repository.product' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Catalog\\Api\\ProductRepositoryInterface',
-),
-),
-'local.factory.product' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Catalog\\Api\\Data\\ProductInterfaceFactory',
-),
-),
-'local.resource_model.product' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Catalog\\Model\\ResourceModel\\Product',
-),
-),
-'local.app.state' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Framework\\App\\State',
-),
-),
-'local.registry.stock' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\CatalogInventory\\Api\\StockRegistryInterface',
-),
-),
-'local.product.media.config' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Catalog\\Model\\Product\\Media\\Config',
-),
-),
-'local.filesystem' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Framework\\Filesystem',
-),
-),
-'local.scope' =>
-array (
-'factory' =>
-array (
-'service' => 'magento',
-'method' => 'get',
-),
-'arguments' =>
-array (
-0 => 'Magento\\Framework\\App\\Config\\ScopeConfigInterface',
 ),
 ),
 );

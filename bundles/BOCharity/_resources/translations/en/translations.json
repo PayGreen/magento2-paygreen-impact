@@ -2,32 +2,29 @@
   "translations": {
     "charity_block_title": {
       "field": {
-        "label": "Charity block title",
-        "help": "This title is displayed to your customers on the checkout page."
+        "label": "Block title"
       }
     },
     "charity_block_message": {
       "field": {
-        "label": "Charity block message",
-        "help": "This message is displayed to your customers on the checkout page."
+        "label": "Title of the checkbox"
       }
     },
     "charity_popin_title": {
       "field": {
-        "label": "Popin Charity title",
-        "help": "This title is displayed to your customers inside the Charity popin."
+        "label": "Popin title"
       }
     },
     "charity_popin_subtitle": {
       "field": {
-        "label": "Popin Charity subtitle",
-        "help": "This subtitle is displayed to your customers inside the Charity popin."
+        "label": "Instruction for the choice of association",
+        "help": "This text is displayed above the choice of the beneficiary association of the donation."
       }
     },
     "charity_popin_message": {
       "field": {
-        "label": "Popin Charity message",
-        "help": "This message is displayed to your customers on the checkout page."
+        "label": "Instruction for choosing the amount",
+        "help": "This text is displayed in front of the field allowing to modify the amount of the donation."
       }
     }
   }

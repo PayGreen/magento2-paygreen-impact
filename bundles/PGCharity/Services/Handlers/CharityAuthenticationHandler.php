@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -227,6 +227,9 @@ class CharityAuthenticationHandler implements AuthenticationHandlerInterface
         $response = $this->apiFacade->getAccountInfos($clientId);
 
         if ($response->data->usesArrondi === "1") {
+            if($response->data->charityBilling->status !== "SIGNED") {
+                $this->settings->set("charity_test_mode",true);
+            }
             $result = true;
             $this->settings->set('charity_activation',true);
             $this->broadcaster->fire(new ProductActivationEventComponent('soft', 'charity'));

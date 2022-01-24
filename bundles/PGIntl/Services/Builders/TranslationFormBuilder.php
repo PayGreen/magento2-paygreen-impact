@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -74,12 +74,14 @@ class TranslationFormBuilder
             $enabled = (!array_key_exists('enabled', $config) || ($config['enabled'] === true));
 
             if ($enabled && in_array($tag, $tags)) {
+                $data['label'] = $config['label'];
+                if (!empty($config['help'])) {
+                    $data['help'] = $config['help'];
+                }
+
                 $fieldConfig = array_merge(self::$BASIC_FIELD_CONFIGURATION, array(
                     'view' => array(
-                        'data' => array(
-                            'label' => $config['label'],
-                            'help' => $config['help']
-                        )
+                        'data' => $data
                     )
                 ));
 

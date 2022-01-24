@@ -1,0 +1,14 @@
+{
+  "misc": {
+    "tree_user_contribution": {
+      "test_mode": {
+        "title": "The carbon contribution is currently in TEST mode: NO DONATION WILL BE DONATED. If you are not the site owner, please do not contribute."
+      },
+      "explanation": {
+        "title": "Make a contribution",
+        "message": "The contribution will be entirely donated to the climate project.",
+        "details": "With the contribution, you have the possibility of making the carbon footprint of your purchase neutral. The amount of the contribution is automatically calculated on the payment page."
+      }
+    }
+  }
+}

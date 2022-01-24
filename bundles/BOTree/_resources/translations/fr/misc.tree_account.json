@@ -7,7 +7,7 @@
           "expired": "Votre période de test est expirée. Pour continuer à utiliser le ClimateKit veuillez contacter le support PayGreen."
         },
         "mandate": {
-          "unsigned": "Le ClimateKit est indisponible tant qu'aucun mandat SEPA n'a été signé."
+          "unsigned": "Le ClimateKit est obligatoirement en mode test tant qu'aucun mandat SEPA n'a été signé."
         }
       }
     }

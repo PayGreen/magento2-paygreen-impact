@@ -14,8 +14,8 @@
     },
     "message_find_out_more": {
       "field": {
-        "label": "Nom de la page sur vos engagements",
-        "help": "Ce texte sera utilisé comme lien pour conduire vos clients vers la page de présentation de vos engagements."
+        "label": "Vos engagements",
+        "help": "Ce texte sera utilisé comme présentation courte de vos engagements."
       }
     }
   }

@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -24,6 +24,7 @@ namespace PGI\Impact\BOTree\Services\Controllers;
 use PGI\Impact\APITree\Services\Facades\ApiFacade;
 use PGI\Impact\BOModule\Foundations\Controllers\AbstractBackofficeController;
 use PGI\Impact\PGFramework\Services\Generators\CSVGenerator;
+use PGI\Impact\PGFramework\Services\Handlers\RequirementHandler;
 use PGI\Impact\PGPayment\Exceptions\InvalidProductCatalog as InvalidProductCatalogException;
 use PGI\Impact\PGServer\Components\Resources\Data as DataResourceComponent;
 use PGI\Impact\PGServer\Components\Responses\HTTP as HTTPResponseComponent;
@@ -42,7 +43,16 @@ class ExportProductCatalogController extends AbstractBackofficeController
 {
     const EXPORT_PRODUCT_CATALOG_FILENAME = 'export_product_catalog';
 
-    private static $EXPORT_PRODUCT_CATALOG_COLUMNS_NAME = array('nom', 'ID-tech', 'code article', 'poids');
+    private static $EXPORT_PRODUCT_CATALOG_COLUMNS_NAME = array(
+        'nom',
+        'ID-tech',
+        'code article',
+        'poids',
+        'prix hors taxe',
+        'categorie_1',
+        'categorie_2',
+        'categorie_3'
+    );
 
     /** @var CSVGenerator */
     private $csvGenerator;
@@ -53,14 +63,19 @@ class ExportProductCatalogController extends AbstractBackofficeController
     /** @var ApiFacade */
     private $treeAPIFacade;
 
+    /** @var RequirementHandler */
+    private $requirementHandler;
+
     public function __construct(
         CSVGenerator $csvGenerator,
         TreeCatalogHandler $treeCatalogHandler,
-        ApiFacade $treeAPIFacade
+        ApiFacade $treeAPIFacade,
+        RequirementHandler $requirementHandler
     ) {
         $this->csvGenerator = $csvGenerator;
         $this->treeCatalogHandler = $treeCatalogHandler;
         $this->treeAPIFacade = $treeAPIFacade;
+        $this->requirementHandler = $requirementHandler;
     }
 
     /**
@@ -91,9 +106,10 @@ class ExportProductCatalogController extends AbstractBackofficeController
     public function displayTreeExportProductCatalogButtonAction()
     {
         $emptyCache = !$this->treeCatalogHandler->hasData();
-
+        $tree_access_available = $this->requirementHandler->isFulfilled('tree_access_available');
         return $this->buildTemplateResponse('tree/block-tree-export-product-catalog')
             ->addData('empty_cache', $emptyCache)
+            ->addData('tree_access_available', $tree_access_available)
             ;
     }
 

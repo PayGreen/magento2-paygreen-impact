@@ -12,13 +12,6 @@
             "RIGHT": "En bas à droite"
           }
         },
-        "tree_bot_corner": {
-          "label": "Forme des angles",
-          "choices": {
-            "ROUND": "Angles arrondis",
-            "SQUARE": "Angles arrés"
-          }
-        },
         "tree_bot_mobile_activated" : {
           "label": "Afficher le CarbonBot sur les sites mobiles",
           "help": "Permet de définir si vous souhaitez ou non afficher le CarbonBot sur les sites mobiles."

@@ -7,7 +7,7 @@
           "expired": "Your trial period has expired. To continue using ClimateKit please contact PayGreen support."
         },
         "mandate": {
-          "unsigned": "The ClimateKit is unavailable until a SEPA mandate has been signed."
+          "unsigned": "The ClimateKit must be in test mode as long as no SEPA mandate has been signed."
         }
       }
     }

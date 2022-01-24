@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -25,6 +25,7 @@ use Exception;
 use PGI\Impact\PGFramework\Services\Handlers\CacheHandler;
 use PGI\Impact\PGIntl\Components\Translation as TranslationComponent;
 use PGI\Impact\PGIntl\Services\Translator;
+use PGI\Impact\PGShop\Interfaces\Entities\CategoryEntityInterface;
 use PGI\Impact\PGShop\Interfaces\Entities\ProductEntityInterface;
 use PGI\Impact\PGShop\Services\Managers\ProductManager;
 use PGI\Impact\PGSystem\Components\Parameters;
@@ -188,7 +189,11 @@ class TreeCatalogHandler
                     'name' => $name,
                     'id' => $id,
                     'reference' => $productEntry['reference'],
-                    'weight' => $productEntry['weight']
+                    'weight' => $productEntry['weight'],
+                    'price' => $productEntry['price'],
+                    'categorie_1' => $productEntry['categorie_1'],
+                    'categorie_2' => $productEntry['categorie_2'],
+                    'categorie_3' => $productEntry['categorie_3']
                 );
             }
         }
@@ -210,12 +215,29 @@ class TreeCatalogHandler
             $name = $this->productNameFilter->filter($product->getName());
             $reference = $this->productReferenceFilter->filter($product->getReference());
 
+            /** @var CategoryEntityInterface[] $categories */
+            $categories = $product->getCategories();
+
+            $categoriesName = array();
+
+            for ($i = 0; $i <= 2; $i++) {
+                if (isset($categories[$i])) {
+                    $categoriesName[] = $categories[$i]->getName();
+                } else {
+                    $categoriesName[] = "";
+                }
+            }
+
             if (!in_array($reference, $this->parameters['catalog_export.excluded_products'])) {
                 $productCatalog[] = array(
                     'name' => $name,
                     'id' => $product->id(),
                     'reference' => (!empty($reference)) ? $reference : $product->id(),
                     'weight' => $product->getWeight(),
+                    'price' => $product->getPrice()*100,
+                    "categorie_1" => $categoriesName[0],
+                    "categorie_2" => $categoriesName[1],
+                    "categorie_3" => $categoriesName[2],
                     'isVirtual' => $product->isVirtual()
                 );
             }

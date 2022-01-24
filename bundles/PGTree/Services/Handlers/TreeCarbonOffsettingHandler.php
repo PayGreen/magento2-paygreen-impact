@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -112,10 +112,11 @@ class TreeCarbonOffsettingHandler
     }
 
     /**
+     * @param int $userContributionAmount
      * @throws ResponseException
      * @throws Exception
      */
-    public function closeCarbonOffsetting()
+    public function closeCarbonOffsetting($userContributionAmount)
     {
         if (!$this->requirementHandler->isFulfilled('tree_activation')) {
             throw new Exception("Compute carbon offsetting require 'tree_activation'.");
@@ -125,8 +126,11 @@ class TreeCarbonOffsettingHandler
 
         $key = $this->footprintIdHandler->getFootprintId();
 
-        /** @var ResponseComponent $response */
-        $response = $this->treeAPIFacade->createCarbonFootprintPurchase($key);
+        if ($userContributionAmount > 0) {
+            $response = $this->treeAPIFacade->createCarbonFootprintUserContribution($key, $userContributionAmount);
+        } else {
+            $response = $this->treeAPIFacade->createCarbonFootprintPurchase($key);
+        }
 
         if ($response->getHTTPCode() === 200) {
             $this->footprintIdHandler->resetFootprintId();
@@ -149,6 +153,23 @@ class TreeCarbonOffsettingHandler
         $key = $this->footprintIdHandler->getFootprintId();
 
         return $this->treeAPIFacade->getCarbonFootprintEstimation($key, true);
+    }
+
+    /**
+     * @param string $user_id
+     * @return ResponseComponent
+     * @throws ResponseException
+     * @throws Exception
+     */
+    public function getFavoriteProject($user_id)
+    {
+        if (!$this->requirementHandler->isFulfilled('tree_activation')) {
+            throw new Exception("Get favorite project require 'tree_activation'.");
+        }
+
+        $this->logger->debug('Get favorite climate project.');
+
+        return $this->treeAPIFacade->getFavoriteProject($user_id);
     }
 
     /**

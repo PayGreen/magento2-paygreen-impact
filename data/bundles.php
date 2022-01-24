@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -43,8 +43,9 @@ return array (
 20 => 'APICharity',
 21 => 'BOCharity',
 22 => 'FOCharity',
-23 => 'PGMagento',
-24 => 'PGMagentoTree',
-25 => 'PGMagentoCharity',
-26 => 'MODImpact',
+23 => 'BOGreen',
+24 => 'PGMagento',
+25 => 'PGMagentoTree',
+26 => 'PGMagentoCharity',
+27 => 'MODImpact',
 );

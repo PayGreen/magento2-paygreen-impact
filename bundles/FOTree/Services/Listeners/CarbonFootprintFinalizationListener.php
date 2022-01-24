@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -26,7 +26,9 @@ use PGI\Impact\PGFramework\Services\Handlers\RequirementHandler;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
 use PGI\Impact\PGShop\Components\Events\LocalOrder as LocalOrderEventComponent;
 use PGI\Impact\PGShop\Interfaces\Entities\OrderEntityInterface;
+use PGI\Impact\PGShop\Interfaces\Entities\ShopableItemEntityInterface;
 use PGI\Impact\PGTree\Services\Handlers\TreeCarbonOffsettingHandler;
+use PGI\Impact\PGTree\Services\Handlers\TreeContributionHandler;
 use PGI\Impact\PGTree\Services\Repositories\CarbonDataRepository;
 use Exception;
 
@@ -42,16 +44,22 @@ class CarbonFootprintFinalizationListener
     /** @var CarbonDataRepository */
     private $carbonDataRepository;
 
+    /** @var TreeContributionHandler */
+    private $treeContributionHandler;
+
     /** @var LoggerInterface */
     private $logger;
+
 
     public function __construct(
         TreeCarbonOffsettingHandler $treeCarbonOffsettingHandler,
         CarbonDataRepository $carbonDataRepository,
+        TreeContributionHandler $treeContributionHandler,
         LoggerInterface $logger
     ) {
         $this->treeCarbonOffsettingHandler = $treeCarbonOffsettingHandler;
         $this->carbonDataRepository = $carbonDataRepository;
+        $this->treeContributionHandler = $treeContributionHandler;
         $this->logger = $logger;
     }
 
@@ -80,10 +88,22 @@ class CarbonFootprintFinalizationListener
                     $order->getCarrier()
                 );
 
+                $contributionId = $this->treeContributionHandler->getPrimary();
+                $contributionAmount = 0;
+
+                /** @var ShopableItemEntityInterface $item */
+                foreach ($order->getItems() as $item) {
+                    if ($item->getProduct()->id() === $contributionId) {
+                        $contributionAmount += $item->getCost();
+                    }
+                }
+
+                $this->logger->debug('Carbon user contribution : ', $contributionAmount );
+
                 /** @var CarbonFootprintReplyComponent $carbonFootprintResponse */
                 $carbonFootprintResponse = $this->treeCarbonOffsettingHandler->getCarbonOffsetting();
 
-                $this->treeCarbonOffsettingHandler->closeCarbonOffsetting();
+                $this->treeCarbonOffsettingHandler->closeCarbonOffsetting($contributionAmount);
 
                 $this->treeCarbonOffsettingHandler->saveCarbonData($order, $carbonFootprintResponse);
 

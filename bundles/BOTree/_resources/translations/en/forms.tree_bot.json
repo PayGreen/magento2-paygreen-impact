@@ -12,13 +12,6 @@
             "RIGHT": "At the bottom right"
           }
         },
-        "tree_bot_corner": {
-          "label": "Shape of the corners",
-          "choices": {
-            "ROUND": "Rounded corners",
-            "SQUARE": "Squared corners"
-          }
-        },
         "tree_bot_mobile_activated" : {
           "label": "Display the CarbonBot on mobile sites",
           "help": "Allows you to define whether or not you want to display the CarbonBot on mobile sites."

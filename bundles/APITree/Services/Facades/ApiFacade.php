@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -378,6 +378,29 @@ class ApiFacade
     }
 
     /**
+     * Create a carbon footprint user contribution
+     *
+     * @param string $fingerprint Unique string that you provide to identify a Carbon Footprint
+     * @return ResponseComponent
+     * @throws ResponseException
+     * @throws Exception
+     */
+    public function createCarbonFootprintUserContribution($fingerprint, $userContributionAmount)
+    {
+        $request = $this->getRequestFactory()->buildRequest(
+            'update_carbon_footprint_status',
+            array('fingerprint' => $fingerprint)
+        )->setContent(array(
+            'status' => 'USER_CONTRIBUTED',
+            'userContribution' => $userContributionAmount
+        ));
+
+        $request = $this->checkTestMode($request);
+
+        return $this->getRequestSender()->sendRequest($request);
+    }
+
+    /**
      * List all your Purchases with pagination
      *
      * @param int $pageNumber Page number is 1 by default
@@ -525,6 +548,20 @@ class ApiFacade
 
         $request = $this->checkTestMode($request);
         
+        return $this->getRequestSender()->sendRequest($request);
+    }
+
+    /**
+     * @param string $user_id
+     * @return ResponseComponent
+     * @throws ResponseException
+     */
+    public function getFavoriteProject($user_id)
+    {
+        $request = $this->getRequestFactory()->buildRequest('get_favorite_project', array(
+            'idUser' => $user_id
+        ),false);
+
         return $this->getRequestSender()->sendRequest($request);
     }
 

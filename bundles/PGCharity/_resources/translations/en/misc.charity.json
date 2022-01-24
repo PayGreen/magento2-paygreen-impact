@@ -3,7 +3,7 @@
     "charity": {
       "test_mode": {
         "active": "TEST mode activated",
-        "title": "Your CharityKit is currently configured in TEST mode: no donation will be donated to associations."
+        "title": "Your CharityKit is currently configured in TEST mode: NO DONATION WILL BE DONATED. If you are not the site owner, please do not donate."
       }
     }
   }

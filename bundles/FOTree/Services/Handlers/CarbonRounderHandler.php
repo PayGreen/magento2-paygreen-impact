@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -43,13 +43,13 @@ class CarbonRounderHandler
     {
         $numberKg = $this->convertTonToKiloGram($number);
 
-        if ($numberKg >= 100) {
-            $result = $this->formatNumber(round($numberKg))." kg";
+        if ($numberKg >= 10) {
+            $result = $this->formatNumber(round($numberKg,0,PHP_ROUND_HALF_DOWN))." kg";
         } elseif ($numberKg < 1) {
             $numberG = $this->convertTonToGram($number);
-            $result = $this->formatNumber(round($numberG))." g";
+            $result = $this->formatNumber(round($numberG,0,PHP_ROUND_HALF_DOWN))." g";
         } else {
-            $result = $this->formatNumber(round($numberKg, 1))." kg";
+            $result = $this->formatNumber(round($numberKg, 2, PHP_ROUND_HALF_DOWN))." kg";
         }
 
         return $result;

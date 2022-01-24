@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -25,6 +25,7 @@ use PGI\Impact\APITree\Components\Replies\CarbonFootprint as CarbonFootprintRepl
 use PGI\Impact\BOModule\Foundations\Controllers\AbstractBackofficeController;
 use PGI\Impact\FOTree\Services\Handlers\CarbonRounderHandler;
 use PGI\Impact\PGServer\Components\Responses\HTTP as HTTPResponseComponent;
+use PGI\Impact\PGServer\Components\Responses\PaygreenModule as PaygreenModuleResponseComponent;
 use PGI\Impact\PGShop\Services\Managers\CartManager;
 use PGI\Impact\PGShop\Services\Managers\CustomerManager;
 use PGI\Impact\PGTree\Services\Handlers\TreeCarbonOffsettingHandler;
@@ -89,7 +90,6 @@ class ClimateBotController extends AbstractBackofficeController
         $templateContent = $this->viewHandler->renderTemplate('tree-bot', array(
             'color' => $this->getSettings()->get("tree_bot_color"),
             'position' => $this->getSettings()->get("tree_bot_side"),
-            'corner' => $this->getSettings()->get("tree_bot_corner"),
             'isDetailsActivated' => $isDetailsActivated,
             'detailsUrl' => $detailsUrl,
             'carbonEmittedTotal' => $this->carbonRounderHandler->roundNumber(
@@ -111,5 +111,32 @@ class ClimateBotController extends AbstractBackofficeController
         $response->setContent($templateContent);
 
         return  $response;
+    }
+
+    /**
+     * @return PaygreenModuleResponseComponent
+     * @throws Exception
+     */
+    public function createFootprintAction()
+    {
+        $this->carbonOffsettingHandler->computeCarbonOffsetting(
+            $this->cartManager->getCurrent(),
+            $this->customerManager->getCurrent()
+        );
+
+        /** @var CarbonFootprintReplyComponent $carbonFootprint */
+        $carbonFootprint = $this->carbonOffsettingHandler->getCarbonOffsetting();
+
+        $fingerprint = $carbonFootprint->getFingerprint();
+        $idUser = $carbonFootprint->getIdUser();
+
+        $response = new PaygreenModuleResponseComponent($this->getRequest());
+        $response
+            ->addData('fingerprint', $fingerprint)
+            ->addData('userId', $idUser)
+        ;
+
+        return  $response;
+
     }
 }

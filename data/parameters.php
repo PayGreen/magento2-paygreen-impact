@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -242,6 +242,18 @@ array (
 array (
 0 => 'tree_access_available',
 ),
+),
+'install_tree_contribution_product' =>
+array (
+'event' => 'module.install',
+'service' => 'listener.setup.tree_contribution_product',
+'method' => 'installContributionProduct',
+),
+'uninstall_tree_contribution_product' =>
+array (
+'event' => 'module.uninstall',
+'service' => 'listener.setup.tree_contribution_product',
+'method' => 'uninstallContributionProduct',
 ),
 'tree_check_client_compatibility' =>
 array (
@@ -523,7 +535,7 @@ array (
 'tree_bot_activated' =>
 array (
 'type' => 'bool',
-'default' => false,
+'default' => true,
 ),
 'tree_bot_color' =>
 array (
@@ -535,17 +547,17 @@ array (
 'type' => 'string',
 'default' => 'RIGHT',
 ),
-'tree_bot_corner' =>
-array (
-'type' => 'string',
-'default' => 'ROUND',
-),
 'tree_bot_mobile_activated' =>
 array (
 'type' => 'bool',
 'default' => true,
 ),
 'tree_test_mode' =>
+array (
+'type' => 'bool',
+'default' => true,
+),
+'tree_user_contribution' =>
 array (
 'type' => 'bool',
 'default' => true,
@@ -650,6 +662,11 @@ array (
 'type' => 'bool',
 'default' => true,
 ),
+'tree_contribution_id' =>
+array (
+'type' => 'int',
+'global' => true,
+),
 'charity_gift_id' =>
 array (
 'type' => 'int',
@@ -714,6 +731,16 @@ array (
 1 => 'tree_bot_activation',
 ),
 ),
+'user_contribution_block' =>
+array (
+'target' => 'FRONT.FUNNEL.CHECKOUT',
+'builder' => 'user_contribution_block',
+'clean' => true,
+'requirements' =>
+array (
+0 => 'tree_user_contribution',
+),
+),
 'charity_block' =>
 array (
 'target' => 'FRONT.FUNNEL.CHECKOUT',
@@ -766,8 +793,8 @@ array (
 ),
 'default' =>
 array (
-'fr' => 'Cette empreinte carbone sera intégralement prise en charge par votre commerçant.',
-'en' => 'This carbon footprint will be fully supported by your merchant.',
+'fr' => '',
+'en' => '',
 ),
 ),
 'message_carbon_footprint' =>
@@ -780,8 +807,8 @@ array (
 ),
 'default' =>
 array (
-'fr' => 'Impact carbone de mon parcours d\'achat',
-'en' => 'Carbon impact of my purchasing journey',
+'fr' => 'Mon achat neutre en carbone',
+'en' => 'My carbon neutral purchase',
 ),
 ),
 'message_find_out_more' =>
@@ -794,17 +821,16 @@ array (
 ),
 'default' =>
 array (
-'fr' => 'En savoir plus sur nos engagements',
-'en' => 'Find out more about our commitments',
+'fr' => 'Nous finançons des projets de réduction et de séquestration de GES à hauteur de vos émissions.',
+'en' => 'We finance GHG reduction and sequestration projects up to the amount of your emissions.',
 ),
 ),
 'charity_block_title' =>
 array (
 'label' => 'translations.charity_block_title.field.label',
-'help' => 'translations.charity_block_title.field.help',
 'tags' =>
 array (
-0 => 'charity',
+0 => 'charity_block',
 ),
 'default' =>
 array (
@@ -815,10 +841,9 @@ array (
 'charity_block_message' =>
 array (
 'label' => 'translations.charity_block_message.field.label',
-'help' => 'translations.charity_block_message.field.help',
 'tags' =>
 array (
-0 => 'charity',
+0 => 'charity_block',
 ),
 'default' =>
 array (
@@ -829,10 +854,9 @@ array (
 'charity_popin_title' =>
 array (
 'label' => 'translations.charity_popin_title.field.label',
-'help' => 'translations.charity_popin_title.field.help',
 'tags' =>
 array (
-0 => 'charity',
+0 => 'charity_popin',
 ),
 'default' =>
 array (
@@ -846,7 +870,7 @@ array (
 'help' => 'translations.charity_popin_subtitle.field.help',
 'tags' =>
 array (
-0 => 'charity',
+0 => 'charity_popin',
 ),
 'default' =>
 array (
@@ -860,7 +884,7 @@ array (
 'help' => 'translations.charity_popin_message.field.help',
 'tags' =>
 array (
-0 => 'charity',
+0 => 'charity_popin',
 ),
 'default' =>
 array (
@@ -1328,7 +1352,7 @@ array (
 'requirements' =>
 array (
 0 => 'shop_context',
-1 => 'tree_kit_activation',
+1 => 'tree_activation',
 ),
 ),
 'backoffice.carbon_bot_config.display' =>
@@ -1430,9 +1454,46 @@ array (
 1 => 'tree_connexion',
 ),
 ),
+'backoffice.tree_user_contribution_config_form.save' =>
+array (
+'target' => 'tree_user_contribution_config_form.save',
+'requirements' =>
+array (
+0 => 'shop_context',
+1 => 'tree_connexion',
+),
+),
 'front.climatebot.display' =>
 array (
 'target' => 'display@front.tree.climatebot',
+'requirements' =>
+array (
+0 => 'tree_access_available',
+),
+),
+'front.tree.save_contribution' =>
+array (
+'target' => 'saveContribution@front.tree.usercontribution',
+'requirements' =>
+array (
+0 => 'tree_access_available',
+),
+),
+'front.tree.cancel_contribution' =>
+array (
+'target' => 'cancelContribution@front.tree.usercontribution',
+'requirements' =>
+array (
+0 => 'tree_access_available',
+),
+),
+'front.tree.contribution_explanation' =>
+array (
+'target' => 'displayContributionExplanationPage@front.tree.usercontribution',
+),
+'front.tree.create_footprint' =>
+array (
+'target' => 'createFootprint@front.tree.climatebot',
 'requirements' =>
 array (
 0 => 'tree_access_available',
@@ -1471,6 +1532,7 @@ array (
 array (
 0 => 'shop_context',
 1 => 'charity_activation',
+2 => 'charity_access_available',
 ),
 ),
 'backoffice.charity_partnerships.update_positions' =>
@@ -1491,9 +1553,18 @@ array (
 1 => 'charity_kit_activation',
 ),
 ),
-'backoffice.charity_translations.save' =>
+'backoffice.charity_translations_block.save' =>
 array (
-'target' => 'charity_translations_form.save',
+'target' => 'charity_translations_block_form.save',
+'requirements' =>
+array (
+0 => 'shop_context',
+1 => 'charity_kit_activation',
+),
+),
+'backoffice.charity_translations_popin.save' =>
+array (
+'target' => 'charity_translations_popin_form.save',
 'requirements' =>
 array (
 0 => 'shop_context',
@@ -1536,6 +1607,18 @@ array (
 'front.charity.gift_explanation' =>
 array (
 'target' => 'displayGiftExplanationPage@front.charity.gift',
+),
+'backoffice.green_account.connect' =>
+array (
+'target' => 'connect@backoffice.green_account',
+),
+'backoffice.green_account.disconnectTree' =>
+array (
+'target' => 'disconnectTree@backoffice.green_account',
+),
+'backoffice.green_account.disconnectCharity' =>
+array (
+'target' => 'disconnectCharity@backoffice.green_account',
 ),
 ),
 ),
@@ -2428,31 +2511,6 @@ array (
 ),
 ),
 ),
-'tree_bot_corner' =>
-array (
-'model' => 'choice.contracted.single',
-'validators' =>
-array (
-'array.in' =>
-array (
-0 => 'ROUND',
-1 => 'SQUARE',
-),
-),
-'view' =>
-array (
-'data' =>
-array (
-'translate' => true,
-'choices' =>
-array (
-'ROUND' => 'forms.tree_bot.fields.tree_bot_corner.choices.ROUND',
-'SQUARE' => 'forms.tree_bot.fields.tree_bot_corner.choices.SQUARE',
-),
-'label' => 'forms.tree_bot.fields.tree_bot_corner.label',
-),
-),
-),
 'tree_details_url' =>
 array (
 'model' => 'string',
@@ -2596,6 +2654,32 @@ array (
 ),
 ),
 ),
+'tree_user_contribution_config' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'tree_user_contribution' =>
+array (
+'model' => 'bool.switch',
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.tree_user_contribution_config_form.fields.tree_user_contribution.label',
+'help' => 'forms.tree_user_contribution_config_form.fields.tree_user_contribution.help',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
+),
+),
+),
 'products' =>
 array (
 'fields' =>
@@ -2612,6 +2696,56 @@ array (
 'help' => 'forms.products.fields.tree_kit_activation.help',
 ),
 ),
+),
+),
+),
+'green_authentication' =>
+array (
+'model' => 'basic',
+'fields' =>
+array (
+'client_id' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.green_authentication.fields.client_id.label',
+),
+),
+),
+'login' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.green_authentication.fields.login.label',
+),
+),
+),
+'password' =>
+array (
+'model' => 'string',
+'required' => true,
+'view' =>
+array (
+'data' =>
+array (
+'label' => 'forms.green_authentication.fields.password.label',
+),
+),
+),
+),
+'view' =>
+array (
+'data' =>
+array (
+'validate' => 'misc.forms.default.buttons.save',
 ),
 ),
 ),
@@ -2865,7 +2999,7 @@ array (
 ),
 'form_tree_bot_translations_management' =>
 array (
-'target' => 'carbon_bot_config',
+'target' => 'tree_translations',
 'action' => 'tree_bot_translations_form.display',
 'data' =>
 array (
@@ -2896,6 +3030,16 @@ array (
 array (
 'class' => 'pgblock pgblock__max__sm',
 'title' => 'blocks.tree_export_product_catalog.title',
+),
+),
+'tree_user_contribution' =>
+array (
+'target' => 'tree_config',
+'action' => 'tree_user_contribution_config_form.display',
+'data' =>
+array (
+'title' => 'blocks.tree_user_contribution_config_form.title',
+'class' => 'pgblock__md',
 ),
 ),
 'charity_kit_header' =>
@@ -2955,15 +3099,71 @@ array (
 'class' => 'pgblock__max__md pg__default',
 ),
 ),
-'form_charity_translations_management' =>
+'form_charity_translations_block_management' =>
 array (
 'target' => 'charity_translations',
-'action' => 'charity_translations_form.display',
+'action' => 'charity_translations_block_form.display',
 'data' =>
 array (
 'class' => 'pgblock pgblock__max__lg',
-'title' => 'pages.translations.frontoffice.title',
-'description' => 'pages.translations.frontoffice.description',
+'title' => 'pages.charity_translations.block.title',
+'description' => 'pages.charity_translations.block.description',
+),
+),
+'form_charity_translations_popin_management' =>
+array (
+'target' => 'charity_translations',
+'action' => 'charity_translations_popin_form.display',
+'data' =>
+array (
+'class' => 'pgblock pgblock__max__lg',
+'title' => 'pages.charity_translations.popin.title',
+'description' => 'pages.charity_translations.popin.description',
+),
+),
+'green_account_create' =>
+array (
+'target' => 'home',
+'position' => 2,
+'template' => 'green_account/block-create',
+'data' =>
+array (
+'class' => 'pgblock__max__lg pgblock__default',
+),
+'requirements' =>
+array (
+0 => '!tree_connexion',
+1 => '!charity_connexion',
+),
+),
+'green_account_login' =>
+array (
+'target' => 'home',
+'position' => 3,
+'action' => 'displayAccountLogin@backoffice.green_account',
+'data' =>
+array (
+'class' => 'pgblock__max__md',
+),
+'requirements' =>
+array (
+0 => '!tree_connexion',
+1 => '!charity_connexion',
+),
+),
+'green_account_infos' =>
+array (
+'target' => 'home',
+'position' => 6,
+'action' => 'displayAccountInfos@backoffice.green_account',
+'data' =>
+array (
+'class' => 'pgblock__max__md',
+),
+'requirements' =>
+array (
+0 => 'tree_connexion',
+1 => 'charity_connexion',
 ),
 ),
 'config_form_integration' =>
@@ -3029,6 +3229,21 @@ array (
 array (
 'URL' => 'data.cron_activation_mode.url',
 'AJAX' => 'data.cron_activation_mode.ajax',
+),
+'backoffice' =>
+array (
+'template' => 'backoffice-require',
+),
+'tree_contribution' =>
+array (
+'name' => 'Climate contribution',
+'reference' => 'paygreen-climate-contribution',
+'image_path' => 'static:/pictures/FOTree/logo-tree-contribution.png',
+),
+'carbon_bot' =>
+array (
+'carbon_bot_preview' => 'block-tree-preview',
+'carbon_bot_front' => '/js/climatebot-require.js',
 ),
 'charity_gift' =>
 array (
@@ -3132,6 +3347,18 @@ array (
 ),
 'tree_access_available' =>
 array (
+'requirements' =>
+array (
+0 => 'tree_activation',
+),
+),
+'tree_user_contribution' =>
+array (
+'name' => 'generic.setting',
+'config' =>
+array (
+'setting' => 'tree_user_contribution',
+),
 'requirements' =>
 array (
 0 => 'tree_activation',
@@ -3402,8 +3629,8 @@ array (
 'charity_translations' =>
 array (
 'action' => 'backoffice.charity_translations.display',
-'name' => 'pages.translations.name',
-'title' => 'pages.translations.title',
+'name' => 'pages.charity_translations.name',
+'title' => 'pages.charity_translations.title',
 ),
 ),
 'name' => 'menu.charity.name',
@@ -3474,8 +3701,9 @@ array (
 array (
 'excluded_products' =>
 array (
-0 => 'paygreen-charity-gift',
-1 => 'pgimpact-charity-gift',
+0 => 'paygreen-climate-contribution',
+1 => 'paygreen-charity-gift',
+2 => 'pgimpact-charity-gift',
 ),
 ),
 'api' =>
@@ -3633,6 +3861,12 @@ array (
 'url' => '{host}/carbon/footprints/{idFootprint}/products',
 'private' => true,
 'validity' => '204',
+),
+'get_favorite_project' =>
+array (
+'method' => 'GET',
+'url' => '{host}/carbon/public/projects?idUser={idUser}',
+'private' => false,
 ),
 ),
 'responses' =>

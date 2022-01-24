@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -79,7 +79,6 @@ return array (
 'PGI\\Impact\\BOModule\\Services\\Views\\MenuView' => 'BOModule/Services/Views/MenuView.php',
 'PGI\\Impact\\BOModule\\Services\\Views\\NotificationsView' => 'BOModule/Services/Views/NotificationsView.php',
 'PGI\\Impact\\BOModule\\Services\\Views\\SystemPathsView' => 'BOModule/Services/Views/SystemPathsView.php',
-'PGI\\Impact\\BOPayment\\Services\\Actions\\DisplayPaymentStatisticsPageAction' => 'BOPayment/Services/Actions/DisplayPaymentStatisticsPageAction.php',
 'PGI\\Impact\\BOPayment\\Services\\Actions\\SaveAccountConfigurationAction' => 'BOPayment/Services/Actions/SaveAccountConfigurationAction.php',
 'PGI\\Impact\\BOPayment\\Services\\Controllers\\AccountController' => 'BOPayment/Services/Controllers/AccountController.php',
 'PGI\\Impact\\BOPayment\\Services\\Controllers\\ButtonsController' => 'BOPayment/Services/Controllers/ButtonsController.php',
@@ -87,7 +86,6 @@ return array (
 'PGI\\Impact\\BOPayment\\Services\\Controllers\\OAuthController' => 'BOPayment/Services/Controllers/OAuthController.php',
 'PGI\\Impact\\BOPayment\\Services\\Controllers\\PluginController' => 'BOPayment/Services/Controllers/PluginController.php',
 'PGI\\Impact\\BOPayment\\Services\\Deflectors\\PaygreenConnexionDeflector' => 'BOPayment/Services/Deflectors/PaygreenConnexionDeflector.php',
-'PGI\\Impact\\BOPayment\\Services\\Handlers\\PaymentStatisticsHandler' => 'BOPayment/Services/Handlers/PaymentStatisticsHandler.php',
 'PGI\\Impact\\BOPayment\\Services\\Listeners\\DisplayBackofficeListener' => 'BOPayment/Services/Listeners/DisplayBackofficeListener.php',
 'PGI\\Impact\\BOPayment\\Services\\Views\\ButtonLineView' => 'BOPayment/Services/Views/ButtonLineView.php',
 'PGI\\Impact\\BOTree\\Services\\Actions\\DisplayCarbonBotConfigurationFormAction' => 'BOTree/Services/Actions/DisplayCarbonBotConfigurationFormAction.php',
@@ -118,10 +116,12 @@ return array (
 'PGI\\Impact\\FOPayment\\Services\\OutputBuilders\\PaymentFooterOutputBuilder' => 'FOPayment/Services/OutputBuilders/PaymentFooterOutputBuilder.php',
 'PGI\\Impact\\FOPayment\\Services\\OutputBuilders\\SuccessPaymentMessageOutputBuilder' => 'FOPayment/Services/OutputBuilders/SuccessPaymentMessageOutputBuilder.php',
 'PGI\\Impact\\FOTree\\Services\\Controllers\\ClimateBotController' => 'FOTree/Services/Controllers/ClimateBotController.php',
+'PGI\\Impact\\FOTree\\Services\\Controllers\\UserContributionController' => 'FOTree/Services/Controllers/UserContributionController.php',
 'PGI\\Impact\\FOTree\\Services\\Handlers\\CarbonRounderHandler' => 'FOTree/Services/Handlers/CarbonRounderHandler.php',
 'PGI\\Impact\\FOTree\\Services\\Listeners\\CarbonFootprintFinalizationListener' => 'FOTree/Services/Listeners/CarbonFootprintFinalizationListener.php',
 'PGI\\Impact\\FOTree\\Services\\OutputBuilders\\CarbonBotOutputBuilder' => 'FOTree/Services/OutputBuilders/CarbonBotOutputBuilder.php',
 'PGI\\Impact\\FOTree\\Services\\OutputBuilders\\CarbonFootprintOutputBuilder' => 'FOTree/Services/OutputBuilders/CarbonFootprintOutputBuilder.php',
+'PGI\\Impact\\FOTree\\Services\\OutputBuilders\\UserContributionOutputBuilder' => 'FOTree/Services/OutputBuilders/UserContributionOutputBuilder.php',
 'PGI\\Impact\\PGCharityDev\\Services\\Listeners\\ConnectModuleToApiListener' => 'PGCharityDev/Services/Listeners/ConnectModuleToApiListener.php',
 'PGI\\Impact\\PGCharityDev\\Services\\Listeners\\InstallGiftsFixturesListener' => 'PGCharityDev/Services/Listeners/InstallGiftsFixturesListener.php',
 'PGI\\Impact\\PGCharity\\Entities\\Gift' => 'PGCharity/Entities/Gift.php',
@@ -281,6 +281,7 @@ return array (
 'PGI\\Impact\\PGFramework\\Tools\\Version' => 'PGFramework/Tools/Version.php',
 'PGI\\Impact\\PGGreen\\Interfaces\\AuthenticationHandlerInterface' => 'PGGreen/Interfaces/AuthenticationHandlerInterface.php',
 'PGI\\Impact\\PGGreen\\Services\\Upgrades\\FixGreenAccessTokenSettingUpgrade' => 'PGGreen/Services/Upgrades/FixGreenAccessTokenSettingUpgrade.php',
+'PGI\\Impact\\PGGreen\\Services\\Upgrades\\MatchGreenAccessSettingsUpgrade' => 'PGGreen/Services/Upgrades/MatchGreenAccessSettingsUpgrade.php',
 'PGI\\Impact\\PGGreen\\Services\\Upgrades\\ResetGreenAccessSettingsUpgrade' => 'PGGreen/Services/Upgrades/ResetGreenAccessSettingsUpgrade.php',
 'PGI\\Impact\\PGIntl\\Components\\Translation' => 'PGIntl/Components/Translation.php',
 'PGI\\Impact\\PGIntl\\Entities\\Translation' => 'PGIntl/Entities/Translation.php',
@@ -319,6 +320,10 @@ return array (
 'PGI\\Impact\\PGMagentoPayment\\Services\\Listeners\\OrderValidationListener' => 'PGMagentoPayment/Services/Listeners/OrderValidationListener.php',
 'PGI\\Impact\\PGMagentoPayment\\Services\\Officers\\PostPaymentOfficer' => 'PGMagentoPayment/Services/Officers/PostPaymentOfficer.php',
 'PGI\\Impact\\PGMagentoPayment\\Services\\Strategies\\OrderStateMagentoStrategy' => 'PGMagentoPayment/Services/Strategies/OrderStateMagentoStrategy.php',
+'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionOfficer' => 'PGMagentoTree/Services/Officers/TreeContributionOfficer.php',
+'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionPictureOfficer' => 'PGMagentoTree/Services/Officers/TreeContributionPictureOfficer.php',
+'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionStockOfficer' => 'PGMagentoTree/Services/Officers/TreeContributionStockOfficer.php',
+'PGI\\Impact\\PGMagentoTree\\Services\\Officers\\TreeContributionTranslationOfficer' => 'PGMagentoTree/Services/Officers/TreeContributionTranslationOfficer.php',
 'PGI\\Impact\\PGMagento\\Components\\Provisioners\\Checkout' => 'PGMagento/Components/Provisioners/Checkout.php',
 'PGI\\Impact\\PGMagento\\Components\\Provisioners\\PostOrder' => 'PGMagento/Components/Provisioners/PostOrder.php',
 'PGI\\Impact\\PGMagento\\Components\\Provisioners\\PostPayment' => 'PGMagento/Components/Provisioners/PostPayment.php',
@@ -644,19 +649,25 @@ return array (
 'PGI\\Impact\\PGTree\\Entities\\CarbonData' => 'PGTree/Entities/CarbonData.php',
 'PGI\\Impact\\PGTree\\Interfaces\\Behaviors\\TreeActivationBehaviorInterface' => 'PGTree/Interfaces/Behaviors/TreeActivationBehaviorInterface.php',
 'PGI\\Impact\\PGTree\\Interfaces\\Entities\\CarbonDataEntityInterface' => 'PGTree/Interfaces/Entities/CarbonDataEntityInterface.php',
+'PGI\\Impact\\PGTree\\Interfaces\\Officers\\TreeContributionOfficerInterface' => 'PGTree/Interfaces/Officers/TreeContributionOfficerInterface.php',
 'PGI\\Impact\\PGTree\\Interfaces\\Repositories\\CarbonDataRepositoryInterface' => 'PGTree/Interfaces/Repositories/CarbonDataRepositoryInterface.php',
+'PGI\\Impact\\PGTree\\Services\\Diagnostics\\TreeContributionDiagnostic' => 'PGTree/Services/Diagnostics/TreeContributionDiagnostic.php',
 'PGI\\Impact\\PGTree\\Services\\Filters\\ProductNameFilter' => 'PGTree/Services/Filters/ProductNameFilter.php',
 'PGI\\Impact\\PGTree\\Services\\Filters\\ProductReferenceFilter' => 'PGTree/Services/Filters/ProductReferenceFilter.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\PageCounterHandler' => 'PGTree/Services/Handlers/PageCounterHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeAccountHandler' => 'PGTree/Services/Handlers/TreeAccountHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeAuthenticationHandler' => 'PGTree/Services/Handlers/TreeAuthenticationHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeCarbonOffsettingHandler' => 'PGTree/Services/Handlers/TreeCarbonOffsettingHandler.php',
+'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeCartHandler' => 'PGTree/Services/Handlers/TreeCartHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeCatalogHandler' => 'PGTree/Services/Handlers/TreeCatalogHandler.php',
+'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeContributionHandler' => 'PGTree/Services/Handlers/TreeContributionHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeFootprintIdHandler' => 'PGTree/Services/Handlers/TreeFootprintIdHandler.php',
+'PGI\\Impact\\PGTree\\Services\\Handlers\\TreeHandler' => 'PGTree/Services/Handlers/TreeHandler.php',
 'PGI\\Impact\\PGTree\\Services\\Listeners\\CarbonOffsettingComputingProductListener' => 'PGTree/Services/Listeners/CarbonOffsettingComputingProductListener.php',
 'PGI\\Impact\\PGTree\\Services\\Listeners\\CarbonOffsettingComputingTransportationListener' => 'PGTree/Services/Listeners/CarbonOffsettingComputingTransportationListener.php',
 'PGI\\Impact\\PGTree\\Services\\Listeners\\CarbonOffsettingComputingWebListener' => 'PGTree/Services/Listeners/CarbonOffsettingComputingWebListener.php',
 'PGI\\Impact\\PGTree\\Services\\Listeners\\PageCountingListener' => 'PGTree/Services/Listeners/PageCountingListener.php',
+'PGI\\Impact\\PGTree\\Services\\Listeners\\SetupTreeContributionProductListener' => 'PGTree/Services/Listeners/SetupTreeContributionProductListener.php',
 'PGI\\Impact\\PGTree\\Services\\Managers\\CarbonDataManager' => 'PGTree/Services/Managers/CarbonDataManager.php',
 'PGI\\Impact\\PGTree\\Services\\Repositories\\CarbonDataRepository' => 'PGTree/Services/Repositories/CarbonDataRepository.php',
 'PGI\\Impact\\PGTree\\Services\\Requirements\\TreeAccessAvailableRequirement' => 'PGTree/Services/Requirements/TreeAccessAvailableRequirement.php',

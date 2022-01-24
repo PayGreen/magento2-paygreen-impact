@@ -3,7 +3,7 @@
     "charity": {
       "test_mode": {
         "active": "Mode TEST activé",
-        "title": "Votre CharityKit est actuellement configuré sur le mode TEST : aucun don ne sera reversé aux associations."
+        "title": "Votre CharityKit est actuellement en mode TEST : AUCUN DON NE SERA REVERSÉ. Si vous n'êtes pas le propriétaire du site, veuillez ne pas faire de don."
       }
     }
   }

@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -22,11 +22,13 @@
 namespace PGI\Impact\BOTree\Services\Actions;
 
 use PGI\Impact\PGForm\Services\Views\FormView;
+use PGI\Impact\PGIntl\Services\Handlers\TranslationHandler;
 use PGI\Impact\PGModule\Services\Settings;
 use PGI\Impact\PGServer\Components\Resources\ScriptFile as ScriptFileResourceComponent;
 use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGServer\Components\Responses\Template as TemplateResponseComponent;
 use PGI\Impact\PGServer\Foundations\AbstractAction;
+use PGI\Impact\PGSystem\Components\Parameters;
 use PGI\Impact\PGSystem\Components\Parameters as ParametersComponent;
 use PGI\Impact\PGView\Components\Box as BoxComponent;
 use Exception;
@@ -37,23 +39,26 @@ use Exception;
  */
 class DisplayCarbonBotConfigurationFormAction extends AbstractAction
 {
+    /** @var TranslationHandler $translationHandler */
+    private $translationHandler;
+
     /**
      * @inheritDoc
      * @throws Exception
      */
     public function process()
     {
+        /** @var ParametersComponent $parameters */
+        $parameters = $this->getParameters();
+
         /** @var TemplateResponseComponent $output */
-        $response = $this->buildTemplateResponse('tree/block-tree-preview', array(
+        $response = $this->buildTemplateResponse($parameters['data.carbon_bot.carbon_bot_preview'], array(
             'color' => $this->getSettings()->get("tree_bot_color"),
             'position' => $this->getSettings()->get("tree_bot_side"),
-            'corner' => $this->getSettings()->get("tree_bot_corner"),
             'isDetailsActivated' => "true",
             'detailsUrl' => $this->getSettings()->get('tree_details_url'),
-            'carbonEmittedTotal' => "1.1 kg",
-            'carbonEmittedFromDigital' => "54 g",
-            'carbonEmittedFromTransportation' => "646 g",
-            'carbonEmittedFromProduct' => "0.4 kg",
+            'title' => json_encode($this->translationHandler->translate('message_carbon_footprint')),
+            'description' => json_encode($this->translationHandler->translate('message_find_out_more')),
             'isTreeTestModeActivated' => $this->getSettings()->get('tree_test_mode'),
         ))->addData('form', $this->buildSettingsFormView());
 
@@ -89,5 +94,13 @@ class DisplayCarbonBotConfigurationFormAction extends AbstractAction
         $view->setAction($url);
 
         return new BoxComponent($view);
+    }
+
+    /**
+     * @param TranslationHandler $translationHandler
+     */
+    public function setTranslationHandler($translationHandler)
+    {
+        $this->translationHandler = $translationHandler;
     }
 }

@@ -7,7 +7,7 @@
           "expired": "Votre période de test est expirée. Pour continuer à utiliser le CharityKit, veuillez contacter le support PayGreen."
         },
         "mandate": {
-          "unsigned": "Le CharityKit est indisponible tant qu'aucun mandat SEPA n'a été signé."
+          "unsigned": "Le CharityKit est obligatoirement en mode test tant qu'aucun mandat SEPA n'a été signé."
         }
       }
     }

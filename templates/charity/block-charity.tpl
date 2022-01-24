@@ -1,5 +1,5 @@
 {*
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -12,7 +12,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -27,8 +27,12 @@
     {if $charityActivated == true }
 
         {if
-        $charityKitInfos['is_mandate_signed'] == false &&
-        $charityKitInfos['is_test_mode_expired']
+            $charityKitInfos['is_mandate_signed'] == false &&
+            $charityKitInfos['is_test_mode_expired']
+        }
+            {'misc.charity_account.notifications.test_mode.expired'|pgtrans}
+        {elseif
+            $charityKitInfos['is_mandate_signed'] == false
         }
             {'misc.charity_account.notifications.mandate.unsigned'|pgtrans}
         {else}

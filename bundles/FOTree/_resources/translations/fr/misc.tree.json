@@ -1,0 +1,14 @@
+{
+  "misc": {
+    "tree_user_contribution": {
+      "test_mode": {
+        "title": "La contribution carbone est actuellement en mode TEST : AUCUN DON NE SERA REVERSÉ. Si vous n'êtes pas le propriétaire du site, veuillez ne pas faire de contribution."
+      },
+      "explanation": {
+        "title": "Faire une contribution",
+        "message": "La contribution sera entièrement reversé au projet climatique.",
+        "details": "Avec la contribution, vous avez la possibilité de rendre neutre le bilan carbone de votre achat. Le montant de la contribution est automatiquement calculé sur la page de paiement."
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <?php
 /**
- * 2014 - 2021 Watt Is It
+ * 2014 - 2022 Watt Is It
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  * to contact@paygreen.fr so we can send you a copy immediately.
  *
  * @author    PayGreen <contact@paygreen.fr>
- * @copyright 2014 - 2021 Watt Is It
+ * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
  * @version   1.0.0
  *
@@ -28,6 +28,8 @@ use PGI\Impact\PGClient\Exceptions\Response as ResponseException;
 use PGI\Impact\PGClient\Services\Factories\RequestFactory;
 use PGI\Impact\PGGreen\Interfaces\AuthenticationHandlerInterface;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
+use PGI\Impact\PGModule\Components\Events\ProductActivation as ProductActivationEventComponent;
+use PGI\Impact\PGModule\Services\Broadcaster;
 use PGI\Impact\PGModule\Services\Settings;
 use DateTime;
 use Exception;
@@ -53,16 +55,21 @@ class TreeAuthenticationHandler implements AuthenticationHandlerInterface
     /** @var LoggerInterface */
     private $logger;
 
+    /** @var Broadcaster */
+    private $broadcaster;
+
     public function __construct(
         ApiFacade $apiFacade,
         ApiFacadeFactory $apiFacadeFactory,
         Settings $settings,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        Broadcaster $broadcaster
     ) {
         $this->apiFacade = $apiFacade;
         $this->apiFacadeFactory = $apiFacadeFactory;
         $this->settings = $settings;
         $this->logger = $logger;
+        $this->broadcaster = $broadcaster;
     }
 
     /**
@@ -218,8 +225,12 @@ class TreeAuthenticationHandler implements AuthenticationHandlerInterface
         $response = $this->apiFacade->getAccountInfos($clientId);
 
         if ($response->data->usesTree === "1") {
+            if($response->data->climateBilling->status !== "SIGNED") {
+                $this->settings->set("tree_test_mode",true);
+            }
             $result = true;
             $this->settings->set("tree_activation",true);
+            $this->broadcaster->fire(new ProductActivationEventComponent('soft', 'climate'));
         }
 
         return $result;
