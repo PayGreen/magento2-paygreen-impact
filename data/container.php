@@ -7577,14 +7577,6 @@ array (
 0 => '@handler.static_file',
 ),
 ),
-'provisioner.pre_payment' =>
-array (
-'class' => 'PGI\\Impact\\PGMagento\\Components\\Provisioners\\PrePayment',
-'arguments' =>
-array (
-0 => '@magento',
-),
-),
 'officer.settings.configuration.global' =>
 array (
 'class' => 'PGI\\Impact\\PGMagento\\Services\\Officers\\ConfigurationGlobalSettingsOfficer',
