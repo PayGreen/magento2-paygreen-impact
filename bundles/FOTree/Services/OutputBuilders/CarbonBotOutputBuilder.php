@@ -15,13 +15,13 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
 namespace PGI\Impact\FOTree\Services\OutputBuilders;
 
-use PGI\Impact\APITree\Components\Replies\CarbonFootprint as CarbonFootprintReplyComponent;
+use PGI\Impact\PGIntl\Services\Handlers\LocaleHandler;
 use PGI\Impact\PGIntl\Services\Handlers\TranslationHandler;
 use PGI\Impact\PGLog\Interfaces\LoggerInterface;
 use PGI\Impact\PGModule\Components\Output as OutputComponent;
@@ -32,11 +32,8 @@ use PGI\Impact\PGServer\Components\Resources\ScriptFile as ScriptFileResourceCom
 use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGServer\Services\Handlers\LinkHandler;
 use PGI\Impact\PGShop\Services\Managers\CartManager;
-use PGI\Impact\PGShop\Services\Managers\CustomerManager;
 use PGI\Impact\PGSystem\Components\Parameters;
 use PGI\Impact\PGTree\Services\Handlers\TreeAccountHandler;
-use PGI\Impact\PGTree\Services\Handlers\TreeCarbonOffsettingHandler;
-use PGI\Impact\PGTree\Services\Handlers\TreeFootprintIdHandler;
 
 /**
  * Class CarbonBotOutputBuilder
@@ -47,23 +44,14 @@ class CarbonBotOutputBuilder extends AbstractOutputBuilder
     /** @var Settings */
     private $settings;
 
-    /**  @var TreeCarbonOffsettingHandler */
-    private $carbonOffsettingHandler;
-
     /** @var CartManager */
     private $cartManager;
-
-    /** @var CustomerManager */
-    private $customerManager;
 
     /** @var TreeAccountHandler */
     private $treeAccountHandler;
 
     /** @var TranslationHandler */
     private $translationHandler;
-
-    /** @var TreeFootprintIdHandler */
-    private $treeFootprintIdHandler;
 
     /** @var LinkHandler */
     private $linkHandler;
@@ -73,31 +61,31 @@ class CarbonBotOutputBuilder extends AbstractOutputBuilder
 
     /** @var Parameters */
     private $parameters;
+    /**
+     * @var LocaleHandler
+     */
+    private $localeHandler;
 
     public function __construct(
         Settings $settings,
-        TreeCarbonOffsettingHandler $carbonOffsettingHandler,
         TreeAccountHandler $treeAccountHandler,
         CartManager $cartManager,
-        CustomerManager $customerManager,
         TranslationHandler $translationHandler,
-        TreeFootprintIdHandler $treeFootprintIdHandler,
         LinkHandler $linkHandler,
         LoggerInterface $logger,
-        Parameters $parameters
+        Parameters $parameters,
+        LocaleHandler $localeHandler
     ) {
         parent::__construct();
 
         $this->settings = $settings;
-        $this->carbonOffsettingHandler = $carbonOffsettingHandler;
         $this->cartManager = $cartManager;
-        $this->customerManager = $customerManager;
         $this->treeAccountHandler = $treeAccountHandler;
         $this->translationHandler = $translationHandler;
-        $this->treeFootprintIdHandler = $treeFootprintIdHandler;
         $this->linkHandler = $linkHandler;
         $this->logger = $logger;
         $this->parameters = $parameters;
+        $this->localeHandler = $localeHandler;
     }
 
     /**
@@ -106,23 +94,7 @@ class CarbonBotOutputBuilder extends AbstractOutputBuilder
      */
     public function build(array $data = array())
     {
-        $fingerprint = 0;
-        $idUser = 0;
         $cartPrice = 0;
-
-        if ($this->treeFootprintIdHandler->isFootprintSet()) {
-            $this->carbonOffsettingHandler->computeCarbonOffsetting(
-                $this->cartManager->getCurrent(),
-                $this->customerManager->getCurrent()
-            );
-
-            /** @var CarbonFootprintReplyComponent $carbonFootprint */
-            $carbonFootprint = $this->carbonOffsettingHandler->getCarbonOffsetting();
-
-            $fingerprint = $carbonFootprint->getFingerprint();
-            $idUser = $carbonFootprint->getIdUser();
-        }
-
 
         /** @var object $user */
         $user = $this->treeAccountHandler->getAccountData();
@@ -149,15 +121,16 @@ class CarbonBotOutputBuilder extends AbstractOutputBuilder
             $testMode ="true";
         }
 
+        $locale = $this->localeHandler->getLanguage();
+
         $output->addResource(new DataResourceComponent(array(
+            'paygreen_tree_climatebot_locale' => $locale,
             'paygreen_tree_climatebot_api_url' => $url,
             'paygreen_tree_climatebot_name' => $user->organisationName,
             'paygreen_tree_climatebot_color' => $this->settings->get("tree_bot_color"),
             'paygreen_tree_climatebot_position' => $this->settings->get("tree_bot_side"),
             'paygreen_tree_climatebot_url' => $this->settings->get("tree_details_url"),
             'paygreen_tree_climatebot_mobile' => $this->settings->get("tree_bot_mobile_activated"),
-            'paygreen_tree_climatebot_fingerprint' => $fingerprint,
-            'paygreen_tree_climatebot_user_id' => $idUser,
             'paygreen_tree_climatebot_test_mode' => $testMode,
             'paygreen_tree_climatebot_cart_price' => $cartPrice,
             'paygreen_tree_climatebot_description' => $this->translationHandler->translate('message_find_out_more'),

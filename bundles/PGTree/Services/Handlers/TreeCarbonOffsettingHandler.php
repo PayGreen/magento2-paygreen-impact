@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -35,7 +35,6 @@ use PGI\Impact\PGShop\Interfaces\ShopableInterface;
 use PGI\Impact\PGTree\Components\CarbonOffsettingComputing as CarbonOffsettingComputingComponent;
 use PGI\Impact\PGTree\Components\Events\CarbonOffsettingComputing as CarbonOffsettingComputingEventComponent;
 use PGI\Impact\PGTree\Services\Managers\CarbonDataManager;
-use PGI\Impact\PGView\Services\Handlers\ViewHandler;
 use Exception;
 
 /**
@@ -119,7 +118,7 @@ class TreeCarbonOffsettingHandler
     public function closeCarbonOffsetting($userContributionAmount)
     {
         if (!$this->requirementHandler->isFulfilled('tree_activation')) {
-            throw new Exception("Compute carbon offsetting require 'tree_activation'.");
+            throw new Exception("Close carbon offsetting require 'tree_activation'.");
         }
 
         $this->logger->debug('Create carbon footprint purchase.');
@@ -145,7 +144,7 @@ class TreeCarbonOffsettingHandler
     public function getCarbonOffsetting()
     {
         if (!$this->requirementHandler->isFulfilled('tree_activation')) {
-            throw new Exception("Compute carbon offsetting require 'tree_activation'.");
+            throw new Exception("Get carbon offsetting require 'tree_activation'.");
         }
 
         $this->logger->debug('Retrieve carbon footprint.');

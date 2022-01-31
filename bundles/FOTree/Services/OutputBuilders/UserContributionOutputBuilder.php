@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -24,6 +24,7 @@ namespace PGI\Impact\FOTree\Services\OutputBuilders;
 use Exception;
 use PGI\Impact\APITree\Components\Replies\CarbonFootprint as CarbonFootprintReplyComponent;
 use PGI\Impact\FOTree\Services\Handlers\CarbonRounderHandler;
+use PGI\Impact\PGLog\Interfaces\LoggerInterface;
 use PGI\Impact\PGModule\Components\Output as OutputComponent;
 use PGI\Impact\PGModule\Foundations\AbstractOutputBuilder;
 use PGI\Impact\PGModule\Services\Settings;
@@ -31,6 +32,8 @@ use PGI\Impact\PGServer\Components\Resources\Data as DataResourceComponent;
 use PGI\Impact\PGServer\Components\Resources\ScriptFile as ScriptFileResourceComponent;
 use PGI\Impact\PGServer\Components\Resources\StyleFile as StyleFileResourceComponent;
 use PGI\Impact\PGServer\Services\Handlers\LinkHandler;
+use PGI\Impact\PGShop\Services\Managers\CartManager;
+use PGI\Impact\PGShop\Services\Managers\CustomerManager;
 use PGI\Impact\PGTree\Services\Handlers\TreeCarbonOffsettingHandler;
 use PGI\Impact\PGTree\Services\Handlers\TreeHandler;
 
@@ -52,22 +55,37 @@ class UserContributionOutputBuilder extends AbstractOutputBuilder
     /** @var LinkHandler */
     private $linkHandler;
 
+    /** @var CartManager */
+    private $cartManager;
+
+    /** @var CustomerManager */
+    private $customerManager;
+
     /** @var Settings */
     private $settings;
+
+    /** @var LoggerInterface */
+    private $logger;
 
     public function __construct(
         TreeHandler $treeHandler,
         TreeCarbonOffsettingHandler $carbonOffsettingHandler,
         CarbonRounderHandler $carbonRounderHandler,
         LinkHandler $linkHandler,
-        Settings $settings)
-    {
+        CartManager $cartManager,
+        CustomerManager $customerManager,
+        Settings $settings,
+        LoggerInterface $logger
+    ){
         parent::__construct();
         $this->treeHandler = $treeHandler;
         $this->carbonOffsettingHandler = $carbonOffsettingHandler;
         $this->carbonRounderHandler = $carbonRounderHandler;
         $this->linkHandler = $linkHandler;
+        $this->cartManager = $cartManager;
+        $this->customerManager = $customerManager;
         $this->settings = $settings;
+        $this->logger = $logger;
     }
 
     /**
@@ -78,6 +96,11 @@ class UserContributionOutputBuilder extends AbstractOutputBuilder
     {
         /** @var OutputComponent $output */
         $output = new OutputComponent();
+
+        $this->carbonOffsettingHandler->computeCarbonOffsetting(
+            $this->cartManager->getCurrent(),
+            $this->customerManager->getCurrent()
+        );
 
         /** @var CarbonFootprintReplyComponent $carbonFootprintReply */
         $carbonFootprintReply = $this->carbonOffsettingHandler->getCarbonOffsetting();

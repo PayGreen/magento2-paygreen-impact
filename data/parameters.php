@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -1461,14 +1461,6 @@ array (
 array (
 0 => 'shop_context',
 1 => 'tree_connexion',
-),
-),
-'front.climatebot.display' =>
-array (
-'target' => 'display@front.tree.climatebot',
-'requirements' =>
-array (
-0 => 'tree_access_available',
 ),
 ),
 'front.tree.save_contribution' =>

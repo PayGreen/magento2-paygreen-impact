@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -6029,9 +6029,7 @@ array (
 array (
 0 => '@manager.customer',
 1 => '@manager.cart',
-2 => '@handler.view',
-3 => '@handler.tree_carbon_offsetting',
-4 => '@handler.carbon_rounder',
+2 => '@handler.tree_carbon_offsetting',
 ),
 ),
 'controller.front.tree.usercontribution' =>
@@ -6160,15 +6158,13 @@ array (
 'arguments' =>
 array (
 0 => '@settings',
-1 => '@handler.tree_carbon_offsetting',
-2 => '@handler.tree_account',
-3 => '@manager.cart',
-4 => '@manager.customer',
-5 => '@handler.translation',
-6 => '@handler.tree_footprint_id',
-7 => '@handler.link',
-8 => '@logger',
-9 => '@parameters',
+1 => '@handler.tree_account',
+2 => '@manager.cart',
+3 => '@handler.translation',
+4 => '@handler.link',
+5 => '@logger',
+6 => '@parameters',
+7 => '@handler.locale',
 ),
 ),
 'builder.output.user_contribution_block' =>
@@ -6200,7 +6196,10 @@ array (
 1 => '@handler.tree_carbon_offsetting',
 2 => '@handler.carbon_rounder',
 3 => '@handler.link',
-4 => '@settings',
+4 => '@manager.cart',
+5 => '@manager.customer',
+6 => '@settings',
+7 => '@logger',
 ),
 ),
 'handler.carbon_rounder' =>

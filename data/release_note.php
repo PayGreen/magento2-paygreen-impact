@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -4089,88 +4089,94 @@ array (
 0 =>
 array (
 'type' => 'ADD',
+'code' => 'PGI-3851',
+'text' => 'Ajouter la contribution carbone.',
+),
+1 =>
+array (
+'type' => 'ADD',
 'code' => 'PGI-3703',
 'text' => 'Archivage régulier des logs trop volumineux.',
 ),
-1 =>
+2 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3726',
 'text' => 'Ajout d\'une page de gestion du planificateur interne.',
 ),
-2 =>
+3 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3758',
 'text' => 'CharityKit : refonte complete de la page de gestions des traductions.',
 ),
-3 =>
+4 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3825',
 'text' => 'Nouveau dashboard impact (CharityKit et ClimateKit).',
 ),
-4 =>
+5 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3826',
 'text' => 'Notification adresse d\'expédition requise pour ClimateKit.',
 ),
-5 =>
+6 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3819',
 'text' => 'Nouveau dashboard pour le bloc de Paiement.',
 ),
-6 =>
+7 =>
 array (
 'type' => 'ADD',
 'code' => 'PSI-4',
 'text' => 'Ajout des catégories et prix dans l\'export du catalogue.',
 ),
-7 =>
+8 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3801',
 'text' => 'Nouveau CarbonBot.',
 ),
-8 =>
+9 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3841',
 'text' => 'Modification administration CarbonBot.',
 ),
-9 =>
+10 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3835',
 'text' => 'Ajout produit Climate contribution au panier.',
 ),
-10 =>
+11 =>
 array (
 'type' => 'ADD',
 'code' => 'PGI-3840',
 'text' => 'Affichage en mode test dans le bloc de contribution.',
 ),
-11 =>
+12 =>
 array (
 'type' => 'FIX',
 'code' => 'WPI-1',
 'text' => 'Corriger retours pour validation.',
 ),
-12 =>
+13 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3810',
 'text' => 'Corriger l\'upgrade FixGreenAccessTokenSettingUpgrade.',
 ),
-13 =>
+14 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3816',
 'text' => 'Erreur à l\'enregistrement d\'une traduction dynamique.',
 ),
-14 =>
+15 =>
 array (
 'type' => 'FIX',
 'code' => 'PGI-3732',

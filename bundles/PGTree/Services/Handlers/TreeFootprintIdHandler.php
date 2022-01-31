@@ -15,7 +15,7 @@
  * @author    PayGreen <contact@paygreen.fr>
  * @copyright 2014 - 2022 Watt Is It
  * @license   https://opensource.org/licenses/mit-license.php MIT License X11
- * @version   1.0.0
+ * @version   1.0.1
  *
  */
 
@@ -100,50 +100,19 @@ class TreeFootprintIdHandler
     }
 
     /**
-     * @return bool
-     * @throws Exception
-     */
-    public function isFootprintSet()
-    {
-        if (!$this->cookieHandler->has(self::FOOTPRINT_ID_COOKIE_NAME)) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    /**
      * @return mixed|null
      * @throws Exception
      */
     public function getFootprintId()
     {
-        if (!$this->cookieHandler->has(self::FOOTPRINT_ID_COOKIE_NAME)) {
+        if (!$this->cookieHandler->has(self::FOOTPRINT_ID_COOKIE_NAME) || $this->cookieHandler->get(self::FOOTPRINT_ID_COOKIE_NAME) === "") {
             $this->logger->warning("Footprint cookie not found.");
-            $this->createFootprintId();
+            $id = $this->createFootprintId();
         } else {
             $id = $this->cookieHandler->get(self::FOOTPRINT_ID_COOKIE_NAME);
-
-            if (empty($id)) {
-                $id = $this->createFootprintId();
-            }
-
-            try {
-                /** @var CarbonFootprintReplyComponent $carbonFootprint */
-                $carbonFootprint = $this->treeAPIFacade->getCarbonFootprintEstimation($id);
-
-                if (!in_array($carbonFootprint->getStatus(), self::$FOOTPRINT_VALID_STATUS)) {
-                    $this->logger->error("Footprint '{$id}' is not in valid status. Unrecognized status : '{$carbonFootprint->getStatus()}'.");
-                    $this->createFootprintId();
-                }
-            } catch (Exception $exception) {
-                $this->logger->error("Footprint '{$id}' not found.");
-                $this->createFootprintId();
-            }
         }
 
-        return $this->cookieHandler->get(self::FOOTPRINT_ID_COOKIE_NAME);
+        return $id;
     }
 
     /**
